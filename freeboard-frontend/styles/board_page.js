@@ -73,6 +73,7 @@ export const BodyImg = styled.div`
 
 export const BodyContents = styled.div`
     white-space: pre-wrap;
+    word-break: break-all;
 `
 
 export const BodyYoutube = styled.div`

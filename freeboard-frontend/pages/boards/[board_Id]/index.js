@@ -68,6 +68,8 @@ export default function BoardPage(){
         router.push("/boards")
     }
 
+
+
     return(
         <NewBody>
             <BoardContent>

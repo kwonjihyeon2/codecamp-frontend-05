@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import FreeBoardWriteUI from "./BoardWrite.presenter"
 import { CREATE_NEWBOARD,UPDATE_BOARD } from "./BoardWrite.queries"
 
-export default function FreeBoardWrite(props) {
+export default function FreeBoardWrite(props:any) {
 
     const router = useRouter()
 
@@ -22,7 +22,7 @@ export default function FreeBoardWrite(props) {
 
     const [EditBoard] = useMutation(UPDATE_BOARD)
 
-    function User(event){
+    function User(event:any){
         setName(event.target.value)
         if( event.target.value ){
             setErrorName("")
@@ -34,7 +34,7 @@ export default function FreeBoardWrite(props) {
         }
     }
 
-    function UserPw(event){
+    function UserPw(event:any){
         setPW(event.target.value)
         if( event.target.value.length > 3 ){
             setErrorPw("")
@@ -46,7 +46,7 @@ export default function FreeBoardWrite(props) {
         }
     }
 
-    function MainContent(event){
+    function MainContent(event:any){
         setContent(event.target.value)
         if( event.target.value ){
             setErrorContent("")
@@ -60,7 +60,7 @@ export default function FreeBoardWrite(props) {
         
     }
 
-    function MainTitle(event){
+    function MainTitle(event:any){
         setTitle(event.target.value)
         if( event.target.value ){
             setErrorTitle("")
@@ -122,7 +122,7 @@ export default function FreeBoardWrite(props) {
                 router.push(`/boards/${PostId}`)
             }
         } catch(error){
-            console.log(error)
+            console.log(error.message)
             
         }
     }
@@ -130,17 +130,22 @@ export default function FreeBoardWrite(props) {
     const EditBtn = async ()=>{
         console.log("수정되었습니다")
 
-        const EditResult = await EditBoard({
-            variables : {
-                updateBoardInput : {
-                    title : myTitle, contents : content
-                }, password : PW, boardId : router.query.board_Id
-            }
-        })
+        try{
+            const MyVaribles = { title : myTitle, contents : content }
+            if(myTitle !== "" ) MyVaribles.title = myTitle
+            if(content !== "") MyVaribles.contents = content 
 
-        console.log(EditResult.data.updateBoard._id)
+            const EditResult = await EditBoard({
+                variables :{updateBoardInput : MyVaribles, password : PW, boardId : router.query.board_Id}
+            })
 
-        router.push(`/boards/${router.query.board_Id}`)
+            console.log(EditResult.data.updateBoard._id) 
+            router.push(`/boards/${router.query.board_Id}`)
+        } catch(error){
+            console.log(error.message)
+        }
+
+        
     }
 
     return(
@@ -158,6 +163,7 @@ export default function FreeBoardWrite(props) {
             register={register}
             EditBtn={EditBtn}
             isEdit={props.isEdit}
+            ToPre={props.ToPre}
         />
     )
 }

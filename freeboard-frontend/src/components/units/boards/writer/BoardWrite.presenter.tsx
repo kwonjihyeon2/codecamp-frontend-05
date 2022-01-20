@@ -19,7 +19,7 @@ import { NewBody,
     FtBtn
 } from './BoardWrite.styles'
 
-export default function FreeBoardWriteUI(props){
+export default function FreeBoardWriteUI(props:any){
     return(
         <NewBody>
             <Main>
@@ -29,7 +29,7 @@ export default function FreeBoardWriteUI(props){
                     <UserInfo>
                         <UserDiv>
                             <div>작성자<UserStar>*</UserStar></div>
-                            <CommonInput type="text" placeholder="이름을 입력하세요." onChange={props.WriterName} />
+                            <CommonInput type="text" placeholder="이름을 입력하세요." onChange={props.WriterName} defaultValue={props.isEdit ? props.ToPre?.fetchBoard.writer : ""} />
                             <ErrorMessage>{props.ErrorName}</ErrorMessage>
                         </UserDiv>
                         <UserDiv>
@@ -41,12 +41,12 @@ export default function FreeBoardWriteUI(props){
                 
                     <CommonMargin>
                         <div>제목</div>
-                        <CommonInput type="text" placeholder="제목을 지정해주세요." onChange={props.WriterTitle}/>
+                        <CommonInput type="text" placeholder="제목을 지정해주세요." onChange={props.WriterTitle} defaultValue={props.isEdit ? props.ToPre?.fetchBoard.title : ""}/>
                         <ErrorMessage>{props.ErrorTitle}</ErrorMessage>
                     </CommonMargin>
                     <CommonMargin>
                         <div>내용</div>
-                        <TextArea placeholder="내용을 작성해주세요." onChange={props.WriterContent}></TextArea>
+                        <TextArea placeholder="내용을 작성해주세요." onChange={props.WriterContent} defaultValue={props.isEdit ? props.ToPre?.fetchBoard.contents : ""}></TextArea>
                         <ErrorMessage>{props.ErrorContent}</ErrorMessage>
                     </CommonMargin>
                     <CommonMargin>

@@ -110,11 +110,16 @@ export const Footer = styled.div`
     text-align:center;
 `
 export const FtBtn = styled.button`
-    background-color : ${(props)=>props.isActive ? "#ffd600" : "none"};
-    color : ${(props)=>props.isActive ? "#000" : "#bdbdbd"};
+    background-color : ${(props : IsActive)=>props.isActive ? "#ffd600" : "none"};
+    color : ${(props: IsActive)=>props.isActive ? "#000" : "#bdbdbd"};
     /* true라면 === true 생략 가능 false라면 ! */
     width:180px;
     height:50px;
     border:none;
     cursor: pointer;
 `
+
+
+interface IsActive {
+    isActive : boolean
+}
