@@ -1,0 +1,17 @@
+.container{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    text-align:center;
+    background-color : #eee;
+    padding:30px;
+}
+
+.title{
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.logincontent{
+    text-align: left;
+}
