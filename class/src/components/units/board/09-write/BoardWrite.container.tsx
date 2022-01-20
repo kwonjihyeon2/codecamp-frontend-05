@@ -42,6 +42,7 @@ export default function BoardWrite(props){
             title? : string
             contents?: string
             //?: 잇을수도,없을수도
+            
         }
         const myvariables:IMyVariables = {
             number : Number(router.query.mynumber)
