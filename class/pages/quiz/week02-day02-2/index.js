@@ -15,7 +15,7 @@ export default function FilterPage(){
     const bonus = FRUITS.filter((el)=>(el.number % 2 === 0))
     console.log(bonus)
 
-    const result = bonus.map((el)=>(<div>{`${el.number} ${el.title}`}</div>))
+    const result = bonus.map((el)=>(<div key={el._id}>{`${el.number} ${el.title}`}</div>))
     
     return(
         <div>

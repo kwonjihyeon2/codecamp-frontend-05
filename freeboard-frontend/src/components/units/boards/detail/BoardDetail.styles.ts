@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 export const NewBody = styled.div`
     width:100%;
     font-family : Noto Sans KR;
+    box-sizing : border-box;
 `
 export const BoardContent = styled.div`
     width:1200px;
@@ -118,6 +119,49 @@ export const CommonBtn = styled.div`
 `
 
 export const Commentcontent = styled.div`
-    margin :40px auto;
+    margin :0px auto;
     width : 1200px;
+`
+
+export const CommentTitle = styled.div`
+    margin : 40px 0;
+    display : flex;
+`
+
+export const StarIcon = styled.div`
+    color : #bdbdbd;
+`
+
+export const CommentBox = styled.div`
+    width : 100%;
+    height : 160px;
+    border : 1px solid #bdbdbd;
+    margin : 20px 0;
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+`
+export const OnComments = styled.div`
+    width:100%;
+    display : flex;
+    justify-content : space-between;
+`
+
+export const CommentsInput  = styled.input`
+    border : none;
+    width : 100%;
+    padding : 15px;
+    border-top : 1px solid #bdbdbd;
+`
+
+export const CommentInfo = styled.div`
+    width:100%;
+    margin : 25px 0;
+    border-bottom : 1px solid #bdbdbd;
+`
+
+export const CommentDiv = styled.div`
+    display : flex;
+    width : 100%;
+    
 `

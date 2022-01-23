@@ -1,0 +1,10 @@
+schema: http://example.codebootcamp.co.kr/graphql
+# 받아올 데이터 API에 대한 주소
+generates:
+  ./src/commons/types/generated/types.ts:
+  # 받아온 타입스크립트 파일을 여기에 저장함
+    plugins:
+      - typescript
+    config:
+      typesPrefix : I
+    #타입에 : ~를 붙여달라

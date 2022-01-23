@@ -166,4 +166,4 @@ export default function FreeBoardWrite(props:any) {
             ToPre={props.ToPre}
         />
     )
-}
+} 
