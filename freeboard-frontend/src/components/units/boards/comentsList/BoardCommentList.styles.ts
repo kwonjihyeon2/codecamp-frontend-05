@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 // import {image} from 'public'
 
-import { IActive } from './BoardComment.types'
+import { IActive } from './BoardCommentList.types'
 
 
 export const NewBody = styled.div`
@@ -14,7 +14,7 @@ export const BoardContent = styled.div`
     margin : 80px auto;
 `
 
-export const CommentContent = styled.div`
+export const Commentcontent = styled.div`
     margin :0px auto;
     width : 1200px;
 `

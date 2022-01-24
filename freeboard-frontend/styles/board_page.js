@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     box-shadow  : 0px 4px 20px rgba(0,0,0,0.2);
 `
 
-export const Wrapper_Top = styled.div`
+export const WrapperTop = styled.div`
     margin-bottom : 80px;
     border-bottom : 1px solid #bdbdbd;
     padding-bottom : 20px;
@@ -53,7 +53,7 @@ export const WriteDate = styled.div`
     font-size : 16px;
 `
 
-export const Wrapper_Top_Icon = styled.span`
+export const WrapperTopIcon = styled.span`
     color : #ffd600;
     margin-left : 20px;
 `

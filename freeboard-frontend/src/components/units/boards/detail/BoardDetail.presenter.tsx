@@ -1,9 +1,18 @@
 import * as S from './BoardDetail.styles'
-import { FaUserCircle , FaLink, FaLocationArrow,FaStar } from 'react-icons/fa'
+import { FaUserCircle , FaLink, FaLocationArrow } from 'react-icons/fa'
 import { BiLike,BiDislike } from 'react-icons/bi'
+import ReactPlayer from 'react-player'
 
+interface IDetailProps{
+    data ?: any
+    GoList : () => void
+    GoEditPage : () => void
+    deleteBoard : () => void
+    LikeBtn : () => void
+    DisLikeBtn : () => void
+}
 
-export default function FreeBoardDetailUI(props){
+export default function FreeBoardDetailUI(props:IDetailProps){
     
 
 
@@ -11,37 +20,37 @@ export default function FreeBoardDetailUI(props){
         <S.NewBody>
             <S.BoardContent>
                 <S.Wrapper>
-                    <S.Wrapper_Top>
+                    <S.WrapperTop>
                         <S.Writer>
                             <S.WriterBox>
                                 <S.Profile><FaUserCircle size={50} color="#bdbdbd"/></S.Profile>
                                 <div>
                                     <div>{props.data?.fetchBoard.writer}</div>
-                                    <S.WriteDate>Date : 2021.02.18</S.WriteDate>
+                                    <S.WriteDate>{props.data?.fetchBoard.createdAt}</S.WriteDate>
                                 </div>
                             </S.WriterBox>
                             
                             <div>
-                                <S.Wrapper_Top_Icon><FaLink /></S.Wrapper_Top_Icon>
-                                <S.Wrapper_Top_Icon><FaLocationArrow /></S.Wrapper_Top_Icon>
+                                <S.WrapperTopIcon><FaLink /></S.WrapperTopIcon>
+                                <S.WrapperTopIcon><FaLocationArrow /></S.WrapperTopIcon>
                             </div>
                         </S.Writer>
-                    </S.Wrapper_Top>
+                    </S.WrapperTop>
                     <div>
                         <S.BodyTitle>{props.data?.fetchBoard.title}</S.BodyTitle>
                         <S.BodyImg></S.BodyImg>
                         <S.BodyContents>{props.data?.fetchBoard.contents}</S.BodyContents>
-                        <S.BodyYoutube>{props.data?.fetchBoard.youtubeUrl}</S.BodyYoutube>
-                        <S.BodyLikebox>
+                        <S.BodyYouTube><ReactPlayer url={props.data?.fetchBoard.youtubeUrl} width={480} height={props.data?.fetchBoard.youtubeUrl === "" ? 0 : 250}/></S.BodyYouTube>
+                        <S.BodyLikeBox>
                             <S.LikeBox>
-                                <BiLike />
-                                <p>1920</p>
+                                <S.LikeBtn onClick={props.LikeBtn}><BiLike color={'#ffd600'} size={20}/></S.LikeBtn>
+                                <div>{props.data?.fetchBoard.likeCount}</div>
                             </S.LikeBox>
                             <S.LikeBox>
-                                <BiDislike color="#828282"/>
-                                <S.DisLikeText>1920</S.DisLikeText>
+                                <BiDislike onClick={props.DisLikeBtn} color="#828282" size={20}/>
+                                <S.DisLikeText>{props.data?.fetchBoard.dislikeCount}</S.DisLikeText>
                             </S.LikeBox>
-                        </S.BodyLikebox>
+                        </S.BodyLikeBox>
                     </div>
                 </S.Wrapper>
                 <S.ButtonBox>

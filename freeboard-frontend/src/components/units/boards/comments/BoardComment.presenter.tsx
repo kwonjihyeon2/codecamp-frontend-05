@@ -1,21 +1,15 @@
 import * as S from './BoardComment.styles'
-import {IPropsComment} from './BoardComment.types' 
-import { FaUserCircle , FaStar,FaPencilAlt,FaRegTrashAlt } from 'react-icons/fa'
+import {IPropsComment} from './BoardComment.types'
 // import { BiLike,BiDislike } from 'react-icons/bi'
-
+import { Rate } from 'antd'
 
 export default function FreeBoardCommentsUI(props:IPropsComment){
 
     return(
         <S.NewBody>
-           <S.Commentcontent>
+           <S.CommentContent>
                 <S.CommentTitle>댓글</S.CommentTitle>
-                <S.StarIcon>
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
+                <S.StarIcon><Rate value={props.StarValue} onChange={props.handelChange}/>
                 </S.StarIcon>
                 <S.CommentBox>
                     <div>
@@ -31,30 +25,8 @@ export default function FreeBoardCommentsUI(props:IPropsComment){
                         
                     </S.OnComments>
                 </S.CommentBox>
-                    <S.CommentInfo>
-
-                        {props.data?.fetchBoardComments.map((el: any)=>(
-                            <S.CommentDiv key={el._id}>
-                                <div><FaUserCircle size={50}/></div>
-                                <S.CommentWriterBox>
-                                    <S.WriterRating>
-                                        <div>{el.writer}</div>
-                                        <div><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></div>
-                                    </S.WriterRating>
-                                    <div>{el.contents}</div>
-                                    <S.DateColor>{el.createdAt}</S.DateColor>
-                                </S.CommentWriterBox>
-                                <div>
-                                    <button id={el._id} onClick={props.UpdateComment}><FaPencilAlt /></button>
-                                    <button id={el._id} onClick={props.DeleteCommentBtn}><FaRegTrashAlt /></button>
-                                </div>
-                            </S.CommentDiv>
-                        ))}
-                        {/* 사용자 div */}
-                            
-                    </S.CommentInfo>
-                        
-            </S.Commentcontent>
+                
+            </S.CommentContent>
         </S.NewBody>
     )
     

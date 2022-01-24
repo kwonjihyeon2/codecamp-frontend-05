@@ -1,9 +1,9 @@
 
 import { useMutation, useQuery } from "@apollo/client"
 import { useRouter } from "next/router"
-import React, { useState } from "react"
+import { useState,ChangeEvent } from "react"
 import FreeBoardCommentsUI from "./BoardComment.presenter"
-import { DELETE_BOARD_COMMENT, FETCH_BOARD_COMMENT, CREATE_BOARD_COMMENT,UPDATE_BOARD_COMMENT } from "./BoardComment.queries"
+import { FETCH_BOARD_COMMENT, CREATE_BOARD_COMMENT } from "./BoardComment.queries"
 // import { IBoardCommentProps } from "./BoardComment.types"
 
 export default function FreeBoardComments() {
@@ -23,24 +23,24 @@ export default function FreeBoardComments() {
     
     // console.log(data?.fetchBoardComments.writer)
 
-    const onChangeMywriter = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeMywriter = (event:ChangeEvent<HTMLInputElement>) => {
         setMywriter(event.target.value)
         if(event.target.value){
             setIsActive(true)
         }
     }
-    const onChangePassword = (event:React.ChangeEvent<HTMLInputElement>) =>{
+    const onChangePassword = (event:ChangeEvent<HTMLInputElement>) =>{
         setMyPassword(event.target.value)
-        let myPw = event.target.value
+        const myPw = event.target.value
 
         if(myPw.length > 4){
             setIsActive(true)
         }
     }
 
-    const onChangeContents = (event:React.ChangeEvent<HTMLTextAreaElement>) =>{
+    const onChangeContents = (event:ChangeEvent<HTMLTextAreaElement>) =>{
         setMyContents(event.target.value)
-        let maxLength = event.target.value.length
+        const maxLength = event.target.value.length
         if(maxLength){
             setIsActive(true)
         }
@@ -50,12 +50,20 @@ export default function FreeBoardComments() {
         }
     }
 
+
+    const [StarValue, setStarValue] = useState(3)
+
+    const handelChange = (value:any) =>{
+        setStarValue(value)
+    }
+    
+
     const CreateCommentBtn = async () => {
 
         try{
             await CreateComment({
                 variables : {createBoardCommentInput : {
-                    writer : myWriter, password : myPassword, contents : myContents, rating : 1
+                    writer : myWriter, password : myPassword, contents : myContents, rating : StarValue
                 }, boardId : String(router.query.board_Id)},
                 refetchQueries : [{
                     variables : { page : 1, boardId : router.query.board_Id},
@@ -68,63 +76,20 @@ export default function FreeBoardComments() {
         
     }
 
-    const [DeleteComment] = useMutation(DELETE_BOARD_COMMENT)
-
-    const DeleteCommentBtn = (event : any) =>{
-        try{
-            const InputPassword = prompt("비밀번호를 입력하세요.")
-
-            DeleteComment({
-                variables : {password : InputPassword, boardCommentId : event.target.id},
-                refetchQueries : [{
-                    variables : { page : 1, boardId : router.query.board_Id},
-                    query : FETCH_BOARD_COMMENT
-                }]
-            }) 
-            console.log(event.target.id)
-            console.log(InputPassword)
-
-        } catch(error){
-            console.log(error.message)
-        }
-
-    }
-
-    const [UpdateComment] = useMutation(UPDATE_BOARD_COMMENT)
-    const [isEdit, setIsEdit] = useState(false)
-
-    const UpdateCommentBtn = async (event:any)=>{
-        setIsEdit(true)
-
-        try{
-            const UpdatePassword = prompt("비밀번호를 입력하세요.")
-            const Updateresult = await UpdateComment({
-                variables : {updateBoardCommentInput : {
-                    contents : "철수" , rating : 1
-                },password : UpdatePassword, boardCommentId : event.target.id}
-            })
-           console.log(Updateresult.data.updateBoardComment._id)
-        } catch(error){
-            console.log(error.message)
-        }
-    }
-
 
 
     return(
 
         <FreeBoardCommentsUI 
             data={data}
-            DeleteCommentBtn={DeleteCommentBtn}
             onChangeMywriter={onChangeMywriter}
             onChangePassword={onChangePassword}
             onChangeContents={onChangeContents}
             isActive={isActive}
             CreateComment={CreateCommentBtn}
             length={length}
-            UpdateComment={UpdateCommentBtn}
-            isEdit={isEdit}
-            // UpdateId={UpdateId}
+            handelChange = {handelChange}
+            StarValue={StarValue}
         />
     )
 } 

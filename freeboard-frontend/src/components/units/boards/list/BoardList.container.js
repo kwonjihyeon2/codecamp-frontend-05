@@ -12,7 +12,7 @@ export default function BoardListPage(){
     const CreateNewBoard = ()=>{
         router.push("/boards/new")
     }
-    //클릭했을때 상세페이지로 가는 것 props onclick으로 연결
+    // 클릭했을때 상세페이지로 가는 것 props onclick으로 연결
 
     const GoToDetailPage = (event) => {
        console.log(event.target.id)

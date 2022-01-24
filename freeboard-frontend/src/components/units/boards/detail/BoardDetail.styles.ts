@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
     box-shadow  : 0px 4px 20px rgba(0,0,0,0.2);
 `
 
-export const Wrapper_Top = styled.div`
+export const WrapperTop = styled.div`
     margin-bottom : 80px;
     border-bottom : 1px solid #bdbdbd;
     padding-bottom : 20px;
@@ -54,7 +54,7 @@ export const WriteDate = styled.div`
     font-size : 16px;
 `
 
-export const Wrapper_Top_Icon = styled.span`
+export const WrapperTopIcon = styled.span`
     color : #ffd600;
     margin-left : 20px;
 `
@@ -77,18 +77,21 @@ export const BodyContents = styled.div`
     word-break: break-all;
 `
 
-export const BodyYoutube = styled.div`
-    width:486px;
-    height : 240px;
-    background-color : #bdbdbd;
+export const BodyYouTube = styled.div`
+    display : none;
+    width:100%;
+    display : flex;
+    justify-content : center;
     margin : 120px auto;
 `
 
-export const BodyLikebox = styled.div`
+export const BodyLikeBox = styled.div`
     display : flex;
     justify-content : center;
     margin : 0 auto;
     padding-top : 40px;
+    align-items:center;
+    cursor : pointer;
 `
 
 export const LikeBox = styled.div`
@@ -97,7 +100,14 @@ export const LikeBox = styled.div`
     text-align : center;
 `
 
-export const DisLikeText = styled.p`
+export const LikeBtn = styled.button`
+    cursor : pointer;
+    text-align : center;
+    border : none;
+    background-color : #fff;
+`
+
+export const DisLikeText = styled.div`
     color : #828282;
 `
 

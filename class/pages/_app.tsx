@@ -1,4 +1,5 @@
 import '../styles/globals.css' //나중에 삭제할..
+import "antd/dist/antd.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { AppProps } from 'next/app'
 

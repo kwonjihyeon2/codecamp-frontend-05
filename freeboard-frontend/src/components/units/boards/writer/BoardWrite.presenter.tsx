@@ -19,7 +19,24 @@ import { NewBody,
     FtBtn
 } from './BoardWrite.styles'
 
-export default function FreeBoardWriteUI(props:any){
+interface IPropsWriteUI{
+    ToPre ?: any
+    ErrorName : String
+    WriterName : (event: ChangeEvent<HTMLInputElement>) => void
+    WriterPassword : (event: ChangeEvent<HTMLInputElement>) => void
+    ErrorPassword : String
+    WriterTitle: (event:ChangeEvent<HTMLInputElement>) => void
+    ErrorTitle: String
+    WriterContent: (event:ChangeEvent<HTMLInputElement>) => void
+    ErrorContent: String
+    isActive : boolean
+    register : () => void
+    EditBtn : () => void
+    isEdit : boolean
+    MyYoutube : (event:ChangeEvent<HTMLInputElement>) => void
+}
+
+export default function FreeBoardWriteUI(props:IPropsWriteUI){
     return(
         <NewBody>
             <Main>
@@ -61,7 +78,7 @@ export default function FreeBoardWriteUI(props:any){
 
                     <CommonMargin>
                         <div>유튜브</div>
-                        <CommonInput type="text" placeholder="링크를 복사해주세요."/>
+                        <CommonInput type="text" placeholder="링크를 복사해주세요." onChange={props.MyYoutube} defaultValue={props.isEdit ? props.ToPre?.fetchBoard.youtubeUrl : ""}/>
                     </CommonMargin>
                     <CommonMargin>
                         <div>사진 첨부</div>
