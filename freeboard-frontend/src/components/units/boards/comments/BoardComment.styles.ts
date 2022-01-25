@@ -91,3 +91,4 @@ export const DateColor = styled.div`
     font-size : 12px;
     margin-top : 20px;
 `
+// 별이나 유튜브 등 css하고싶으면 관련 파일 import
