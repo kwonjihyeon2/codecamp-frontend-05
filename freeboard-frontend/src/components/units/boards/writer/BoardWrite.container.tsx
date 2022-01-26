@@ -167,9 +167,21 @@ export default function FreeBoardWrite(props: IWriteConProps) {
     console.log("수정되었습니다");
 
     try {
-      const MyVariables = { title: myTitle, contents: content };
+      const MyVariables = {
+        title: myTitle,
+        contents: content,
+        boardAddress: {
+          zipcode: zonecode,
+          address: Address,
+          addressDetail: AddressDetail,
+        },
+      };
       if (myTitle !== "") MyVariables.title = myTitle;
       if (content !== "") MyVariables.contents = content;
+      if (zonecode !== "") MyVariables.boardAddress.zipcode = zonecode;
+      if (Address !== "") MyVariables.boardAddress.address = Address;
+      if (AddressDetail !== "")
+        MyVariables.boardAddress.addressDetail = AddressDetail;
 
       const EditResult = await EditBoard({
         variables: {
@@ -179,7 +191,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
         },
       });
 
-      console.log(EditResult.data.updateBoard._id);
+      console.log(EditResult.data.updateBoard.boardAddress.address);
       Modal.success({ content: "게시물이 수정되었습니다." });
 
       router.push(`/boards/${router.query.board_Id}`);

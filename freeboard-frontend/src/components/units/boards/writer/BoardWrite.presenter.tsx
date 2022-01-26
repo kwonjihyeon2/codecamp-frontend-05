@@ -109,10 +109,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
               <PostNum
                 type="text"
                 placeholder="07250"
+                readOnly
                 value={
-                  props.isEdit
-                    ? props.ToPre?.fetchBoard.boardAddress.zipcode
-                    : ""
+                  props.zonecode || props.ToPre?.fetchBoard.boardAddress.zipcode
                 }
               />
 
@@ -130,8 +129,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
             </PostBox>
             <CommonInput
               type="text"
+              readOnly
               value={
-                props.isEdit ? props.ToPre?.fetchBoard.boardAddress.address : ""
+                props.Address || props.ToPre?.fetchBoard.boardAddress.address
               }
             />
             <br />
@@ -140,8 +140,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
               onChange={props.AddressDetail}
               defaultValue={
                 props.isEdit
-                  ? props.ToPre?.fetchBoard.boardAddress.addressDetail
-                  : ""
+                  ? // ? props.ToPre?.fetchBoard.boardAddress.addressDetail
+                    props.ToPre?.fetchBoard.boardAddress.addressDetail
+                  : props.AddressDetail
               }
             />
           </CommonMargin>

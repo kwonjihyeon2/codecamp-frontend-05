@@ -33,6 +33,11 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      boardAddress {
+        address
+        addressDetail
+        zipcode
+      }
     }
   }
 `;

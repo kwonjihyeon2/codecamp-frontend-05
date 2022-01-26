@@ -118,6 +118,7 @@ export default function FreeBoardCommentsList() {
   const EditCommentBtn = async (event: any) => {
     // setIsEdit(true)
     setEditId(event.currentTarget.id);
+    // if(event.target instanceof Element) setSelectedID(event.target.id)
 
     setIsEdit((prev) => !prev);
 
@@ -132,7 +133,7 @@ export default function FreeBoardCommentsList() {
         variables: {
           updateBoardCommentInput: myVariables,
           password: NewPassword,
-          boardCommentId: ModalId,
+          boardCommentId: EditId,
         },
         refetchQueries: [
           {
@@ -144,6 +145,7 @@ export default function FreeBoardCommentsList() {
 
       console.log(EditId, isEdit, myContents);
     } catch (error) {
+      // Modal.warning({ content: error.message });
       console.log(error.message);
     }
   };
