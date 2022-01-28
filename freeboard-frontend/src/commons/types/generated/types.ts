@@ -22,7 +22,7 @@ export type IBoard = {
   boardAddress?: Maybe<IBoardAddress>;
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  deletedAt?: Maybe<Scalars['DateTime']>; 
+  deletedAt?: Maybe<Scalars['DateTime']>;
   dislikeCount: Scalars['Int'];
   images?: Maybe<Array<Scalars['String']>>;
   likeCount: Scalars['Int'];
