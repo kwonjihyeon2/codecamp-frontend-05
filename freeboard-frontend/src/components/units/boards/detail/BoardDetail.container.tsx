@@ -8,16 +8,26 @@ import {
   DIS_LIKE_BOARD,
 } from "./BoardDetail.queries";
 import { useState } from "react";
+import {
+  IMutation,
+  IMutationDeleteBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+  IMutationLikeBoardArgs,
+  IMutationDislikeBoardArgs,
+} from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 // import ReactPlayer from 'react-player'
 
 export default function FreeBoardDetail() {
   const router = useRouter();
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: String(router.query.board_Id) },
-  });
-  // console.log(data?.fetchBoard.likeCount)
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: String(router.query.board_Id) },
+    }
+  );
 
   const GoList = () => {
     router.push("/boards");
@@ -27,7 +37,10 @@ export default function FreeBoardDetail() {
     router.push(`/boards/${router.query.board_Id}/edit`);
   };
 
-  const [deleteBoard] = useMutation(FETCH_DELETE_BOARD);
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(FETCH_DELETE_BOARD);
   const DeleteDetailBoard = async () => {
     try {
       await deleteBoard({
@@ -42,7 +55,10 @@ export default function FreeBoardDetail() {
   };
 
   const [Like, setLike] = useState(0);
-  const [LikeBoard] = useMutation(LIKE_BOARD);
+  const [LikeBoard] = useMutation<
+    Pick<IMutation, "likeBoard">,
+    IMutationLikeBoardArgs
+  >(LIKE_BOARD);
   const LikeBtn = async () => {
     try {
       await LikeBoard({
@@ -55,15 +71,18 @@ export default function FreeBoardDetail() {
         ],
       });
 
-      console.log(Like, data?.likeBoard);
-      setLike(data?.likeBoard);
+      console.log(Like, data?.fetchBoard.likeCount);
+      setLike(Number(data?.fetchBoard.likeCount));
     } catch (error) {
       console.log(error.message);
     }
   };
 
   const [DisLike, setDisLike] = useState(0);
-  const [DisLikeBoard] = useMutation(DIS_LIKE_BOARD);
+  const [DisLikeBoard] = useMutation<
+    Pick<IMutation, "dislikeBoard">,
+    IMutationDislikeBoardArgs
+  >(DIS_LIKE_BOARD);
   const DisLikeBtn = async () => {
     try {
       await DisLikeBoard({
@@ -75,9 +94,8 @@ export default function FreeBoardDetail() {
           },
         ],
       });
-
       console.log(DisLike, data?.fetchBoard.dislikeCount);
-      setDisLike(data?.fetchBoard.dislikeBoard);
+      setDisLike(Number(data?.fetchBoard.dislikeCount));
     } catch (error) {
       console.log(error.message);
     }

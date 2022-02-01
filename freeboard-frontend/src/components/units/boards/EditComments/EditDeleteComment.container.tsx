@@ -8,13 +8,18 @@ import { ChangeEvent, useState } from "react";
 import {
   IMutation,
   IMutationDeleteBoardCommentArgs,
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
 import EditBoardCommentListUI from "./EditDeleteComment.presenter";
 import { Modal } from "antd";
 
 export default function EditBoardCommentList() {
   const router = useRouter();
-  const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENT, {
+  const { data, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENT, {
     variables: { page: 1, boardId: String(router.query.board_Id) },
   });
 
@@ -22,9 +27,9 @@ export default function EditBoardCommentList() {
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
   >(DELETE_COMMENT);
-  const [modalpassword, setModalPassword] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [ModalId, setModalId] = useState("");
+  const [modalpassword, setModalPassword] = useState<string>("");
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [ModalId, setModalId] = useState<string>("");
   const ModalPasswordEvent = (event: ChangeEvent<HTMLInputElement>) => {
     setModalPassword(event.target.value);
   };
@@ -72,18 +77,17 @@ export default function EditBoardCommentList() {
         boardId: String(router.query.board_Id),
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchBoardComments)
+        if (!fetchMoreResult?.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };
 
         return {
           fetchBoardComments: [
             ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
+            ...fetchMoreResult?.fetchBoardComments,
           ],
         };
       },
     });
-    // console.log(Error);
   };
 
   return (

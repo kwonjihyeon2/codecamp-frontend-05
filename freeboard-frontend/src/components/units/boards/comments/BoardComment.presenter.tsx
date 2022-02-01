@@ -7,17 +7,24 @@ export default function FreeBoardCommentsUI(props: IPropsComment) {
   return (
     <S.NewBody>
       <S.CommentContent>
-        <S.CommentTitle>댓글</S.CommentTitle>
-        <S.StarIcon>
-          <Rate value={props.StarValue} onChange={props.handelChange} />
-        </S.StarIcon>
+        <S.CommentTitle>의견 남기기</S.CommentTitle>
         <S.CommentBox>
           <div>
-            <input type="text" onChange={props.onChangeMywriter} />
-            <input
+            <S.CommonsInput
               type="text"
+              id="writer"
+              onChange={props.onChangeInputs}
+            />
+            <S.CommonsInput
+              type="text"
+              id="password"
               placeholder="비밀번호를 입력하세요."
-              onChange={props.onChangePassword}
+              onChange={props.onChangeInputs}
+            />
+            <Rate
+              value={props.StarValue}
+              onChange={props.handelChange}
+              style={{ fontSize: 16 }}
             />
           </div>
           <S.CommentsInput

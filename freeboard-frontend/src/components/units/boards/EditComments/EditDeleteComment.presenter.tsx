@@ -40,7 +40,6 @@ export default function EditBoardCommentListUI(props: IPropsEdit) {
                 isModalVisible={props.isModalVisible}
               />
             ))}
-            {/* <div>더보기</div> */}
           </InfiniteScroll>
         )}
       </StyleComment>

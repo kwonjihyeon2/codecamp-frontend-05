@@ -6,35 +6,45 @@ import {
   FETCH_BOARD_COMMENT,
   CREATE_BOARD_COMMENT,
 } from "./BoardComment.queries";
-// import { IBoardCommentProps } from "./BoardComment.types"
+import {
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
+  IMutation,
+  IMutationCreateBoardCommentArgs,
+} from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 
 export default function FreeBoardComments() {
   const router = useRouter();
 
-  const [CreateComment] = useMutation(CREATE_BOARD_COMMENT);
-  const [myWriter, setMywriter] = useState("");
-  const [myPassword, setMyPassword] = useState("");
+  const [CreateComment] = useMutation<
+    Pick<IMutation, "createBoardComment">,
+    IMutationCreateBoardCommentArgs
+  >(CREATE_BOARD_COMMENT);
+  const [inputs, setInputs] = useState({
+    writer: "",
+    password: "",
+  });
   const [myContents, setMyContents] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [length, setLength] = useState(0);
 
-  const { data } = useQuery(FETCH_BOARD_COMMENT, {
+  const { data } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENT, {
     variables: { page: 1, boardId: String(router.query.board_Id) },
   });
 
-  // console.log(data?.fetchBoardComments.writer)
-
-  const onChangeMywriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setMywriter(event.target.value);
-    if (event.target.value) {
+  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
+    const myPw = inputs.password;
+    if (inputs.writer) {
       setIsActive(true);
     }
-  };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setMyPassword(event.target.value);
-    const myPw = event.target.value;
-
     if (myPw.length > 4) {
       setIsActive(true);
     }
@@ -56,20 +66,16 @@ export default function FreeBoardComments() {
   };
 
   const [StarValue, setStarValue] = useState(3);
-
   const handelChange = (value: any) => {
     setStarValue(value);
   };
-
-  // ant-design에서 만든 onchange이기 때문에 type:event x
 
   const CreateCommentBtn = async () => {
     try {
       await CreateComment({
         variables: {
           createBoardCommentInput: {
-            writer: myWriter,
-            password: myPassword,
+            ...inputs,
             contents: myContents,
             rating: StarValue,
           },
@@ -91,8 +97,7 @@ export default function FreeBoardComments() {
   return (
     <FreeBoardCommentsUI
       data={data}
-      onChangeMywriter={onChangeMywriter}
-      onChangePassword={onChangePassword}
+      onChangeInputs={onChangeInputs}
       onChangeContents={onChangeContents}
       isActive={isActive}
       CreateComment={CreateCommentBtn}

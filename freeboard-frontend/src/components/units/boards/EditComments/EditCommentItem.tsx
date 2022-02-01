@@ -13,11 +13,12 @@ import {
   IMutation,
   IMutationUpdateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
+import { getMyDate } from "../../../../commons/libraries/uitils";
 
 export default function EditCommentItem(props: IPropsEditItem) {
   const router = useRouter();
-  const [inputPassword, setInputPassword] = useState("");
-  const [inputContent, setInputContent] = useState("");
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [inputContent, setInputContent] = useState<string>("");
   const InputPasswordEvent = (event: ChangeEvent<HTMLInputElement>) => {
     setInputPassword(event.target.value);
   };
@@ -28,8 +29,8 @@ export default function EditCommentItem(props: IPropsEditItem) {
     Pick<IMutation, "updateBoardComment">,
     IMutationUpdateBoardCommentArgs
   >(UPDATE_COMMENT);
-  const [isEdit, setIsEdit] = useState(false);
-  const [StarRating, setRating] = useState();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [StarRating, setRating] = useState<any>();
 
   const StarValue = (value: any) => {
     setRating(value);
@@ -67,32 +68,32 @@ export default function EditCommentItem(props: IPropsEditItem) {
   return (
     <S.CommentDiv key={props.el._id}>
       <div>
-        <FaUserCircle size={50} />
+        <FaUserCircle size={40} />
       </div>
       <S.CommentWriterBox>
         <S.WriterRating>
           {isEdit ? (
             <div>
+              <S.CommentWriter
+                type="password"
+                onChange={InputPasswordEvent}
+                placeholder="비밀번호를 입력하세요"
+              />
               <Rate
                 allowHalf
                 defaultValue={props.el.rating}
                 onChange={StarValue}
+                style={{ fontSize: 16 }}
               />
-              <div>
-                <input type="text" value={props.el.writer} readOnly />
-                <input
-                  type="password"
-                  onChange={InputPasswordEvent}
-                  placeholder="비밀번호를 입력하세요"
-                />
-              </div>
             </div>
           ) : (
             <div>
-              <Rate allowHalf value={props.el.rating} />
-              <div>
-                <input type="text" readOnly value={props.el.writer} />
-              </div>
+              <S.CommentWriter type="text" readOnly value={props.el.writer} />
+              <Rate
+                allowHalf
+                value={props.el.rating}
+                style={{ fontSize: 16 }}
+              />
             </div>
           )}
         </S.WriterRating>
@@ -107,15 +108,15 @@ export default function EditCommentItem(props: IPropsEditItem) {
             <S.CommentArea value={props.el.contents} readOnly={true} />
           )}
         </S.OnComments>
-        <S.DateColor>{props.el.createdAt}</S.DateColor>
+        <S.DateColor>{getMyDate(props.el.createdAt)}</S.DateColor>
       </S.CommentWriterBox>
       <div>
-        <button id={props.el._id} onClick={UpdateCommentBtn}>
+        <S.ButtonStyle id={props.el._id} onClick={UpdateCommentBtn}>
           <FaPencilAlt />
-        </button>
-        <button id={props.el._id} onClick={props.ToggleOpen}>
+        </S.ButtonStyle>
+        <S.ButtonStyle id={props.el._id} onClick={props.ToggleOpen}>
           <FaRegTrashAlt />
-        </button>
+        </S.ButtonStyle>
       </div>
     </S.CommentDiv>
   );

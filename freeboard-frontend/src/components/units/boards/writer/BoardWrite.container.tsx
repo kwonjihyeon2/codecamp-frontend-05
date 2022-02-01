@@ -114,14 +114,14 @@ export default function FreeBoardWrite(props: IWriteConProps) {
         setErrorPw("");
       }
 
-      if (myTitle === "") {
+      if (!myTitle) {
         setErrorTitle("제목은 필수입력 항목입니다.");
         window.scrollTo(0, 0);
       } else {
         setErrorTitle("");
       }
 
-      if (content === "") {
+      if (!content) {
         setErrorContent("내용은 필수입력 항목입니다.");
       } else {
         setErrorContent("");
@@ -135,8 +135,6 @@ export default function FreeBoardWrite(props: IWriteConProps) {
             title: myTitle,
             contents: content,
             youtubeUrl: MyYoutubeUrl,
-            // 키와 값이 같으면 값 생략 가능 = shorthand property
-            // 여기서 name을 내가 지정해준 state값이고, 이 state값이 키(writer)와 같으면
             boardAddress: {
               zipcode: zonecode,
               address: Address,

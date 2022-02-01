@@ -19,20 +19,17 @@ export const CommentContent = styled.div`
 `;
 
 export const CommentTitle = styled.div`
-  margin: 40px 0;
-  display: flex;
-`;
-
-export const StarIcon = styled.div`
-  color: #bdbdbd;
+  margin: 20px 0;
+  font-weight: 700;
+  /* font-size: 24px; */
 `;
 
 export const CommentBox = styled.div`
   width: 100%;
   /* height : 160px; */
   border: 1px solid #bdbdbd;
-  margin: 20px 0;
-  /* padding : 20px; */
+  /* margin: 20px 0; */
+  padding: 20px;
   display: flex;
   flex-direction: column;
 `;
@@ -41,21 +38,36 @@ export const OnComments = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-export const CommentsInput = styled.textarea`
+export const CommonsInput = styled.input`
   border: none;
+  border-bottom: 1px solid #bdbdbd;
+  margin-right: 10px;
+  padding-left: 10px;
+  outline: none;
+  &:focus {
+    transition: all 1.5s;
+    border-bottom: 1px solid #000;
+  }
+`;
+export const CommentsInput = styled.textarea`
+  border: 1px solid #fff;
   border-bottom: 1px solid #bdbdbd;
   width: 100%;
   height: 80px;
-  padding: 20px;
+  margin: 10px 0;
+  padding: 10px;
   resize: none;
+  outline: none;
+  &:focus {
+    border-bottom: 1px solid #000;
+  }
 `;
 export const CommentsCount = styled.div`
   width: 100%;
   /* border-top : 1px solid #bdbdbd; */
   display: flex;
   justify-content: space-between;
-  padding-left: 20px;
+  padding-left: 10px;
   align-items: center;
 `;
 export const ChangeBtn = styled.div`
@@ -64,7 +76,7 @@ export const ChangeBtn = styled.div`
   color: ${(props: IActive) => (props.isActive === true ? "#000" : "#bdbdbd")};
   cursor: ${(props: IActive) =>
     props.isActive === true ? "pointer" : "default"};
-  padding: 10px;
+  padding: 5px;
 `;
 
 export const CommentInfo = styled.div`
@@ -74,10 +86,10 @@ export const CommentInfo = styled.div`
 
 export const CommentDiv = styled.div`
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: space-between;
   border-bottom: 1px solid #bdbdbd;
-  padding: 20px 0;
+  padding: 20px;
 `;
 
 export const CommentWriterBox = styled.div`
@@ -87,7 +99,7 @@ export const CommentWriterBox = styled.div`
 export const WriterRating = styled.div`
   display: flex;
 `;
-export const DateColor = styled.div`
+export const DateColor = styled.span`
   color: #bdbdbd;
   font-size: 12px;
   margin-top: 10px;
@@ -99,4 +111,19 @@ export const CommentArea = styled.textarea`
   border: none;
   margin-top: 5px;
   resize: none;
+`;
+
+export const CommentWriter = styled.input`
+  border: none;
+  font-weight: 700;
+  width: fit-content;
+`;
+
+export const ButtonStyle = styled.button`
+  background-color: #fff;
+  margin: 0 5px;
+  border: none;
+  &:hover {
+    color: #21c997;
+  }
 `;

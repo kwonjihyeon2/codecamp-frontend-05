@@ -1,4 +1,5 @@
 import styled from "@emotion/styled/";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -26,16 +27,32 @@ const NavList = styled.ul`
 const NavLi = styled.li`
   margin: 0 10px;
   font-weight: 700;
+  border-bottom: 1px solid #fff;
+  &:hover {
+    transition: all 0.5s;
+    transform: translateY(-5px);
+    border-bottom: 1px solid #000;
+  }
 `;
 
 export default function LayOutDesignHead() {
+  const router = useRouter();
+
+  const MoveToMain = () => {
+    router.push("/");
+  };
+
+  const MoveToList = () => {
+    router.push("/boards");
+  };
+
   return (
     <Wrapper>
       <HeaderList>
         <HeaderLogo>로고</HeaderLogo>
         <NavList>
-          <NavLi>HOME</NavLi>
-          <NavLi>COMMUNITY</NavLi>
+          <NavLi onClick={MoveToMain}>HOME</NavLi>
+          <NavLi onClick={MoveToList}>COMMUNITY</NavLi>
           <NavLi>MARKET</NavLi>
           <NavLi>MY</NavLi>
         </NavList>

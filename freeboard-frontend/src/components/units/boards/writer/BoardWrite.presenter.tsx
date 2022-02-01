@@ -8,7 +8,6 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
     <S.NewBody>
       <S.Main>
         <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
-
         <S.Content>
           <S.UserInfo>
             <S.UserDiv>
@@ -99,8 +98,7 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
               onChange={props.AddressDetail}
               defaultValue={
                 props.isEdit
-                  ? // ? props.ToPre?.fetchBoard.boardAddress.addressDetail
-                    props.ToPre?.fetchBoard.boardAddress.addressDetail
+                  ? props.ToPre?.fetchBoard.boardAddress.addressDetail
                   : props.AddressDetail
               }
             />

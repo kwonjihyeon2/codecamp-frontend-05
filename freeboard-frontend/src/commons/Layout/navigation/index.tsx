@@ -19,6 +19,8 @@ const WrapperUl = styled.ul`
 
 const NaviList = styled.li`
   margin-left: 10px;
+  cursor: pointer;
+  font-weight: 500;
 `;
 
 export default function LayOutDesignNavi() {

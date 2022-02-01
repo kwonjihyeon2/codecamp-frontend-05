@@ -1,7 +1,6 @@
 import InfiniteScroll from "react-infinite-scroller";
 import { useQuery, gql } from "@apollo/client";
 import styled from "@emotion/styled/";
-// import { useRouter } from "next/router";
 
 const FETCH_BOARD_COMMENT = gql`
   query fetchBoardComments($page: Int, $boardId: ID!) {
@@ -15,15 +14,15 @@ const FETCH_BOARD_COMMENT = gql`
   }
 `;
 const Container = styled.div`
-  width: 300px;
-  height: 100px;
+  width: 100%;
+  height: 200px;
   overflow: auto;
 `;
 export default function InfiniteScrollCompo() {
   //   const router = useRouter();
 
   const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENT, {
-    variables: { page: 1, boardId: String("61f3d4be8cd4860029b48f16") },
+    variables: { page: 1, boardId: "61f3d4be8cd4860029b48f16" },
   });
 
   const LoadComment = () => {
@@ -35,7 +34,7 @@ export default function InfiniteScrollCompo() {
         boardId: String("61f3d4be8cd4860029b48f16"),
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchBoardComments)
+        if (!fetchMoreResult?.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };
 
         return {
@@ -46,7 +45,6 @@ export default function InfiniteScrollCompo() {
         };
       },
     });
-    // console.log(Error);
   };
   return (
     <Container>

@@ -1,8 +1,15 @@
 import * as S from "./BoardList.styles";
 import { FaPencilAlt } from "react-icons/fa";
+import { MouseEvent } from "react";
 import { getMyDate } from "../../../../commons/libraries/uitils";
 
-export default function BoardListPageUI(props) {
+interface IPropsListUI {
+  data: any;
+  GoToDetail: (event: MouseEvent<HTMLDivElement>) => void;
+  CreateNew: () => void;
+}
+
+export default function BoardListPageUI(props: IPropsListUI) {
   return (
     <S.NewBody>
       <S.Wrapper>
@@ -14,8 +21,7 @@ export default function BoardListPageUI(props) {
             <S.WriterDate>날짜</S.WriterDate>
           </S.DataTitleBox>
           <div>
-            {/* index값 번호로 넣어줄 수 있음 */}
-            {props.data?.fetchBoards.map((el, index) => (
+            {props.data?.fetchBoards.map((el: any, index: number) => (
               <S.DataListBox key={el._id}>
                 <S.NumberBox>{index + 1}</S.NumberBox>
                 <S.TitleBox id={el._id} onClick={props.GoToDetail}>
