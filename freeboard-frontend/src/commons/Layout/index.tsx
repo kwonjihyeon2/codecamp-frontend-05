@@ -10,15 +10,16 @@ interface IPropsDesign {
 }
 
 const LayOutDesignBody = styled.div`
-  width: 1200px;
+  width: 1240px;
   margin: 0 auto;
 `;
 
 export default function LayOutDesign(props: IPropsDesign) {
   return (
     <div>
-      <LayOutDesignHead />
       <LayOutDesignNavi />
+      <LayOutDesignHead />
+
       <LayOutDesignBanner />
       <LayOutDesignBody>{props.children}</LayOutDesignBody>
       <LayOutDesignFooter />

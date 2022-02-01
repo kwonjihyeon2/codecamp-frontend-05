@@ -1,5 +1,6 @@
 import * as S from "./BoardList.styles";
 import { FaPencilAlt } from "react-icons/fa";
+import { getMyDate } from "../../../../commons/libraries/uitils";
 
 export default function BoardListPageUI(props) {
   return (
@@ -21,7 +22,7 @@ export default function BoardListPageUI(props) {
                   {el.title}
                 </S.TitleBox>
                 <S.WriterDate>{el.writer}</S.WriterDate>
-                <S.WriterDate>{el.createdAt}</S.WriterDate>
+                <S.WriterDate>{getMyDate(el.createdAt)}</S.WriterDate>
               </S.DataListBox>
             ))}
           </div>

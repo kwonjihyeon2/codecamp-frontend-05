@@ -2,6 +2,7 @@ import * as S from "./BoardDetail.styles";
 import { FaUserCircle, FaLink, FaLocationArrow } from "react-icons/fa";
 import { BiLike, BiDislike } from "react-icons/bi";
 import ReactPlayer from "react-player";
+import { getMyDate } from "../../../../commons/libraries/uitils";
 
 interface IDetailProps {
   data?: any;
@@ -25,7 +26,9 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
                 </S.Profile>
                 <div>
                   <div>{props.data?.fetchBoard.writer}</div>
-                  <S.WriteDate>{props.data?.fetchBoard.createdAt}</S.WriteDate>
+                  <S.WriteDate>
+                    {getMyDate(props.data?.fetchBoard.createdAt)}
+                  </S.WriteDate>
                 </div>
               </S.WriterBox>
 
@@ -47,7 +50,7 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
               <ReactPlayer
                 url={props.data?.fetchBoard.youtubeUrl}
                 width={480}
-                height={props.data?.fetchBoard.youtubeUrl === "" ? 0 : 250}
+                height={props.data?.fetchBoard.youtubeUrl && 250}
               />
             </S.BodyYouTube>
             <S.BodyLikeBox>

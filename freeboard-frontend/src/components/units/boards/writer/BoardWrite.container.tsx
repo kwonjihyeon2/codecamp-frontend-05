@@ -4,11 +4,7 @@ import { useRouter } from "next/router";
 import FreeBoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_NEWBOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { Modal } from "antd";
-
-interface IWriteConProps {
-  isEdit: boolean;
-  ToPre?: any;
-}
+import { IWriteConProps } from "./BoardWrite.types";
 
 export default function FreeBoardWrite(props: IWriteConProps) {
   const router = useRouter();
@@ -146,7 +142,6 @@ export default function FreeBoardWrite(props: IWriteConProps) {
               address: Address,
               addressDetail: AddressDetail,
             },
-            // 백엔드로 요청하는 부분, catch/try 써주는게 좋음
           },
         },
       });

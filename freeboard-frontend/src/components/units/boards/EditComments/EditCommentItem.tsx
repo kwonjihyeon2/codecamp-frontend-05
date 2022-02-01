@@ -71,61 +71,51 @@ export default function EditCommentItem(props: IPropsEditItem) {
       </div>
       <S.CommentWriterBox>
         <S.WriterRating>
-          <div>
-            {isEdit ? (
+          {isEdit ? (
+            <div>
+              <Rate
+                allowHalf
+                defaultValue={props.el.rating}
+                onChange={StarValue}
+              />
               <div>
-                <Rate
-                  allowHalf
-                  defaultValue={StarValue}
-                  onChange={StarRating}
+                <input type="text" value={props.el.writer} readOnly />
+                <input
+                  type="password"
+                  onChange={InputPasswordEvent}
+                  placeholder="비밀번호를 입력하세요"
                 />
-                <div>
-                  <input type="text" value={props.el.writer} readOnly />
-                  <input
-                    type="password"
-                    onChange={InputPasswordEvent}
-                    placeholder="비밀번호를 입력하세요"
-                  />
-                </div>
               </div>
-            ) : (
+            </div>
+          ) : (
+            <div>
+              <Rate allowHalf value={props.el.rating} />
               <div>
-                <Rate allowHalf value={props.el.rating} />
-                <div>
-                  <input type="text" readOnly value={props.el.writer} />
-                </div>
+                <input type="text" readOnly value={props.el.writer} />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </S.WriterRating>
         <S.OnComments>
-          <div>
-            {isEdit ? (
-              <S.CommentArea
-                onChange={InputContentEvent}
-                defaultValue={props.el.contents}
-                maxLength={100}
-              />
-            ) : (
-              <S.CommentArea
-                value={props.el.contents}
-                readOnly={true}
-                maxLength={100}
-              />
-            )}
-          </div>
+          {isEdit ? (
+            <S.CommentArea
+              onChange={InputContentEvent}
+              defaultValue={props.el.contents}
+              maxLength={100}
+            />
+          ) : (
+            <S.CommentArea value={props.el.contents} readOnly={true} />
+          )}
         </S.OnComments>
         <S.DateColor>{props.el.createdAt}</S.DateColor>
       </S.CommentWriterBox>
       <div>
-        <div>
-          <button id={props.el._id} onClick={UpdateCommentBtn}>
-            <FaPencilAlt />
-          </button>
-          <button id={props.el._id} onClick={props.ToggleOpen}>
-            <FaRegTrashAlt />
-          </button>
-        </div>
+        <button id={props.el._id} onClick={UpdateCommentBtn}>
+          <FaPencilAlt />
+        </button>
+        <button id={props.el._id} onClick={props.ToggleOpen}>
+          <FaRegTrashAlt />
+        </button>
       </div>
     </S.CommentDiv>
   );

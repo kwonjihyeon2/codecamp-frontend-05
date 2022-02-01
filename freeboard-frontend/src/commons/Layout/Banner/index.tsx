@@ -1,60 +1,69 @@
-import styled from "@emotion/styled";
-// import { Component } from "react";
-import Slider from "react-slick";
-
-const Wrapper = styled.div`
-  height: 600px;
-  background-color: pink;
-  width: 100%;
-  /* font-family: "ChangeFont"; */
-`;
-
-const Container = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const CommonSlider = styled.div`
-  height: 100%;
-`;
-
-const BannerImg = styled.img`
-  width: inherit;
-`;
+import * as S from "./BannerStyles";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 export default function SampleBanner() {
+  const MySliderList = [
+    {
+      imageSrc: "/layout/slide1.jpg",
+      title: "첫번째 슬라이드",
+      firstContents: "백엔드 모집",
+      secondContents: "3년 이상",
+    },
+    {
+      imageSrc: "/layout/slide.jpg",
+      firstContents: "백엔드 모집",
+      secondContents: "3년 이상",
+      title: "두번째 슬라이드",
+    },
+    {
+      imageSrc: "/layout/bannerimg03.jpeg",
+      firstContents: "프론트엔드 모집",
+      secondContents: "3년 이상",
+      title: "세번째 슬라이드",
+    },
+    {
+      imageSrc: "/layout/slide1.jpg",
+      firstContents: "백엔드 모집",
+      secondContents: "3년 이상",
+      title: "네번째 슬라이드",
+    },
+  ];
+
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: false,
     speed: 500,
-    fade: true,
-    autoplay: true,
+    autoplay: false,
     autoplayspeed: 800,
-    Infinity: false,
+    centerMode: true,
+    centerPadding: "60px",
+    Infinity: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { centerPadding: "0px" },
+      },
+    ],
   };
 
   return (
-    <Wrapper>
-      <Container>
-        <Slider {...settings}>
-          <CommonSlider>
-            <BannerImg src="/layout/bannerImg04.jpeg" alt="" />
-          </CommonSlider>
-          <CommonSlider>
-            <BannerImg src="/layout/bannerImg02.jpeg" alt="" />
-          </CommonSlider>
-          <CommonSlider>
-            <BannerImg src="/layout/bannerImg03.jpeg" alt="" />
-          </CommonSlider>
-          <CommonSlider>
-            <BannerImg src="/layout/bannerImg04.jpeg" alt="" />
-          </CommonSlider>
-        </Slider>
-      </Container>
-    </Wrapper>
+    <S.Wrapper>
+      <S.StyledSlider {...settings}>
+        {MySliderList.map((el, index) => (
+          <div key={index}>
+            <S.SlickBox>
+              <S.ColorImg src={el.imageSrc} alt={el.title} />
+              <S.TextBox>
+                <S.CommonsText>{el.firstContents}</S.CommonsText>
+                <S.CommonsText>{el.secondContents}</S.CommonsText>
+              </S.TextBox>
+            </S.SlickBox>
+          </div>
+        ))}
+      </S.StyledSlider>
+    </S.Wrapper>
   );
 }

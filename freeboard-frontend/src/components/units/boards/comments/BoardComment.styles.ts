@@ -90,7 +90,7 @@ export const WriterRating = styled.div`
 export const DateColor = styled.div`
   color: #bdbdbd;
   font-size: 12px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 // 별이나 유튜브 등 css하고싶으면 관련 파일 import
 

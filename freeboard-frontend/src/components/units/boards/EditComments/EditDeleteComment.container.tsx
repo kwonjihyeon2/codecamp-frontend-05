@@ -17,11 +17,6 @@ export default function EditBoardCommentList() {
   const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENT, {
     variables: { page: 1, boardId: String(router.query.board_Id) },
   });
-  //   console.log(data?.fetchBoardComments);
-  //   const [inputPassword, setInputPassword] = useState("");
-  // 입력될 비밀번호
-  //   const [inputContent, setInputContent] = useState("");
-  // 입력될 내용
 
   const [deleteComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
@@ -74,7 +69,7 @@ export default function EditBoardCommentList() {
     fetchMore({
       variables: {
         page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
-        boardId: String("61f3d4be8cd4860029b48f16"),
+        boardId: String(router.query.board_Id),
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoardComments)
@@ -88,7 +83,7 @@ export default function EditBoardCommentList() {
         };
       },
     });
-    console.log(Error);
+    // console.log(Error);
   };
 
   return (
