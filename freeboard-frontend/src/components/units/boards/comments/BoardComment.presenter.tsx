@@ -1,6 +1,5 @@
 import * as S from "./BoardComment.styles";
 import { IPropsComment } from "./BoardComment.types";
-// import { BiLike,BiDislike } from 'react-icons/bi'
 import { Rate } from "antd";
 
 export default function FreeBoardCommentsUI(props: IPropsComment) {

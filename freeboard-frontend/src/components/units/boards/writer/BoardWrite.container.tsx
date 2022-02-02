@@ -5,6 +5,11 @@ import FreeBoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_NEWBOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { Modal } from "antd";
 import { IWriteConProps, IMyVariableUpdateBoard } from "./BoardWrite.types";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function FreeBoardWrite(props: IWriteConProps) {
   const router = useRouter();
@@ -22,8 +27,14 @@ export default function FreeBoardWrite(props: IWriteConProps) {
   const [ErrorTitle, setErrorTitle] = useState<string>("");
   const [Errorcontent, setErrorContent] = useState<string>("");
 
-  const [createBoard] = useMutation(CREATE_NEWBOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_NEWBOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
   const [isActive, setIsActive] = useState(false);
 
   function onChangeInputs(event: ChangeEvent<HTMLInputElement>) {
@@ -141,7 +152,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
         });
 
         Modal.success({ content: "게시물이 등록되었습니다." });
-        router.push(`/boards/${result.data.createBoard._id}`);
+        router.push(`/boards/${result.data?.createBoard._id}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -167,14 +178,18 @@ export default function FreeBoardWrite(props: IWriteConProps) {
         variables: {
           updateBoardInput: MyVariables,
           password: inputs.password,
-          boardId: router.query.board_Id,
+          boardId: String(router.query.board_Id),
         },
       });
 
       Modal.success({ content: "게시물이 수정되었습니다." });
+      console.log(props.ToPre?.fetchBoard.boardAddress);
       router.push(`/boards/${router.query.board_Id}`);
     } catch (error) {
-      console.log(error.message);
+      Modal.error({
+        title: "게시물 수정 실패",
+        content: `${error.message}`,
+      });
     }
   };
 

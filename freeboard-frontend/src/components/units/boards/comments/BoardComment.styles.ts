@@ -72,10 +72,9 @@ export const CommentsCount = styled.div`
 `;
 export const ChangeBtn = styled.div`
   background-color: ${(props: IActive) =>
-    props.isActive === true ? "#ffd600" : "#c9c9c9"};
-  color: ${(props: IActive) => (props.isActive === true ? "#000" : "#bdbdbd")};
-  cursor: ${(props: IActive) =>
-    props.isActive === true ? "pointer" : "default"};
+    props.isActive ? "#ffd600" : "#c9c9c9"};
+  color: ${(props: IActive) => (props.isActive ? "#000" : "#bdbdbd")};
+  cursor: ${(props: IActive) => (props.isActive ? "pointer" : "default")};
   padding: 5px;
 `;
 
@@ -106,10 +105,10 @@ export const DateColor = styled.span`
 `;
 // 별이나 유튜브 등 css하고싶으면 관련 파일 import
 
-export const CommentArea = styled.textarea`
+export const CommentArea = styled.input`
   width: 100%;
   border: none;
-  margin-top: 5px;
+  padding: 10px 0;
   resize: none;
 `;
 

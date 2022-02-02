@@ -15,7 +15,7 @@ const FETCH_BOARDS = gql`
 `;
 const ScrollBox = styled.div`
   width: 100%;
-  height: 500px;
+  height: 350px;
   overflow: auto;
 `;
 

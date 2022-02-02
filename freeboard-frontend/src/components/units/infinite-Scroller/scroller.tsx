@@ -45,7 +45,7 @@ export default function InfiniteScrollCompo() {
   };
   return (
     <InfiniteScroll pageStart={0} loadMore={LoadComment} hasMore={true}>
-      {data.fetchBoardComments.map((el) => (
+      {data.fetchBoardComments.map((el: any) => (
         <div key={el._id}>
           <span>{el.contents}</span>
           <span>{el.writer}</span>

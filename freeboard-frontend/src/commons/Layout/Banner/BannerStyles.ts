@@ -41,9 +41,12 @@ export const CommonsText = styled.div`
   font-weight: 700;
   transition: all 2s;
 `;
-
 export const ColorImg = styled.img`
   filter: brightness(70%);
+  &:hover {
+    transition: all 0.5s;
+    transform: scale(1.1);
+  }
 `;
 
 export const StyledSlider = styled(Slider)`
@@ -56,6 +59,7 @@ export const StyledSlider = styled(Slider)`
   .slick-slide > div {
     width: 1240px;
     margin: 0 15px;
+    overflow: hidden;
   }
 
   .slick-slide img {

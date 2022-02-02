@@ -6,7 +6,7 @@ import * as S from "../comments/BoardComment.styles";
 import { FaUserCircle, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
 import { Rate } from "antd";
-import { ChangeEvent, useState } from "react";
+import { MouseEvent, ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
 import {
   FETCH_BOARD_COMMENT,
@@ -20,14 +20,19 @@ import { getMyDate } from "../../../../commons/libraries/uitils";
 
 export default function EditCommentItem(props: IPropsEditItem) {
   const router = useRouter();
-  const [inputPassword, setInputPassword] = useState<string>("");
-  const [inputContent, setInputContent] = useState<string>("");
-  const InputPasswordEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputPassword(event.target.value);
+
+  const [inputEvent, setInputEvent] = useState({
+    password: "",
+    contents: "",
+  });
+
+  const ChangeInputEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputEvent({
+      ...inputEvent,
+      [event.target.id]: event.target.value,
+    });
   };
-  const InputContentEvent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputContent(event.target.value);
-  };
+
   const [UpdateComment] = useMutation<
     Pick<IMutation, "updateBoardComment">,
     IMutationUpdateBoardCommentArgs
@@ -39,12 +44,12 @@ export default function EditCommentItem(props: IPropsEditItem) {
     setRating(value);
   };
 
-  const UpdateCommentBtn = async (event: any) => {
+  const UpdateCommentBtn = async (event: MouseEvent<HTMLButtonElement>) => {
     setIsEdit((prev) => !prev);
 
     const MyVariable: IMyVariableUpdateComment = {};
-    if (inputContent) {
-      MyVariable.contents = inputContent;
+    if (inputEvent.contents) {
+      MyVariable.contents = inputEvent.contents;
     }
     if (StarRating) {
       MyVariable.rating = StarRating;
@@ -54,7 +59,7 @@ export default function EditCommentItem(props: IPropsEditItem) {
       await UpdateComment({
         variables: {
           updateBoardCommentInput: MyVariable,
-          password: inputPassword,
+          password: inputEvent.password,
           boardCommentId: String(event.currentTarget.id),
         },
         refetchQueries: [
@@ -75,11 +80,13 @@ export default function EditCommentItem(props: IPropsEditItem) {
       </div>
       <S.CommentWriterBox>
         <S.WriterRating>
+          <S.CommentWriter type="text" readOnly value={props.el.writer} />
           {isEdit ? (
             <div>
               <S.CommentWriter
                 type="password"
-                onChange={InputPasswordEvent}
+                id="password"
+                onChange={ChangeInputEvent}
                 placeholder="비밀번호를 입력하세요"
               />
               <Rate
@@ -91,7 +98,6 @@ export default function EditCommentItem(props: IPropsEditItem) {
             </div>
           ) : (
             <div>
-              <S.CommentWriter type="text" readOnly value={props.el.writer} />
               <Rate
                 allowHalf
                 value={props.el.rating}
@@ -103,12 +109,13 @@ export default function EditCommentItem(props: IPropsEditItem) {
         <S.OnComments>
           {isEdit ? (
             <S.CommentArea
-              onChange={InputContentEvent}
+              id="contents"
+              onChange={ChangeInputEvent}
               defaultValue={props.el.contents}
               maxLength={100}
             />
           ) : (
-            <S.CommentArea value={props.el.contents} readOnly={true} />
+            <S.CommentArea value={props.el.contents} readOnly />
           )}
         </S.OnComments>
         <S.DateColor>{getMyDate(props.el.createdAt)}</S.DateColor>

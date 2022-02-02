@@ -12,6 +12,9 @@ const Container = styled.div`
 const ContainerBox = styled.div`
   width: 50%;
   text-align: center;
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 
 const CommonSpan = styled.span`

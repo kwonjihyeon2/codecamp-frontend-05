@@ -37,7 +37,7 @@ export default function EditBoardCommentList() {
   const ToggleOpen = (event: any) => {
     setIsModalVisible((prev) => !prev);
     setModalId(event.currentTarget.id);
-    console.log(event.target.id);
+    console.log(event.currentTarget.id);
   };
 
   const ToggleSetting = () => {

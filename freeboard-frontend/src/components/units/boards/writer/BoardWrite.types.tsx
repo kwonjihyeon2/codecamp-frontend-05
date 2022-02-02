@@ -16,7 +16,6 @@ export interface IPropsWriteUI {
   register: () => void;
   EditBtn: () => void;
   isEdit: boolean;
-  // MyYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
   onTogglePostModal: () => void;
   isModalVisible: boolean;
   onCompleteDaumPostcode: any;

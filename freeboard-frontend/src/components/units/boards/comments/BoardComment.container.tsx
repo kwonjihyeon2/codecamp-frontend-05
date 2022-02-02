@@ -41,12 +41,10 @@ export default function FreeBoardComments() {
       ...inputs,
       [event.target.id]: event.target.value,
     });
-    const myPw = inputs.password;
-    if (inputs.writer) {
+    if (inputs.writer && inputs.password.length > 3) {
       setIsActive(true);
-    }
-    if (myPw.length > 4) {
-      setIsActive(true);
+    } else {
+      setIsActive(false);
     }
   };
 
@@ -55,6 +53,8 @@ export default function FreeBoardComments() {
     const maxLength = event.target.value.length;
     if (maxLength) {
       setIsActive(true);
+    } else {
+      setIsActive(false);
     }
     setLength(maxLength);
     if (maxLength >= 100) {
@@ -72,22 +72,25 @@ export default function FreeBoardComments() {
 
   const CreateCommentBtn = async () => {
     try {
-      await CreateComment({
-        variables: {
-          createBoardCommentInput: {
-            ...inputs,
-            contents: myContents,
-            rating: StarValue,
+      if (myContents && inputs.writer && inputs.password.length > 3) {
+        await CreateComment({
+          variables: {
+            createBoardCommentInput: {
+              ...inputs,
+              contents: myContents,
+              rating: StarValue,
+            },
+            boardId: String(router.query.board_Id),
           },
-          boardId: String(router.query.board_Id),
-        },
-        refetchQueries: [
-          {
-            variables: { page: 1, boardId: router.query.board_Id },
-            query: FETCH_BOARD_COMMENT,
-          },
-        ],
-      });
+          refetchQueries: [
+            {
+              variables: { page: 1, boardId: router.query.board_Id },
+              query: FETCH_BOARD_COMMENT,
+            },
+          ],
+        });
+      }
+      console.log(inputs.password.length);
     } catch (error) {
       console.log(error.message);
     }

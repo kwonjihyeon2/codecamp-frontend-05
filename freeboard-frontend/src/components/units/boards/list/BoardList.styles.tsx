@@ -4,22 +4,47 @@ export const NewBody = styled.div`
   width: 100%;
   font-family: Noto Sans KR;
 `;
-export const Wrapper = styled.div`
-  width: 1240px;
-  margin: 0 auto;
+export const WrapperTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const BoardCount = styled.span`
+  color: #c51315;
+  font-weight: 700;
 `;
 
+export const Selection = styled.select`
+  padding: 7px 10px;
+  border: 1px solid #e5e5e5;
+`;
+
+export const SearchInput = styled.input`
+  padding: 5px 10px;
+  border: 1px solid #e5e5e5;
+  margin: 0 10px;
+  cursor: pointer;
+`;
+
+export const SearchButton = styled.button`
+  padding: 5px 15px;
+  border: 1px solid #c51315;
+  background-color: #c51315;
+  color: white;
+  cursor: pointer;
+`;
 export const WrapperList = styled.div`
   width: 100%;
-  margin: 40px 0;
-  border-top: 1px solid #000;
+  margin: 20px 0;
   border-bottom: 1px solid #000;
 `;
 export const DataTitleBox = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   color: #000;
+  border: 1px solid #e5e5e5;
+  background-color: #f9f9f9;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -32,7 +57,7 @@ export const DataListBox = styled.div`
   color: #4f4f4f;
   font-size: 16px;
   text-align: center;
-  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
 `;
 
 export const NumberBox = styled.div`
@@ -40,8 +65,15 @@ export const NumberBox = styled.div`
   overflow: hidden;
 `;
 
+export const TitleTopBox = styled.div`
+  width: 50%;
+`;
 export const TitleBox = styled.div`
   width: 50%;
+  cursor: pointer;
+  &:hover {
+    color: #c51315;
+  }
 `;
 export const WriterDate = styled.div`
   width: 20%;
@@ -58,7 +90,12 @@ export const CreateBtn = styled.button`
   border-radius: 10px;
   background-color: #fff;
   cursor: pointer;
+  transition: ease-in 0.3s;
+  &:hover {
+    color: white;
+    background-color: #c51315;
+  }
 `;
 export const PencilIcon = styled.span`
-  margin-right: 10px;
+  margin-left: 10px;
 `;
