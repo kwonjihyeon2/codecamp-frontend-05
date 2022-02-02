@@ -1,4 +1,7 @@
-import { IPropsEditItem } from "./EditDeleteComment.types";
+import {
+  IPropsEditItem,
+  IMyVariableUpdateComment,
+} from "./EditDeleteComment.types";
 import * as S from "../comments/BoardComment.styles";
 import { FaUserCircle, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
@@ -39,11 +42,11 @@ export default function EditCommentItem(props: IPropsEditItem) {
   const UpdateCommentBtn = async (event: any) => {
     setIsEdit((prev) => !prev);
 
-    const MyVariable = { contents: inputContent, rating: StarRating };
-    if (!inputContent) {
+    const MyVariable: IMyVariableUpdateComment = {};
+    if (inputContent) {
       MyVariable.contents = inputContent;
     }
-    if (!StarRating) {
+    if (StarRating) {
       MyVariable.rating = StarRating;
     }
 

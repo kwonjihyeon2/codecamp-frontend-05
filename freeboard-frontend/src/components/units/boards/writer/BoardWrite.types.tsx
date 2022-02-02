@@ -8,10 +8,7 @@ export interface IWriteConProps {
 export interface IPropsWriteUI {
   ToPre?: any;
   ErrorName: String;
-  WriterName: (event: ChangeEvent<HTMLInputElement>) => void;
-  WriterPassword: (event: ChangeEvent<HTMLInputElement>) => void;
   ErrorPassword: String;
-  WriterTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   ErrorTitle: String;
   WriterContent: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   ErrorContent: String;
@@ -19,7 +16,7 @@ export interface IPropsWriteUI {
   register: () => void;
   EditBtn: () => void;
   isEdit: boolean;
-  MyYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
+  // MyYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
   onTogglePostModal: () => void;
   isModalVisible: boolean;
   onCompleteDaumPostcode: any;
@@ -27,4 +24,16 @@ export interface IPropsWriteUI {
   zonecode: any;
   data?: any;
   AddressDetail: any;
+  onChangeInputs: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface IMyVariableUpdateBoard {
+  title?: string;
+  contents?: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
 }

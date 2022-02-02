@@ -10,6 +10,7 @@ const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
       boardAddress {
         zipcode
         address
@@ -25,7 +26,7 @@ export default function BoardsEditPage() {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.board_Id },
   });
-  console.log(data);
+  console.log(data?.fetchBoard);
 
   return <FreeBoardWrite isEdit={true} ToPre={data} />;
 }

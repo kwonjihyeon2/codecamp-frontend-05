@@ -17,7 +17,8 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
               <S.CommonInput
                 type="text"
                 placeholder="이름을 입력하세요."
-                onChange={props.WriterName}
+                id="writer"
+                onChange={props.onChangeInputs}
                 defaultValue={
                   props.isEdit ? props.ToPre?.fetchBoard.writer : ""
                 }
@@ -30,8 +31,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
               <div>비밀번호</div>
               <S.CommonInput
                 type="password"
+                id="password"
                 placeholder="비밀번호를 입력하세요."
-                onChange={props.WriterPassword}
+                onChange={props.onChangeInputs}
               />
               <S.ErrorMessage>{props.ErrorPassword}</S.ErrorMessage>
             </S.UserDiv>
@@ -41,8 +43,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
             <div>제목</div>
             <S.CommonInput
               type="text"
+              id="title"
               placeholder="제목을 지정해주세요."
-              onChange={props.WriterTitle}
+              onChange={props.onChangeInputs}
               defaultValue={props.isEdit ? props.ToPre?.fetchBoard.title : ""}
             />
             <S.ErrorMessage>{props.ErrorTitle}</S.ErrorMessage>
@@ -108,8 +111,9 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
             <div>유튜브</div>
             <S.CommonInput
               type="text"
+              id="youtubeUrl"
               placeholder="링크를 복사해주세요."
-              onChange={props.MyYoutube}
+              onChange={props.onChangeInputs}
               defaultValue={
                 props.isEdit ? props.ToPre?.fetchBoard.youtubeUrl : ""
               }

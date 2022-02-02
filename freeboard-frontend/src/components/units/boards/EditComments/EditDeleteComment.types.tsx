@@ -17,3 +17,8 @@ export interface IPropsEditItem {
   ToggleOpen: () => void;
   isModalVisible: boolean;
 }
+
+export interface IMyVariableUpdateComment {
+  contents?: string;
+  rating?: number;
+}

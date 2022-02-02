@@ -4,44 +4,49 @@ import { useRouter } from "next/router";
 import FreeBoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_NEWBOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { Modal } from "antd";
-import { IWriteConProps } from "./BoardWrite.types";
+import { IWriteConProps, IMyVariableUpdateBoard } from "./BoardWrite.types";
 
 export default function FreeBoardWrite(props: IWriteConProps) {
   const router = useRouter();
 
-  const [name, setName] = useState<string>("");
-  const [ErrorName, setErrorName] = useState<string>("");
-  const [PW, setPW] = useState<string>("");
-  const [ErrorPw, setErrorPw] = useState<string>("");
-  const [myTitle, setTitle] = useState<string>("");
-  const [ErrorTitle, setErrorTitle] = useState<string>("");
+  const [inputs, setInputs] = useState({
+    writer: "",
+    password: "",
+    title: "",
+    youtubeUrl: "",
+  });
   const [content, setContent] = useState<string>("");
+
+  const [ErrorName, setErrorName] = useState<string>("");
+  const [ErrorPw, setErrorPw] = useState<string>("");
+  const [ErrorTitle, setErrorTitle] = useState<string>("");
   const [Errorcontent, setErrorContent] = useState<string>("");
 
   const [createBoard] = useMutation(CREATE_NEWBOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
   const [isActive, setIsActive] = useState(false);
-  const [MyYoutubeUrl, setYouTube] = useState("");
 
-  const [EditBoard] = useMutation(UPDATE_BOARD);
-
-  function WriterName(event: ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
-    if (event.target.value) {
+  function onChangeInputs(event: ChangeEvent<HTMLInputElement>) {
+    // setName(event.target.value);
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
+    if (inputs.writer) {
       setErrorName("");
     }
-    if (event.target.value && PW.length > 3 && myTitle && content) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
-  function UserPw(event: ChangeEvent<HTMLInputElement>) {
-    setPW(event.target.value);
-    if (event.target.value.length > 3) {
+    if (inputs.password.length > 3) {
       setErrorPw("");
     }
-    if (name && event.target.value.length > 3 && myTitle && content) {
+    if (inputs.title) {
+      setErrorTitle("");
+    }
+    if (
+      inputs.writer &&
+      inputs.password.length > 3 &&
+      inputs.title &&
+      content
+    ) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -53,28 +58,17 @@ export default function FreeBoardWrite(props: IWriteConProps) {
     if (event.target.value) {
       setErrorContent("");
     }
-    if (name && PW.length > 3 && myTitle && event.target.value) {
+    if (
+      inputs.writer &&
+      inputs.password.length > 3 &&
+      inputs.title &&
+      event.target.value
+    ) {
       setIsActive(true);
-      console.log(PW.length);
+      console.log(isActive);
     } else {
       setIsActive(false);
     }
-  }
-
-  function MainTitle(event: ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-    if (event.target.value) {
-      setErrorTitle("");
-    }
-    if (name && PW.length > 3 && event.target.value && content) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
-  function MyYoutube(event: ChangeEvent<HTMLInputElement>) {
-    setYouTube(event.target.value);
   }
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -100,21 +94,21 @@ export default function FreeBoardWrite(props: IWriteConProps) {
 
   const register = async () => {
     try {
-      if (!name) {
+      if (!inputs.writer) {
         setErrorName("이름은 필수입력 항목입니다.");
         window.scrollTo(0, 0);
       } else {
         setErrorName("");
       }
 
-      if (!PW || PW.length < 4) {
+      if (!inputs.password || inputs.password.length < 4) {
         setErrorPw("비밀번호는 필수입력 항목입니다. 4자리 이상 입력하세요.");
         window.scrollTo(0, 0);
       } else {
         setErrorPw("");
       }
 
-      if (!myTitle) {
+      if (!inputs.title) {
         setErrorTitle("제목은 필수입력 항목입니다.");
         window.scrollTo(0, 0);
       } else {
@@ -126,67 +120,58 @@ export default function FreeBoardWrite(props: IWriteConProps) {
       } else {
         setErrorContent("");
       }
-
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: name,
-            password: PW,
-            title: myTitle,
-            contents: content,
-            youtubeUrl: MyYoutubeUrl,
-            boardAddress: {
-              zipcode: zonecode,
-              address: Address,
-              addressDetail: AddressDetail,
+      if (
+        inputs.writer &&
+        inputs.password.length > 3 &&
+        inputs.title &&
+        content
+      ) {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              ...inputs,
+              contents: content,
+              boardAddress: {
+                zipcode: zonecode,
+                address: Address,
+                addressDetail: AddressDetail,
+              },
             },
           },
-        },
-      });
+        });
 
-      if (name && PW.length > 3 && myTitle && content) {
         Modal.success({ content: "게시물이 등록되었습니다." });
+        router.push(`/boards/${result.data.createBoard._id}`);
       }
-      const PostId = result.data.createBoard._id;
-
-      router.push(`/boards/${PostId}`);
-      console.log(result);
     } catch (error) {
       console.log(error.message);
     }
   };
 
   const EditBtn = async () => {
-    console.log("수정되었습니다");
-
     try {
-      const MyVariables = {
-        title: myTitle,
-        contents: content,
-        boardAddress: {
-          zipcode: zonecode,
-          address: Address,
-          addressDetail: AddressDetail,
-        },
-      };
-      if (myTitle !== "") MyVariables.title = myTitle;
-      if (content !== "") MyVariables.contents = content;
-      if (zonecode !== "") MyVariables.boardAddress.zipcode = zonecode;
-      if (Address !== "") MyVariables.boardAddress.address = Address;
-      if (AddressDetail !== "")
-        MyVariables.boardAddress.addressDetail = AddressDetail;
+      const MyVariables: IMyVariableUpdateBoard = {};
 
-      const EditResult = await EditBoard({
+      if (inputs.title) MyVariables.title = inputs.title;
+      if (inputs.youtubeUrl) MyVariables.youtubeUrl = inputs.youtubeUrl;
+      if (content) MyVariables.contents = content;
+      if (zonecode || Address || AddressDetail) {
+        MyVariables.boardAddress = {};
+        if (zonecode) MyVariables.boardAddress.zipcode = zonecode;
+        if (Address) MyVariables.boardAddress.address = Address;
+        if (AddressDetail)
+          MyVariables.boardAddress.addressDetail = AddressDetail;
+      }
+
+      await updateBoard({
         variables: {
           updateBoardInput: MyVariables,
-          password: PW,
+          password: inputs.password,
           boardId: router.query.board_Id,
         },
       });
 
-      console.log(EditResult.data.updateBoard.boardAddress.address);
       Modal.success({ content: "게시물이 수정되었습니다." });
-
       router.push(`/boards/${router.query.board_Id}`);
     } catch (error) {
       console.log(error.message);
@@ -196,10 +181,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
   return (
     <FreeBoardWriteUI
       ErrorName={ErrorName}
-      WriterName={WriterName}
-      WriterPassword={UserPw}
       ErrorPassword={ErrorPw}
-      WriterTitle={MainTitle}
       ErrorTitle={ErrorTitle}
       WriterContent={MainContent}
       ErrorContent={Errorcontent}
@@ -208,14 +190,13 @@ export default function FreeBoardWrite(props: IWriteConProps) {
       EditBtn={EditBtn}
       isEdit={props.isEdit}
       ToPre={props.ToPre}
-      MyYoutube={MyYoutube}
       isModalVisible={isModalVisible}
       onTogglePostModal={onTogglePostModal}
       onCompleteDaumPostcode={onCompleteDaumPostcode}
       Address={Address}
       zonecode={zonecode}
       AddressDetail={ChangeAddressDetail}
-      // data={data}
+      onChangeInputs={onChangeInputs}
     />
   );
 }
