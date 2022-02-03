@@ -44,7 +44,7 @@ export const CommonsText = styled.div`
 export const ColorImg = styled.img`
   filter: brightness(70%);
   &:hover {
-    transition: all 0.5s;
+    transition: all 1s;
     transform: scale(1.1);
   }
 `;

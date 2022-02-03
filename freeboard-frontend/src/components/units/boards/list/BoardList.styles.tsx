@@ -1,7 +1,9 @@
 import styled from "@emotion/styled/";
 
 export const NewBody = styled.div`
+  max-width: 1240px;
   width: 100%;
+  margin: 50px auto;
   font-family: Noto Sans KR;
 `;
 export const WrapperTop = styled.div`

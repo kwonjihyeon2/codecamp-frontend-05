@@ -28,6 +28,7 @@ export default function MyComponent() {
   };
 
   console.log("마운트 시작");
+
   return (
     <>
       <input type="password" ref={inputRef} />
