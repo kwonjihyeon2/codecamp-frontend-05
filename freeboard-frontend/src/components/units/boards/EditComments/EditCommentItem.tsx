@@ -73,6 +73,7 @@ export default function EditCommentItem(props: IPropsEditItem) {
       console.log(error.message);
     }
   };
+  // 수정에 대한 css를 다시 지정할 필요없이 기존 등록하기 component를 가져오는 방법이 있음
   return (
     <S.CommentDiv key={props.el._id}>
       <div>
