@@ -12,13 +12,13 @@ export default function FunctionLifecycleRefPage() {
     console.log("render된 후! 처음 한번만 그려짐, 다시 렌더될 때는 update");
     inputRef.current?.focus();
 
-    setCount((prev) => prev + 1);
+    //setCount((prev) => prev + 1);
     //setCount로 다시 렌더되면서 나는언제?+DidUpdate가 또 그려짐. 한번 페이지가 그려지는데 불필요한 리렌더링이 들어감. 비추천. 하지만 사용할 필요가 있을 땐 사용됨. 주의! 의존성배열과 함께쓰면 무한 렌더링.
 
     return () => {
-      console.log("이 대화방에서 나가가겠습니다.");
+      console.log("이 대화방에서 나가겠습니다.");
     }; //componentWillUnmount의 기능
-  }, []);
+  }, [count]);
 
   //componentDidUpdate 비슷, 의존성배열이 없으므로 변경되는 게 있으면 다시 렌더링
   //최초 한번은 실행, Update는 변경되는 값이 있었을때 실행됐었음.
