@@ -52,6 +52,7 @@ export default function LayOutDesignHead() {
         <HeaderLogo>로고</HeaderLogo>
         <NavList>
           <NavLi onClick={MoveToMain}>HOME</NavLi>
+          <NavLi>OPEN-API</NavLi>
           <NavLi onClick={MoveToList}>COMMUNITY</NavLi>
           <NavLi>MARKET</NavLi>
           <NavLi>MY</NavLi>
