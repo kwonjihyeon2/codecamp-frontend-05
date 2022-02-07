@@ -5,13 +5,14 @@ import styled from "@emotion/styled/";
 const Wrapper = styled.div`
   max-width: 1240px;
   margin: 50px auto;
+  text-align: center;
 `;
 
 const CurrentTable = styled.div`
   width: 50%;
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  margin: 10px auto;
 `;
 
 export default function OpenApiPage() {
@@ -53,7 +54,6 @@ export default function OpenApiPage() {
       setPrevKorea(Myprevkorea);
       setPrevUsdollar(MyprevUS);
       setPrevJpy(MyprevJpy);
-      //   console.log(`${MyprevUS} - ${MyprevJpy}`);
       console.log(MyprevJpy, Myprevkorea);
     }
     fetchPrev();
@@ -61,26 +61,26 @@ export default function OpenApiPage() {
 
   return (
     <Wrapper>
-      <div>{mydate}일 기준 환율을 확인하세요</div>
+      <div>{mydate}일 EUR 기준 환율을 확인하세요</div>
       <CurrentTable>
-        <li>국가별</li>
+        <li>통화별</li>
         <li>환율</li>
         <li>전일 대비</li>
       </CurrentTable>
       <CurrentTable>
         <li>미국 USD</li>
         <li>{Usdollar}</li>
-        <li>{Number(Usdollar) - Number(prevUsdollar)}</li>
+        <li>{(Number(Usdollar) - Number(prevUsdollar)).toFixed(2)}</li>
       </CurrentTable>
       <CurrentTable>
         <li>한국 KRW</li>
         <li>{Korea}</li>
-        <li>{Number(Korea) - Number(prevKorea)}</li>
+        <li>{(Number(Korea) - Number(prevKorea)).toFixed(2)}</li>
       </CurrentTable>
       <CurrentTable>
         <li>일본 JPY</li>
         <li>{Jpy}</li>
-        <li>{Number(Jpy) - Number(prevJpy)}</li>
+        <li>{(Number(Jpy) - Number(prevJpy)).toFixed(2)}</li>
       </CurrentTable>
     </Wrapper>
   );
