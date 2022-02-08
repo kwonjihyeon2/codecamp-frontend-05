@@ -24,6 +24,7 @@ export default function OpenApiPage() {
   const [Jpy, setJpy] = useState("");
   const [prevJpy, setPrevJpy] = useState("");
 
+  // map 실패
   useEffect(() => {
     async function fetchCurrent() {
       const result = await axios.get(
@@ -82,6 +83,8 @@ export default function OpenApiPage() {
         <li>{Jpy}</li>
         <li>{(Number(Jpy) - Number(prevJpy)).toFixed(2)}</li>
       </CurrentTable>
+
+      <div>firebase</div>
     </Wrapper>
   );
 }

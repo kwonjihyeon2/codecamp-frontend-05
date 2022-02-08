@@ -25,6 +25,7 @@ export default function FirebasePage() {
 
     console.log(docs);
   };
+
   return (
     <div>
       <h1>파이어베이스 연습 페이지입니다.</h1>

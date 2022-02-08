@@ -5,6 +5,23 @@ import { AppProps } from "next/app";
 import LayOutDesign from "../src/commons/Layout";
 import { Global } from "@emotion/react";
 import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCX4TE4xP6jaGfW18fFeUFmeiJ4ifPeXyY",
+  authDomain: "forfreeboard.firebaseapp.com",
+  projectId: "forfreeboard",
+  storageBucket: "forfreeboard.appspot.com",
+  messagingSenderId: "1032669085239",
+  appId: "1:1032669085239:web:a2db23a257ef37c19649b2",
+};
+
+// Initialize Firebase
+export const forfreeboard = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({

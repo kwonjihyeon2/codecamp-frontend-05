@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# index.ts
+_app.tsx
