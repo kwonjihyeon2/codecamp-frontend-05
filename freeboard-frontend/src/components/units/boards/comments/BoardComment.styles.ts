@@ -83,12 +83,20 @@ export const CommentInfo = styled.div`
   margin-bottom: 50px;
 `;
 
+export const EditBox = styled.div`
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+`;
 export const CommentDiv = styled.div`
   display: flex;
-  /* width: 100%; */
+  width: 100%;
   justify-content: space-between;
   border-bottom: 1px solid #bdbdbd;
-  padding: 20px;
+  margin: 0 20px;
+  padding: 20px 0;
 `;
 
 export const CommentWriterBox = styled.div`
@@ -110,6 +118,20 @@ export const CommentArea = styled.input`
   border: none;
   padding: 10px 0;
   resize: none;
+`;
+
+export const ChangeComment = styled.input`
+  border: 1px solid #fff;
+  border-bottom: 1px solid #bdbdbd;
+  width: 100%;
+  /* height: 80px; */
+  margin: 10px 0;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  &:focus {
+    border-bottom: 1px solid #000;
+  }
 `;
 
 export const CommentWriter = styled.input`

@@ -75,60 +75,62 @@ export default function EditCommentItem(props: IPropsEditItem) {
   };
   // 수정에 대한 css를 다시 지정할 필요없이 기존 등록하기 component를 가져오는 방법이 있음
   return (
-    <S.CommentDiv key={props.el._id}>
-      <div>
-        <FaUserCircle size={40} />
-      </div>
-      <S.CommentWriterBox>
-        <S.WriterRating>
-          <S.CommentWriter type="text" readOnly value={props.el.writer} />
-          {isEdit ? (
-            <div>
-              <S.CommentWriter
-                type="password"
-                id="password"
+    <S.EditBox>
+      <S.CommentDiv key={props.el._id}>
+        <div>
+          <FaUserCircle size={40} />
+        </div>
+        <S.CommentWriterBox>
+          <S.WriterRating>
+            <S.CommentWriter type="text" readOnly value={props.el.writer} />
+            {isEdit ? (
+              <div>
+                <S.CommonsInput
+                  type="password"
+                  id="password"
+                  onChange={ChangeInputEvent}
+                  placeholder="비밀번호를 입력하세요"
+                />
+                <Rate
+                  allowHalf
+                  defaultValue={props.el.rating}
+                  onChange={StarValue}
+                  style={{ fontSize: 16 }}
+                />
+              </div>
+            ) : (
+              <div>
+                <Rate
+                  allowHalf
+                  value={props.el.rating}
+                  style={{ fontSize: 16 }}
+                />
+              </div>
+            )}
+          </S.WriterRating>
+          <S.OnComments>
+            {isEdit ? (
+              <S.ChangeComment
+                id="contents"
                 onChange={ChangeInputEvent}
-                placeholder="비밀번호를 입력하세요"
+                defaultValue={props.el.contents}
+                maxLength={100}
               />
-              <Rate
-                allowHalf
-                defaultValue={props.el.rating}
-                onChange={StarValue}
-                style={{ fontSize: 16 }}
-              />
-            </div>
-          ) : (
-            <div>
-              <Rate
-                allowHalf
-                value={props.el.rating}
-                style={{ fontSize: 16 }}
-              />
-            </div>
-          )}
-        </S.WriterRating>
-        <S.OnComments>
-          {isEdit ? (
-            <S.CommentArea
-              id="contents"
-              onChange={ChangeInputEvent}
-              defaultValue={props.el.contents}
-              maxLength={100}
-            />
-          ) : (
-            <S.CommentArea value={props.el.contents} readOnly />
-          )}
-        </S.OnComments>
-        <S.DateColor>{getMyDate(props.el.createdAt)}</S.DateColor>
-      </S.CommentWriterBox>
-      <div>
-        <S.ButtonStyle id={props.el._id} onClick={UpdateCommentBtn}>
-          <FaPencilAlt />
-        </S.ButtonStyle>
-        <S.ButtonStyle id={props.el._id} onClick={props.ToggleOpen}>
-          <FaRegTrashAlt />
-        </S.ButtonStyle>
-      </div>
-    </S.CommentDiv>
+            ) : (
+              <S.CommentArea value={props.el.contents} readOnly />
+            )}
+          </S.OnComments>
+          <S.DateColor>{getMyDate(props.el.createdAt)}</S.DateColor>
+        </S.CommentWriterBox>
+        <div>
+          <S.ButtonStyle id={props.el._id} onClick={UpdateCommentBtn}>
+            <FaPencilAlt />
+          </S.ButtonStyle>
+          <S.ButtonStyle id={props.el._id} onClick={props.ToggleOpen}>
+            <FaRegTrashAlt />
+          </S.ButtonStyle>
+        </div>
+      </S.CommentDiv>
+    </S.EditBox>
   );
 }

@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { AppProps } from "next/app";
-import LayOutDesign from "../src/commons/Layout";
+import LayOutDesign from "../src/components/commons-components/Layout";
 import { Global } from "@emotion/react";
 import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
 // Import the functions you need from the SDKs you need

@@ -1,9 +1,10 @@
 import BoardListPageUI from "./BoardList.presenter";
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 
 interface IPropsList {
   data: any;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function BoardListPage(props: IPropsList) {
@@ -15,15 +16,18 @@ export default function BoardListPage(props: IPropsList) {
   // 클릭했을때 상세페이지로 가는 것 props onclick으로 연결
 
   const GoToDetailPage = (event: MouseEvent<HTMLDivElement>) => {
-    console.log(event.target.id);
-    router.push(`boards/${event.target.id}`);
+    if (event.target instanceof Element) console.log(event.target.id);
+    if (event.target instanceof Element)
+      router.push(`boards/${event.target.id}`);
   };
+
   return (
     <>
       <BoardListPageUI
         CreateNew={CreateNewBoard}
         GoToDetail={GoToDetailPage}
         data={props.data}
+        onChangeSearch={props.onChangeSearch}
       />
     </>
   );

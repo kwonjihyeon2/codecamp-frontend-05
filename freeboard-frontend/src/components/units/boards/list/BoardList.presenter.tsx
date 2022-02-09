@@ -1,12 +1,13 @@
 import * as S from "./BoardList.styles";
 import { FaPencilAlt } from "react-icons/fa";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { getMyDate } from "../../../../commons/libraries/uitils";
 
 interface IPropsListUI {
   data: any;
   GoToDetail: (event: MouseEvent<HTMLDivElement>) => void;
   CreateNew: () => void;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function BoardListPageUI(props: IPropsListUI) {
@@ -23,7 +24,11 @@ export default function BoardListPageUI(props: IPropsListUI) {
             <option>내용</option>
             <option>작성자</option>
           </S.Selection>
-          <S.SearchInput type="text" placeholder="검색어를 입력하세요." />
+          <S.SearchInput
+            onChange={props.onChangeSearch}
+            type="text"
+            placeholder="검색어를 입력하세요."
+          />
           <S.SearchButton>검색</S.SearchButton>
         </div>
       </S.WrapperTop>
