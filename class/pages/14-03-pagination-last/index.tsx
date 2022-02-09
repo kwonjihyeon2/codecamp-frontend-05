@@ -1,5 +1,9 @@
 import { useQuery, gql } from "@apollo/client";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
+import {
+  IQuery,
+  IQueryFetchBoardsArgs,
+} from "../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -20,7 +24,10 @@ const FETCH_BOARD_COUNT = gql`
 export default function PaginationNextPage() {
   const [startPage, setStartPage] = useState(1);
   //startPage는 시작페이지를 지정한 것 !== 현재페이지 혼동 주의
-  const { data, refetch } = useQuery(FETCH_BOARDS, {
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoards">,
+    IQueryFetchBoardsArgs
+  >(FETCH_BOARDS, {
     variables: { page: startPage },
     //page 시작 기준을 starPage로 두면 함수 호출 시 refetch 안써도됨.
   });
@@ -28,8 +35,9 @@ export default function PaginationNextPage() {
   const { data: dataBoardsCount } = useQuery(FETCH_BOARD_COUNT);
   const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10);
 
-  const onClickPage = (event) => {
-    refetch({ page: Number(event.target.id) });
+  const onClickPage = (event: MouseEvent) => {
+    if (event.target instanceof Element)
+      refetch({ page: Number(event.target.id) });
   };
 
   const onClickPrevPage = () => {
