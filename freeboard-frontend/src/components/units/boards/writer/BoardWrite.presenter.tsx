@@ -123,18 +123,24 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
           <S.CommonMargin>
             <div>사진 첨부</div>
             <S.LoadImg>
-              <S.GetImg>
+              <S.GetImg onClick={props.ClickImage}>
                 +<br />
                 Upload
               </S.GetImg>
-              <S.GetImg>
+              <S.GetImg onClick={props.ClickImage}>
                 +<br />
                 Upload
               </S.GetImg>
-              <S.GetImg>
+              <S.GetImg onClick={props.ClickImage}>
                 +<br />
                 Upload
               </S.GetImg>
+              <S.nonInput
+                type="file"
+                onChange={props.onChangeFiles}
+                multiple
+                ref={props.filesRef}
+              />
             </S.LoadImg>
           </S.CommonMargin>
           <S.CommonMargin>

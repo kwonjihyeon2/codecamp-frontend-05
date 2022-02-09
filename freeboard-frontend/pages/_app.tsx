@@ -1,12 +1,19 @@
 import "../styles/globals.css"; // 나중에 삭제할..
 import "antd/dist/antd.css";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
 import { AppProps } from "next/app";
 import LayOutDesign from "../src/commons/Layout";
 import { Global } from "@emotion/react";
 import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,8 +31,12 @@ const firebaseConfig = {
 export const forfreeboard = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = new ApolloClient({
+  const uploadLink = createUploadLink({
     uri: "http://backend05.codebootcamp.co.kr/graphql",
+  });
+
+  const client = new ApolloClient({
+    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(), // uri에서 받아온 데이터를 임시저장하는 공간
   });
 

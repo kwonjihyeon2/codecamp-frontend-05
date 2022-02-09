@@ -123,3 +123,7 @@ export const FtBtn = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const nonInput = styled.input`
+  /* display: none; */
+`;

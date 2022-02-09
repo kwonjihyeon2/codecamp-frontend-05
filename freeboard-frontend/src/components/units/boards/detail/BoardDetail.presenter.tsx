@@ -44,7 +44,26 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
           </S.WrapperTop>
           <div>
             <S.BodyTitle>{props.data?.fetchBoard.title}</S.BodyTitle>
-            <S.BodyImg></S.BodyImg>
+            <S.BodyImg>
+              <S.showImg
+                src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
+                alt="첫번째 이미지"
+              />
+            </S.BodyImg>
+            <S.BodyImg>
+              <div>
+                <S.showImg
+                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[1]}`}
+                  alt="두번째 이미지"
+                />
+              </div>
+              <div>
+                <S.showImg
+                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[2]}`}
+                  alt="세번째 이미지"
+                />
+              </div>
+            </S.BodyImg>
             <S.BodyContents>{props.data?.fetchBoard.contents}</S.BodyContents>
             <S.BodyYouTube>
               <ReactPlayer
