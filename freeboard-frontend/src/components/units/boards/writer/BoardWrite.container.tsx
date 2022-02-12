@@ -1,12 +1,8 @@
-import { useRef, ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import FreeBoardWriteUI from "./BoardWrite.presenter";
-import {
-  CREATE_NEWBOARD,
-  UPDATE_BOARD,
-  UPLOAD_FILES,
-} from "./BoardWrite.queries";
+import { CREATE_NEWBOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { Modal } from "antd";
 import { IWriteConProps, IMyVariableUpdateBoard } from "./BoardWrite.types";
 import {
@@ -14,7 +10,6 @@ import {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
-import { checkFileValidation } from "../../../../commons/libraries/uitils";
 
 export default function FreeBoardWrite(props: IWriteConProps) {
   const router = useRouter();
@@ -108,36 +103,12 @@ export default function FreeBoardWrite(props: IWriteConProps) {
     setAddressDetail(event.target.value);
   };
 
-  const [fimage, setFimage] = useState([]);
-  const [uploadFile] = useMutation(UPLOAD_FILES);
-  const filesRef = useRef<HTMLInputElement>(null);
+  const [files, setFiles] = useState(["", "", ""]);
 
-  const onChangeFiles = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = [];
-    for (let i = 0; i < event.target.files?.length; i++) {
-      const imgurl = event.target.files?.[i];
-      console.log(file, imgurl);
-
-      const isvaild = checkFileValidation(imgurl);
-      if (!isvaild) return;
-
-      try {
-        const ImageResult = await uploadFile({
-          variables: { file: imgurl },
-        });
-        file.push(ImageResult.data?.uploadFile.url);
-        console.log(ImageResult.data?.uploadFile.url);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-
-    setFimage(...fimage, ...file);
-    console.log(fimage);
-  };
-
-  const ClickImage = () => {
-    filesRef.current?.click();
+  const onChangeUrls = (file: string, index: number) => {
+    const newFileUrls = [...files];
+    newFileUrls[index] = file;
+    setFiles(newFileUrls);
   };
 
   const register = async () => {
@@ -179,7 +150,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
             createBoardInput: {
               ...inputs,
               contents: content,
-              images: fimage,
+              images: files,
               boardAddress: {
                 zipcode: zonecode,
                 address: Address,
@@ -250,9 +221,8 @@ export default function FreeBoardWrite(props: IWriteConProps) {
       zonecode={zonecode}
       AddressDetail={ChangeAddressDetail}
       onChangeInputs={onChangeInputs}
-      onChangeFiles={onChangeFiles}
-      filesRef={filesRef}
-      ClickImage={ClickImage}
+      files={files}
+      onChangeUrls={onChangeUrls}
     />
   );
 }

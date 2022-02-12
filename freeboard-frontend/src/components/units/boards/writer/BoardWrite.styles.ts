@@ -125,5 +125,5 @@ export const FtBtn = styled.button`
 `;
 
 export const nonInput = styled.input`
-  /* display: none; */
+  display: none;
 `;

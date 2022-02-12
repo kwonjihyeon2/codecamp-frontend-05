@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
-    cache: new InMemoryCache(), //uri에서 받아온 데이터를 임시저장하는 공간
+    cache: new InMemoryCache(), //uri에서 받아온 데이터를 임시저장하는 공간(내컴퓨터 메모리공간)
   });
 
   return (
@@ -52,3 +52,22 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+//global ref
+// import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
+
+// function MyApp({ Component, pageProps }: AppProps) {
+//   const client = new ApolloClient({
+//     uri: "http://backend05.codebootcamp.co.kr/graphql",
+//     cache: new InMemoryCache(), // uri에서 받아온 데이터를 임시저장하는 공간
+//   });
+
+//   return (
+//     <ApolloProvider client={client}>
+//       <Global styles={globalStyle} />
+//       <LayOutDesign>
+//         <Component {...pageProps} />
+//       </LayOutDesign>
+//     </ApolloProvider>
+//   );
+// }

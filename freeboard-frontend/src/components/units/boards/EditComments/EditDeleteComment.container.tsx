@@ -30,6 +30,7 @@ export default function EditBoardCommentList() {
   const [modalpassword, setModalPassword] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [ModalId, setModalId] = useState<string>("");
+
   const ModalPasswordEvent = (event: ChangeEvent<HTMLInputElement>) => {
     setModalPassword(event.target.value);
   };

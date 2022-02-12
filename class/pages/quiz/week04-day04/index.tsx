@@ -7,6 +7,7 @@ import {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../src/commons/types/generated/types";
+import { useRouter } from "next/router";
 
 const FETCH_BOARDS = gql`
   query fetchboards($search: String, $page: Int) {
@@ -14,6 +15,15 @@ const FETCH_BOARDS = gql`
       _id
       writer
       title
+    }
+  }
+`;
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      title
+      writer
     }
   }
 `;
@@ -27,10 +37,15 @@ const MatchingWord = styled.span`
 `;
 
 export default function SearchSamplePage() {
+  const router = useRouter();
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
+
+  const { data: fetchBoard } = useQuery(FETCH_BOARD, {
+    variables: { boardId: String(router.query.fetch) },
+  });
 
   const [search, setSearch] = useState("");
 
@@ -43,9 +58,10 @@ export default function SearchSamplePage() {
     LodashDebounce(event.target.value);
   };
 
-  //   const onClickSearch = () => {
-  //     refetch({ search, page: 1 });
-  //   };
+  const onClickSearch = (event: MouseEvent<HTMLSpanElement>) => {
+    router.push(`/quiz/week04-day04/${event.currentTarget.id}`);
+    console.log(fetchBoard?.fetchBoard._id);
+  };
 
   const onChangePage = (event: MouseEvent<HTMLSpanElement>) => {
     if (event.target instanceof Element)
@@ -58,7 +74,7 @@ export default function SearchSamplePage() {
       {data?.fetchBoards.map((el) => (
         <div key={uuidv4()}>
           <span>{el.writer}</span>
-          <span>
+          <span onClick={onClickSearch} id={el._id}>
             {" "}
             {el.title
               .replaceAll(search, `#$%^${search}#$%^`)

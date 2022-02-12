@@ -24,9 +24,8 @@ export interface IPropsWriteUI {
   data?: any;
   AddressDetail: any;
   onChangeInputs: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFiles: (event: ChangeEvent<HTMLInputElement>) => void;
-  ClickImage: () => void;
-  filesRef: any;
+  onChangeUrls: any;
+  files: any;
 }
 
 export interface IMyVariableUpdateBoard {
