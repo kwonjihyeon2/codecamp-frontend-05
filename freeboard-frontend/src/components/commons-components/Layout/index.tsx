@@ -13,11 +13,13 @@ interface IPropsDesign {
 const LayOutDesignBody = styled.div``;
 
 const HIDDEN_HEADERS = ["/"];
+const HIDDEN_BANNERS = ["/Login"];
 
 export default function LayOutDesign(props: IPropsDesign) {
   const router = useRouter();
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
+  const isHiddenBanner = HIDDEN_BANNERS.includes(router.asPath);
 
   console.log(router.asPath);
   return (
@@ -26,7 +28,7 @@ export default function LayOutDesign(props: IPropsDesign) {
         <div>
           <LayOutDesignNavi />
           <LayOutDesignHead />
-          <LayOutDesignBanner />
+          {!isHiddenBanner && <LayOutDesignBanner />}
         </div>
       )}
       <LayOutDesignBody>{props.children}</LayOutDesignBody>

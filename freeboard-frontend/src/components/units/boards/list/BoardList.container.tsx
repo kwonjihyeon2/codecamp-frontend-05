@@ -5,6 +5,8 @@ import { ChangeEvent, MouseEvent } from "react";
 interface IPropsList {
   data: any;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  dataBoardsCount: any;
+  search: string;
 }
 
 export default function BoardListPage(props: IPropsList) {
@@ -28,6 +30,8 @@ export default function BoardListPage(props: IPropsList) {
         GoToDetail={GoToDetailPage}
         data={props.data}
         onChangeSearch={props.onChangeSearch}
+        dataBoardsCount={props.dataBoardsCount}
+        search={props.search}
       />
     </>
   );

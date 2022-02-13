@@ -39,7 +39,7 @@ export default function LayOutDesignHead() {
   const router = useRouter();
 
   const MoveToMain = () => {
-    router.push("/");
+    router.push("/mainpage");
   };
 
   const MoveToList = () => {

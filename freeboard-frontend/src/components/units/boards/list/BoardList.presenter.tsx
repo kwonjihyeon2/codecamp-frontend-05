@@ -2,12 +2,15 @@ import * as S from "./BoardList.styles";
 import { FaPencilAlt } from "react-icons/fa";
 import { ChangeEvent, MouseEvent } from "react";
 import { getMyDate } from "../../../../commons/libraries/uitils";
+import { v4 as uuidv4 } from "uuid";
 
 interface IPropsListUI {
   data: any;
   GoToDetail: (event: MouseEvent<HTMLDivElement>) => void;
   CreateNew: () => void;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  dataBoardsCount: any;
+  search: string;
 }
 
 export default function BoardListPageUI(props: IPropsListUI) {
@@ -15,7 +18,9 @@ export default function BoardListPageUI(props: IPropsListUI) {
     <S.NewBody>
       <S.WrapperTop>
         <div>
-          총 <S.BoardCount>100</S.BoardCount>건
+          총{" "}
+          <S.BoardCount>{props.dataBoardsCount?.fetchBoardsCount}</S.BoardCount>
+          건
         </div>
         <div>
           <S.Selection>
@@ -41,10 +46,17 @@ export default function BoardListPageUI(props: IPropsListUI) {
         </S.DataTitleBox>
         <div>
           {props.data?.fetchBoards.map((el: any, index: number) => (
-            <S.DataListBox key={el._id}>
+            <S.DataListBox key={uuidv4()}>
               <S.NumberBox>{index + 1}</S.NumberBox>
               <S.TitleBox id={el._id} onClick={props.GoToDetail}>
-                {el.title}
+                {el.title
+                  .replaceAll(props.search, `#$%${props.search}#$%`)
+                  .split("#$%")
+                  .map((el: string) => (
+                    <S.Word key={uuidv4()} isMatched={el === props.search}>
+                      {el}
+                    </S.Word>
+                  ))}
               </S.TitleBox>
               <S.WriterDate>{el.writer}</S.WriterDate>
               <S.WriterDate>{getMyDate(el.createdAt)}</S.WriterDate>

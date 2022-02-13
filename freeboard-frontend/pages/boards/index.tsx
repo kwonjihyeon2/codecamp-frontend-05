@@ -21,13 +21,16 @@ const FETCH_BOARDS = gql`
 `;
 
 const FETCH_BOARD_COUNT = gql`
-  query fetchBoardCount {
-    fetchBoardsCount
+  query fetchBoardCount($search: String) {
+    fetchBoardsCount(search: $search)
   }
 `;
 
 export default function BoardListMainPage() {
   const [search, setSearch] = useState("");
+
+  const [startPage, setStartpage] = useState(1);
+  const [matchPage, setMatchPage] = useState(1);
 
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
@@ -35,14 +38,20 @@ export default function BoardListMainPage() {
   >(FETCH_BOARDS, {
     variables: { search, page: 1 },
   });
-  const { data: dataBoardsCount } = useQuery<
+  const { data: dataBoardsCount, refetch: BoardsCountRefetch } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
-  >(FETCH_BOARD_COUNT);
+  >(FETCH_BOARD_COUNT, {
+    variables: { search },
+  });
 
   const DebounceSearch = _.debounce((searchdata) => {
     refetch({ search: searchdata, page: 1 });
+    setStartpage(1);
+    setMatchPage(1);
+    BoardsCountRefetch({ search: searchdata });
     setSearch(searchdata);
+    console.log(data?.fetchBoards);
   }, 500);
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,8 +62,20 @@ export default function BoardListMainPage() {
 
   return (
     <>
-      <BoardListPage data={data} onChangeSearch={onChangeSearch} />
-      <Pagination LastPage={LastPage} refetch={refetch} />
+      <BoardListPage
+        data={data}
+        onChangeSearch={onChangeSearch}
+        dataBoardsCount={dataBoardsCount}
+        search={search}
+      />
+      <Pagination
+        LastPage={LastPage}
+        refetch={refetch}
+        setStartpage={setStartpage}
+        setMatchPage={setMatchPage}
+        startPage={startPage}
+        matchPage={matchPage}
+      />
     </>
   );
 }

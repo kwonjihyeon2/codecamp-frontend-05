@@ -101,3 +101,11 @@ export const CreateBtn = styled.button`
 export const PencilIcon = styled.span`
   margin-left: 10px;
 `;
+
+interface IPropsWord {
+  isMatched: boolean;
+}
+
+export const Word = styled.span`
+  color: ${(props: IPropsWord) => (props.isMatched ? "#c51315" : "#000")};
+`;

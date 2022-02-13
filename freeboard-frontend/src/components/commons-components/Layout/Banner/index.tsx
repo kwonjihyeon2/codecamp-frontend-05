@@ -33,8 +33,8 @@ export default function SampleBanner() {
   const settings = {
     dots: false,
     speed: 500,
-    autoplay: false,
-    autoplayspeed: 800,
+    autoplay: true,
+    autoplayspeed: 1000,
     centerMode: true,
     centerPadding: "60px",
     Infinity: true,

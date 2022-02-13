@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,11 +25,17 @@ const NaviList = styled.li`
 `;
 
 export default function LayOutDesignNavi() {
+  const router = useRouter();
+
+  const MoveToLogin = () => {
+    router.push("/Login");
+  };
+
   return (
     <Wrapper>
       <WrapperDiv>
         <WrapperUl>
-          <NaviList>로그인</NaviList>
+          <NaviList onClick={MoveToLogin}>로그인</NaviList>
           <NaviList>회원가입</NaviList>
           <NaviList>고객센터</NaviList>
         </WrapperUl>
