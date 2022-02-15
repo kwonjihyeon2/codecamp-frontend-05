@@ -16,13 +16,43 @@ const TitleBox = styled.div`
 const WrapperList = styled.div`
   display: flex;
   justify-content: space-between;
-  /* align-items: flex-end; */
+  /* @media (max-width: 1240px) {
+    flex-wrap: wrap;
+  } */
+`;
+
+const BestImg = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  /* @media (max-width: 1240px) {
+    width: 100%;
+  } */
 `;
 
 const ViewAll = styled.p`
   color: #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
   cursor: pointer;
+`;
+
+const TitleFont = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const ContentStyle = styled.h2`
+  margin: 10px 0;
+  /* font-size: 40px; / */
+  font-weight: 700;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const DayTitle = styled.p`
+  margin: 0;
+  font-size: 12px;
+  color: #bdbdbd;
 `;
 
 interface IPropsData {
@@ -34,14 +64,14 @@ export default function BestListPageUI(props: IPropsData) {
   return (
     <Wrapper>
       <TitleBox>
-        <h2>이번주 인기 게시물</h2>
+        <h1>이번주 인기 게시물</h1>
         <ViewAll onClick={props.MoveToAll}>전체보기</ViewAll>
       </TitleBox>
       <WrapperList>
         {props.data?.fetchBoardsOfTheBest.map((el: any) => (
           <div key={uuidv4()}>
             <div>
-              <img
+              <BestImg
                 style={{ width: "300px" }}
                 src={
                   el.images[0]
@@ -50,12 +80,14 @@ export default function BestListPageUI(props: IPropsData) {
                 }
               />
             </div>
-            <h4>{el.writer}</h4>
-            <div>{el.title}</div>
-            <div>{getMyDate(el.updatedAt)}</div>
+            <TitleFont>{el.title}</TitleFont>
+            <ContentStyle>{el.contents}</ContentStyle>
+            <DayTitle>{el.writer}</DayTitle>
+            <DayTitle>{getMyDate(el.updatedAt)}</DayTitle>
           </div>
         ))}
       </WrapperList>
+      <div>중고마켓 제품 보여주기</div>
     </Wrapper>
   );
 }

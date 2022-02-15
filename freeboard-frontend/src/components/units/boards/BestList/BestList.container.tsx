@@ -8,6 +8,7 @@ const BEST_BOARDS = gql`
       _id
       writer
       title
+      contents
       images
       updatedAt
     }

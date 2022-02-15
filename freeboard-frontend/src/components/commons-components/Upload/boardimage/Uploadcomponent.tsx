@@ -18,12 +18,9 @@ export const UPLOAD_FILES = gql`
 `;
 
 export interface IPropsWriteUI {
-  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
-  ClickImage: () => void;
-  filesRef: any;
   index: any;
-  el: any;
   onChangeUrls: any;
+  fileUrl: any;
 }
 
 export default function Uploadfile(props: IPropsWriteUI) {
@@ -36,6 +33,9 @@ export default function Uploadfile(props: IPropsWriteUI) {
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const clickfile = event.target.files?.[0];
     console.log(clickfile); // 파일 올라간 시간 등 storage 주소
+
+    const isVaild = checkFileValidation(clickfile);
+    if (!isVaild) return;
 
     try {
       const result = await uploadfile({ variables: { file: clickfile } });
@@ -57,7 +57,10 @@ export default function Uploadfile(props: IPropsWriteUI) {
       <S.LoadImg>
         {props.fileUrl ? (
           <S.GetImg onClick={ClickImage}>
-            {/* <img src={`https://storage.googleapis.com/${props.fileUrl}`} /> */}
+            <img
+              style={{ width: "80px", height: "80px" }}
+              src={`https://storage.googleapis.com/${props.fileUrl}`}
+            />
           </S.GetImg>
         ) : (
           <div>

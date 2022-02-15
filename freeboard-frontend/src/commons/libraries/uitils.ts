@@ -10,10 +10,10 @@ export const getMyDate = (myDate: any) => {
   return `${yyyy}.${mm}.${dd}`;
 };
 
-export const checkFileValidation = (imgurl: File | undefined) => {
-  if (!imgurl?.size) return false;
+export const checkFileValidation = (clickfile: File | undefined) => {
+  if (!clickfile?.size) return false;
 
-  if (imgurl?.size > 5 * 1024 * 1024) {
+  if (clickfile?.size > 5 * 1024 * 1024) {
     Modal.error({
       title: "파일 등록 실패",
       content: "파일 크기는 5MB 이하여야합니다.",
@@ -22,9 +22,9 @@ export const checkFileValidation = (imgurl: File | undefined) => {
   }
 
   if (
-    !imgurl?.type.includes("jpeg") &&
-    !imgurl?.type.includes("png") &&
-    !imgurl?.type.includes("gif")
+    !clickfile?.type.includes("jpeg") &&
+    !clickfile?.type.includes("png") &&
+    !clickfile?.type.includes("gif")
   ) {
     Modal.error({
       title: "파일 등록 실패",

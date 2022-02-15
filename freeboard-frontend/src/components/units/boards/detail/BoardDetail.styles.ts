@@ -2,19 +2,22 @@ import styled from "@emotion/styled";
 // import {image} from 'public'
 
 export const NewBody = styled.div`
+  max-width: 1240px;
   width: 100%;
-  font-family: Noto Sans KR;
-  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 `;
 export const BoardContent = styled.div`
-  width: 1200px;
-  margin: 80px auto;
+  width: 65%;
+  margin: 80px 0;
+  font-family: Noto Sans KR;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-  padding: 80px 100px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  /* padding: 80px 0; */
+  /* border: 1px solid #bdbdbd; */
 `;
 
 export const WrapperTop = styled.div`
@@ -66,13 +69,20 @@ export const BodyTitle = styled.div`
 export const BodyImg = styled.div`
   width: 100%;
   display: flex;
-  margin: 40px 0;
+  /* justify-content: space-between; */
+  margin: 30px 0;
   background-position: center;
   overflow: hidden;
 `;
 
 export const showImg = styled.img`
   width: 100%;
+`;
+
+export const BottomImg = styled.img`
+  width: 30%;
+  border-radius: 5px;
+  margin-right: 30px;
 `;
 
 export const BodyContents = styled.div`
@@ -90,7 +100,7 @@ export const BodyYouTube = styled.div`
 
 export const BodyLikeBox = styled.div`
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   margin: 0 auto;
   padding-top: 40px;
   align-items: center;
@@ -98,7 +108,7 @@ export const BodyLikeBox = styled.div`
 `;
 
 export const LikeBox = styled.div`
-  margin: 0 30px;
+  margin-right: 30px;
   color: #ffd600;
   text-align: center;
 `;
@@ -114,11 +124,20 @@ export const DisLikeText = styled.div`
   color: #828282;
 `;
 
+export const ShowBox = styled.div`
+  position: static;
+  width: 30%;
+  padding: 80px 0;
+  border: 1px solid #bdbdbd;
+`;
+
 export const ButtonBox = styled.div`
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  width: 100%;
-  padding: 80px 0;
+  padding: 80px 0px;
   border-bottom: 1px solid #bdbdbd;
 `;
 
@@ -133,7 +152,7 @@ export const CommonBtn = styled.div`
 
 export const Commentcontent = styled.div`
   margin: 0px auto;
-  width: 1200px;
+  width: 1240px;
 `;
 
 export const CommentTitle = styled.div`

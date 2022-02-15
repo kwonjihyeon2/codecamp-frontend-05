@@ -115,21 +115,21 @@ export default function FreeBoardWrite(props: IWriteConProps) {
     try {
       if (!inputs.writer) {
         setErrorName("이름은 필수입력 항목입니다.");
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 500);
       } else {
         setErrorName("");
       }
 
       if (!inputs.password || inputs.password.length < 4) {
         setErrorPw("비밀번호는 필수입력 항목입니다. 4자리 이상 입력하세요.");
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 500);
       } else {
         setErrorPw("");
       }
 
       if (!inputs.title) {
         setErrorTitle("제목은 필수입력 항목입니다.");
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 500);
       } else {
         setErrorTitle("");
       }

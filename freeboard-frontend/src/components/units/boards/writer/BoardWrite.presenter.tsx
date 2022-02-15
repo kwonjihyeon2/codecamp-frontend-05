@@ -126,14 +126,13 @@ export default function FreeBoardWriteUI(props: IPropsWriteUI) {
             </S.CommonMargin>
             <S.CommonMargin>
               <div>사진 첨부</div>
-              {props.files.map((el, index) => (
+              {props.files.map((el: any, index: number) => (
                 <div key={uuidv4()}>
                   <Uploadfile
                     fileUrl={el}
                     index={index}
                     onChangeUrls={props.onChangeUrls}
                   />
-                  ;
                 </div>
               ))}
             </S.CommonMargin>

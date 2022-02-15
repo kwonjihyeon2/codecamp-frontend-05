@@ -62,7 +62,7 @@ export const LiButton = styled.li`
   cursor: pointer;
   position: relative;
   width: 30%;
-  &:nth-last-child(1):after {
+  &:nth-child(3):after {
     display: none;
   }
   &::after {

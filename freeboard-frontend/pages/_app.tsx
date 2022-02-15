@@ -11,6 +11,8 @@ import { AppProps } from "next/app";
 import LayOutDesign from "../src/components/commons-components/Layout";
 import { Global } from "@emotion/react";
 import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
+import { useState, createContext, Dispatch, SetStateAction } from "react";
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
@@ -30,9 +32,23 @@ const firebaseConfig = {
 // Initialize Firebase
 export const forfreeboard = initializeApp(firebaseConfig);
 
+interface IpropsContext {
+  accessToken?: string;
+  setAccessToken?: Dispatch<SetStateAction<string>>;
+}
+
+export const MakeGlobalContext = createContext<IpropsContext>({});
+
 function MyApp({ Component, pageProps }: AppProps) {
+  const [accessToken, setAccessToken] = useState("");
+
+  const value = {
+    accessToken: accessToken,
+    setAccessToken: setAccessToken,
+  };
   const uploadLink = createUploadLink({
     uri: "http://backend05.codebootcamp.co.kr/graphql",
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
 
   const client = new ApolloClient({
@@ -41,12 +57,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalStyle} />
-      <LayOutDesign>
-        <Component {...pageProps} />
-      </LayOutDesign>
-    </ApolloProvider>
+    <MakeGlobalContext.Provider value={value}>
+      <ApolloProvider client={client}>
+        <Global styles={globalStyle} />
+        <LayOutDesign>
+          <Component {...pageProps} />
+        </LayOutDesign>
+      </ApolloProvider>
+    </MakeGlobalContext.Provider>
   );
 }
 

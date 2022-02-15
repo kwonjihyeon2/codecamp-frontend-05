@@ -6,6 +6,7 @@ interface IpropsLogin {
   userError: String;
   passwordError: String;
   isActive: boolean;
+  onClickLogin: () => void;
 }
 
 export default function LoginPageUI(props: IpropsLogin) {
@@ -27,7 +28,9 @@ export default function LoginPageUI(props: IpropsLogin) {
           onChange={props.onChangeInputs}
         />
         <L.ErrorColor>{props.passwordError}</L.ErrorColor>
-        <L.LoginBtn isActive={props.isActive}>로그인</L.LoginBtn>
+        <L.LoginBtn onClick={props.onClickLogin} isActive={props.isActive}>
+          로그인
+        </L.LoginBtn>
         <div>
           <L.UlButton>
             <L.LiButton>회원가입</L.LiButton>

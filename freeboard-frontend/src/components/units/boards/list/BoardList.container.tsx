@@ -18,9 +18,10 @@ export default function BoardListPage(props: IPropsList) {
   // 클릭했을때 상세페이지로 가는 것 props onclick으로 연결
 
   const GoToDetailPage = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.target instanceof Element) console.log(event.target.id);
-    if (event.target instanceof Element)
-      router.push(`boards/${event.target.id}`);
+    if (event.currentTarget instanceof Element)
+      console.log(event.currentTarget.id);
+    if (event.currentTarget instanceof Element)
+      router.push(`boards/${event.currentTarget.id}`);
   };
 
   return (

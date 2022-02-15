@@ -95,7 +95,7 @@ export const GetImg = styled.div`
   height: 80px;
   background-color: #bdbdbd;
   margin-right: 15px;
-  padding: 15px;
+  /* padding: 15px; */
   text-align: center;
   line-height: 25px;
   cursor: pointer;

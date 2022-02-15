@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { gql, useQuery } from "@apollo/client";
+import { useContext } from "react";
+import { MakeGlobalContext } from "../../../../../pages/_app";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,8 +28,21 @@ const NaviList = styled.li`
   font-weight: 500;
 `;
 
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      email
+      name
+    }
+  }
+`;
+
 export default function LayOutDesignNavi() {
   const router = useRouter();
+
+  const { data } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+  const { accessToken } = useContext(MakeGlobalContext);
 
   const MoveToLogin = () => {
     router.push("/Login");
@@ -35,8 +52,17 @@ export default function LayOutDesignNavi() {
     <Wrapper>
       <WrapperDiv>
         <WrapperUl>
-          <NaviList onClick={MoveToLogin}>로그인</NaviList>
-          <NaviList>회원가입</NaviList>
+          {accessToken ? (
+            <>
+              <NaviList>{data?.fetchUserLoggedIn.name}님 환영합니다 !</NaviList>
+              <NaviList>로그아웃</NaviList>
+            </>
+          ) : (
+            <>
+              <NaviList onClick={MoveToLogin}>로그인</NaviList>
+              <NaviList>회원가입</NaviList>
+            </>
+          )}
           <NaviList>고객센터</NaviList>
         </WrapperUl>
       </WrapperDiv>
