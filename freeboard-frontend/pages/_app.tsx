@@ -11,7 +11,13 @@ import { AppProps } from "next/app";
 import LayOutDesign from "../src/components/commons-components/Layout";
 import { Global } from "@emotion/react";
 import { globalStyle } from "../src/commons/styles/LayOutDesignStyles";
-import { useState, createContext, Dispatch, SetStateAction } from "react";
+import {
+  useEffect,
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -46,6 +52,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     accessToken: accessToken,
     setAccessToken: setAccessToken,
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken") || "");
+    }
+  }, []);
+
   const uploadLink = createUploadLink({
     uri: "http://backend05.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },

@@ -70,9 +70,14 @@ export default function LoginContainer() {
           password: inputs.userPassword,
         },
       });
-      if (setAccessToken)
-        setAccessToken(result.data?.loginUser.accessToken || "");
-      console.log(result.data?.loginUser.accessToken);
+
+      const saveToken = result.data?.loginUser.accessToken;
+      if (setAccessToken) {
+        setAccessToken(saveToken || "");
+        localStorage.setItem("saveToken", saveToken || "");
+      }
+
+      console.log(localStorage.getItem("saveToken"));
       router.push("/mainpage");
     } catch (error) {
       Modal.error({

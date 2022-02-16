@@ -44,9 +44,16 @@ export default function LoginSamplePage() {
           password: inputs.password,
         },
       });
-      console.log(inputs.email, result.data?.loginUser);
-      if (setAccessToken)
-        setAccessToken(result.data?.loginUser.accessToken || "");
+
+      if (setAccessToken) {
+        setAccessToken(result.data?.loginUser.accessToken);
+        localStorage.setItem(
+          "accessToken",
+          result.data?.loginUser.accessToken || ""
+        );
+        //접속한 사이트에 한해서 저장 유지 .getItem("aaa") : 불러오기
+      }
+
       router.push("/quiz/login/login-sucess");
     } catch (error) {
       if (!accessToken) return alert("먼저 로그인을 해주세요");

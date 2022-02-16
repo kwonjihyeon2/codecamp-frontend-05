@@ -13,7 +13,7 @@ interface IPropsDesign {
 const LayOutDesignBody = styled.div``;
 
 const HIDDEN_HEADERS = ["/"];
-const HIDDEN_BANNERS = ["/Login"];
+const HIDDEN_BANNERS = ["/Login", "/Login/join"];
 
 export default function LayOutDesign(props: IPropsDesign) {
   const router = useRouter();

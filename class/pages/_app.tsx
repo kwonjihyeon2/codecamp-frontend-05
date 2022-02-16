@@ -11,7 +11,13 @@ import { AppProps } from "next/app";
 import LayoutSample from "../src/commons/layoutSample";
 import { Global } from "@emotion/react";
 import { globalSampleStyle } from "../src/commons/styles/globalSampleStyle";
-import { useState, createContext, SetStateAction, Dispatch } from "react";
+import {
+  useEffect,
+  useState,
+  createContext,
+  SetStateAction,
+  Dispatch,
+} from "react";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -44,6 +50,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     accessToken: accessToken,
     setAccessToken: setAccessToken,
   };
+
+  useEffect(() => {
+    //jsx까지 그려진 후 실행되는 부분이기 때문에 useEffect로도 사용 가능
+    if (localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken") || "");
+    }
+  }, []);
 
   const uploadLink = createUploadLink({
     uri: "http://backend05.codebootcamp.co.kr/graphql",
