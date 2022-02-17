@@ -36,23 +36,36 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
+
+interface IUserInfo {
+  name?: string;
+  email?: string;
+  picture?: string;
+}
 interface IGlobalContext {
   accessToken?: string;
   setAccessToken?: Dispatch<SetStateAction<string>>; //state사용 시 만들어주는 타입
+  userInfo?: IUserInfo;
+  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>;
 }
 
 export const GlobalContext = createContext<IGlobalContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
+  //여기 state로 불러오는 값 : localStorage에 저장된 토큰
   const [accessToken, setAccessToken] = useState("");
+  const [userInfo, setUserInfo] = useState<IUserInfo>({});
   const value = {
     //추후 로그인 정보 등 증가할 데이터 객체로 담은 것
     accessToken: accessToken,
     setAccessToken: setAccessToken,
+    userInfo,
+    setUserInfo,
   };
 
   useEffect(() => {
     //jsx까지 그려진 후 실행되는 부분이기 때문에 useEffect로도 사용 가능
+    //새로고침했을 때 초기화 방지
     if (localStorage.getItem("accessToken")) {
       setAccessToken(localStorage.getItem("accessToken") || "");
     }

@@ -1,6 +1,18 @@
+import { ChangeEvent } from "react";
 import * as J from "./joinStyle";
 
-export default function JoinPageUI(props) {
+interface IPropsJoinUI {
+  onClickJoin: () => void;
+  onChangeInputs: (
+    el: string
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isActive: boolean;
+  nameError: string;
+  userError: string;
+  passwordError: string;
+}
+
+export default function JoinPageUI(props: IPropsJoinUI) {
   return (
     <div>
       <J.Wrapper>
