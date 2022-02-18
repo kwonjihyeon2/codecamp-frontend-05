@@ -38,24 +38,38 @@ const firebaseConfig = {
 // Initialize Firebase
 export const forfreeboard = initializeApp(firebaseConfig);
 
+interface IUserInfo {
+  name?: string;
+  email?: string;
+  _id?: string;
+}
+
 interface IpropsContext {
   accessToken?: string;
   setAccessToken?: Dispatch<SetStateAction<string>>;
+  userInfo?: IUserInfo;
+  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>;
 }
 
 export const MakeGlobalContext = createContext<IpropsContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
+  const [userInfo, setUserInfo] = useState<IUserInfo>({});
 
   const value = {
     accessToken: accessToken,
     setAccessToken: setAccessToken,
+    userInfo,
+    setUserInfo,
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      setAccessToken(localStorage.getItem("accessToken") || "");
+    if (localStorage.getItem("saveToken")) {
+      setAccessToken(localStorage.getItem("saveToken") || "");
+    }
+    if (localStorage.getItem("userInfo")) {
+      setUserInfo(JSON.parse(localStorage.getItem("userInfo") || ""));
     }
   }, []);
 

@@ -1,12 +1,12 @@
 import CreateProductUI from "./createProduct.presenter";
 import { useMutation, gql } from "@apollo/client";
-// import { ChangeEvent, useState } from "react";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
 } from "../../../../commons/types/generated/types";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const CREATE_USED_ITEM = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
@@ -28,30 +28,16 @@ interface IpropsCreateItem {
   //   images: [string];
 }
 export default function CreateProductContainer() {
+  const router = useRouter();
+
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
 
-  //   const [inputs, setInputs] = useState({
-  //     name: "",
-  //     remarks: "",
-  //     price: Number(""),
-  //     contents: "",
-  //     tags: [""],
-  //   });
-
-  //   const onChangeInputs =
-  //     (el: string) => (event: ChangeEvent<HTMLInputElement>) => {
-  //       setInputs({
-  //         ...inputs,
-  //         [el]: event?.target.value,
-  //       });
-  //     };
-
   const [uploadfile, setUploadfile] = useState(["", ""]);
 
-  const onChangefile = (file, index) => {
+  const onChangefile = (file: string, index: number) => {
     const spreadfiles = [...uploadfile];
     spreadfiles[index] = file;
     setUploadfile(spreadfiles);
@@ -61,31 +47,22 @@ export default function CreateProductContainer() {
     mode: "onChange",
   });
 
-  //   const onClickSubmit = (data) => {
-  //     console.log(data);
-  //   };
-  const onClickSubmit = (data: IpropsCreateItem) => {
-    console.log(data);
-  };
-
-  const onClickCreate = async (data: IpropsCreateItem) => {
+  const onClickSubmit = async (data: IpropsCreateItem) => {
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            // ...data,
-            name: String(data.name),
-            remarks: data.remarks,
+            ...data,
             price: Number(data.price),
-            contents: data.contents,
             images: uploadfile,
           },
         },
       });
 
       console.log(result.data?.createUseditem);
+      router.push(`/market/${result.data?.createUseditem._id}`);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -94,7 +71,6 @@ export default function CreateProductContainer() {
       register={register}
       handleSubmit={handleSubmit}
       onClickSubmit={onClickSubmit}
-      onClickCreate={onClickCreate}
       onChangefile={onChangefile}
       uploadfile={uploadfile}
     />

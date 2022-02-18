@@ -1,3 +1,3 @@
-export default function MarketPage() {
+export default function CreateProductPage() {
   return <></>;
 }

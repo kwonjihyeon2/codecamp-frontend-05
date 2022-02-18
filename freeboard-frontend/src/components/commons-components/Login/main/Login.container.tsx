@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState, useContext } from "react";
@@ -8,7 +8,7 @@ import {
   IMutationLoginUserArgs,
 } from "../../../../commons/types/generated/types";
 import LoginPageUI from "./Login.presenter";
-import { LOGIN_USER } from "./Login.queries";
+import { LOGIN_USER, FETCH_USER_LOGGED_IN } from "./Login.queries";
 
 export default function LoginContainer() {
   const [inputs, setInputs] = useState({
@@ -59,8 +59,9 @@ export default function LoginContainer() {
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
-  const { setAccessToken } = useContext(MakeGlobalContext);
+  const { setAccessToken, setUserInfo } = useContext(MakeGlobalContext);
   const router = useRouter();
+  const client = useApolloClient();
 
   const onClickLogin = async () => {
     try {
@@ -72,10 +73,21 @@ export default function LoginContainer() {
       });
 
       const saveToken = result.data?.loginUser.accessToken;
-      if (setAccessToken) {
-        setAccessToken(saveToken || "");
-        localStorage.setItem("saveToken", saveToken || "");
-      }
+
+      const resultUserInfo = await client.query({
+        query: FETCH_USER_LOGGED_IN,
+        context: {
+          headers: { Authorization: `Bearer ${saveToken}` },
+        },
+      });
+
+      const userInfo = resultUserInfo.data.fetchUserLoggedIn;
+
+      if (setAccessToken) setAccessToken(saveToken || "");
+      if (setUserInfo) setUserInfo(userInfo);
+
+      localStorage.setItem("saveToken", saveToken || "");
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
       console.log(localStorage.getItem("saveToken"));
       router.push("/mainpage");

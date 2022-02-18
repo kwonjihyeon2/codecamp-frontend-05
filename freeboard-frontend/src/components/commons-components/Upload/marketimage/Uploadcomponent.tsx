@@ -35,14 +35,15 @@ export default function MarketUploadfile(props) {
       props.onChangefile(result.data?.uploadFile.url, props.index);
       console.log(result.data?.uploadFile);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
-  const fileRef = useRef();
+  const fileRef = useRef(null);
   const onClickRef = () => {
     fileRef.current?.click();
   };
+
   return (
     <div>
       {props.fileUrl ? (
