@@ -1,5 +1,5 @@
 import styled from "@emotion/styled/";
-import { useRouter } from "next/router";
+import { MoveToPageHook } from "../../hooks/MoveToPageHook";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,25 +36,17 @@ const NavLi = styled.li`
 `;
 
 export default function LayOutDesignHead() {
-  const router = useRouter();
-
-  const MoveToMain = () => {
-    router.push("/mainpage");
-  };
-
-  const MoveToList = () => {
-    router.push("/boards");
-  };
+  const { moveToPage } = MoveToPageHook();
 
   return (
     <Wrapper>
       <HeaderList>
         <HeaderLogo>로고</HeaderLogo>
         <NavList>
-          <NavLi onClick={MoveToMain}>HOME</NavLi>
+          <NavLi onClick={moveToPage("/mainpage")}>HOME</NavLi>
           <NavLi>OPEN-API</NavLi>
-          <NavLi onClick={MoveToList}>COMMUNITY</NavLi>
-          <NavLi>MARKET</NavLi>
+          <NavLi onClick={moveToPage("/boards")}>COMMUNITY</NavLi>
+          <NavLi onClick={moveToPage("/market")}>MARKET</NavLi>
           <NavLi>MY</NavLi>
         </NavList>
       </HeaderList>

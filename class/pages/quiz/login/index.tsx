@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { ChangeEvent, useState } from "react";
 import {
@@ -46,15 +47,21 @@ export default function LoginSamplePage() {
       });
 
       if (setAccessToken) {
-        setAccessToken(result.data?.loginUser.accessToken);
+        setAccessToken(result.data?.loginUser.accessToken || "");
         localStorage.setItem(
           "accessToken",
           result.data?.loginUser.accessToken || ""
         );
         //접속한 사이트에 한해서 저장 유지 .getItem("aaa") : 불러오기
       }
+      // router.push("/quiz/login/login-sucess");
 
-      router.push("/quiz/login/login-sucess");
+      const basket = localStorage.getItem("save");
+      if (basket)
+        alert(
+          "비회원으로 담긴 게시물 장바구니가 존재합니다. 이동하시겠습니까?"
+        );
+      router.push("/quiz/basket");
     } catch (error) {
       if (!accessToken) return alert("먼저 로그인을 해주세요");
       alert(error.message);

@@ -1,48 +1,70 @@
 import MarketUploadfile from "../../../commons-components/Upload/marketimage/Uploadcomponent";
 import { v4 as uuidv4 } from "uuid";
-import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
-
-interface IpropsCreateUI {
-  register: any;
-  onClickSubmit: (data) => void;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
-  onChangefile: (file: string, index: number) => void;
-  uploadfile: string[];
-}
+import { IpropsCreateUI } from "./createProduct.types";
 
 export default function CreateProductUI(props: IpropsCreateUI) {
   return (
     <div>
-      <h1>상품 등록하기</h1>
+      <h1>상품 {`${props.isEdit ? "수정" : "등록"}`}하기</h1>
       <form onSubmit={props.handleSubmit(props.onClickSubmit)}>
         <div>
-          상품명 <input type="text" {...props.register("name")} />
+          상품명{" "}
+          <input
+            type="text"
+            defaultValue={
+              props.isEdit ? props.fetchItem?.fetchUseditem.name : ""
+            }
+            {...props.register("name")}
+          />
         </div>
         <div>
-          간단설명 <input type="text" {...props.register("remarks")} />
+          간단설명{" "}
+          <input
+            type="text"
+            defaultValue={
+              props.isEdit ? props.fetchItem?.fetchUseditem.remarks : ""
+            }
+            {...props.register("remarks")}
+          />
         </div>
         <div>
-          상품설명 <input type="text" {...props.register("contents")} />
+          상품설명{" "}
+          <input
+            type="text"
+            defaultValue={
+              props.isEdit ? props.fetchItem?.fetchUseditem.contents : ""
+            }
+            {...props.register("contents")}
+          />
         </div>
         <div>
-          판매가격 <input type="text" {...props.register("price")} />
+          판매가격{" "}
+          <input
+            type="text"
+            defaultValue={
+              props.isEdit ? props.fetchItem?.fetchUseditem.price : ""
+            }
+            {...props.register("price")}
+          />
         </div>
         <div>
           태그 <input type="text" />
         </div>
         <div>거래위치</div>
-        <div>
-          이미지
-          {props.uploadfile.map((el, index: number) => (
-            <MarketUploadfile
-              key={uuidv4()}
-              index={index}
-              fileUrl={el}
-              onChangefile={props.onChangefile}
-            />
-          ))}
-        </div>
-        <button onClick={props.onClickSubmit}>등록하기</button>
+        이미지
+        {props.uploadfile.map((el, index: number) => (
+          <MarketUploadfile
+            key={uuidv4()}
+            index={index}
+            fileUrl={el}
+            onChangefile={props.onChangefile}
+          />
+        ))}
+        <button
+          onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
+        >
+          {`${props.isEdit ? "수정" : "등록"}`}하기
+        </button>
       </form>
     </div>
   );
