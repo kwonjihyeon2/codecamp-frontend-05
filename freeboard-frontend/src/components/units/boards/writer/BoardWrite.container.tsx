@@ -182,6 +182,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
         if (AddressDetail)
           MyVariables.boardAddress.addressDetail = AddressDetail;
       }
+      if (files) MyVariables.images = files;
 
       await updateBoard({
         variables: {

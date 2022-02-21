@@ -37,4 +37,5 @@ export interface IMyVariableUpdateBoard {
     address?: string;
     addressDetail?: string;
   };
+  images: string[];
 }

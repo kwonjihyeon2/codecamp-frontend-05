@@ -37,7 +37,7 @@ export default function CreateProductContainer(props: IPropsType) {
     setUploadfile(spreadfiles);
   };
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, setValue, trigger } = useForm({
     mode: "onChange",
   });
 
@@ -64,7 +64,7 @@ export default function CreateProductContainer(props: IPropsType) {
   };
 
   console.log(props.isEdit);
-  console.log(String(router.query.ItemId));
+
   const onClickEdit = async (data: IpropsCreateItem) => {
     try {
       const variables: IMyVariableUpdateItem = {};
@@ -73,6 +73,7 @@ export default function CreateProductContainer(props: IPropsType) {
       if (data.price) variables.price = data.price;
       if (data.contents) variables.contents = data.contents;
       if (data.remarks) variables.remarks = data.remarks;
+      if (uploadfile) variables.images = uploadfile;
 
       await updateUseditem({
         variables: {
@@ -90,6 +91,12 @@ export default function CreateProductContainer(props: IPropsType) {
     }
   };
 
+  const onChangeContents = (value) => {
+    console.log(value);
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    trigger("contents");
+  };
+
   return (
     <CreateProductUI
       isEdit={props.isEdit}
@@ -100,6 +107,7 @@ export default function CreateProductContainer(props: IPropsType) {
       uploadfile={uploadfile}
       onClickEdit={onClickEdit}
       fetchItem={props.fetchItem}
+      onChangeContents={onChangeContents}
     />
   );
 }

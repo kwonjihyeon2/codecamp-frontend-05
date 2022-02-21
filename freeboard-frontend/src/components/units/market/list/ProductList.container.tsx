@@ -16,7 +16,7 @@ export default function ItemList() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_ITEMS);
-  // console.log(data);
+  console.log(data);
 
   // const [cartToday, setCartToday] = useState([]);
   const { todayView, setTodayView } = useContext(MakeGlobalContext);

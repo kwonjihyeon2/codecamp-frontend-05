@@ -1,6 +1,10 @@
 import MarketUploadfile from "../../../commons-components/Upload/marketimage/Uploadcomponent";
 import { v4 as uuidv4 } from "uuid";
 import { IpropsCreateUI } from "./createProduct.types";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function CreateProductUI(props: IpropsCreateUI) {
   return (
@@ -34,15 +38,7 @@ export default function CreateProductUI(props: IpropsCreateUI) {
           />
         </div>
         <div>
-          상품설명{" "}
-          <input
-            type="text"
-            defaultValue={
-              props.isEdit ? props.fetchItem?.fetchUseditem.contents : ""
-            }
-            // readOnly={!!props.fetchItem?.fetchUseditem.name}
-            {...props.register("contents")}
-          />
+          상품설명 <ReactQuill onChange={props.onChangeContents} />
         </div>
         <div>
           판매가격{" "}

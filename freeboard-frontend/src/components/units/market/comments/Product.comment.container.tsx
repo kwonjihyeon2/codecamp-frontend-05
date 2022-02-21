@@ -6,6 +6,8 @@ import {
   IMutationCreateUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
+import { BiEditAlt } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
 
 const CREATE_PRODUCT_COMMENT = gql`
   mutation createUseditemQuestion(
@@ -32,6 +34,12 @@ const FETCH_ITEM_COMMENT = gql`
   }
 `;
 
+const DELETE_COMMENT = gql`
+  mutation deleteUseditemQuestion($useditemQuestionId: ID!) {
+    deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
+  }
+`;
+
 export default function ProductComment() {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
@@ -40,30 +48,50 @@ export default function ProductComment() {
     Pick<IMutation, "createUseditemQuestion">,
     IMutationCreateUseditemQuestionArgs
   >(CREATE_PRODUCT_COMMENT);
-  const { data, refetch } = useQuery(FETCH_ITEM_COMMENT, {
+  const { data } = useQuery(FETCH_ITEM_COMMENT, {
     variables: { page: 1, useditemId: String(router.query.ItemId) },
   });
 
-  console.log(data?.fetchUseditemQuestions.contents);
+  console.log(data?.fetchUseditemQuestions);
+  const [deleteComment] = useMutation(DELETE_COMMENT);
 
   const onClickSubmit = async (data) => {
-    try {
-      const result = await createComment({
-        variables: {
-          createUseditemQuestionInput: { contents: data.contents },
-          useditemId: String(router.query.ItemId),
-        },
-        refetchQueries: [
-          {
-            variables: { page: 1, useditemId: router.query.ItemId },
-            query: FETCH_ITEM_COMMENT,
+    await createComment({
+      variables: {
+        createUseditemQuestionInput: { contents: data.contents },
+        useditemId: String(router.query.ItemId),
+      },
+      update(cache, { data }) {
+        cache.modify({
+          fields: {
+            fetchUseditemQuestions: (prev) => {
+              return [data?.createUseditemQuestion, ...prev];
+            },
           },
-        ],
-      });
-      console.log(result.data?.createUseditemQuestion.contents);
-    } catch (error) {
-      console.log(error.message);
-    }
+        });
+      },
+    });
+  };
+
+  const onClickDelete = (useditemQuestionId: string) => async () => {
+    await deleteComment({
+      variables: { useditemQuestionId: useditemQuestionId },
+      update(cache, { data }) {
+        // console.log(data);
+        const deletedId = data.deleteUseditemQuestion;
+
+        cache.modify({
+          fields: {
+            fetchUseditemQuestions: (prev, { readField }) => {
+              const filteredPrev = prev.filter(
+                (el) => readField("_id", el) !== deletedId
+              );
+              return [...filteredPrev];
+            },
+          },
+        });
+      },
+    });
   };
 
   return (
@@ -77,6 +105,12 @@ export default function ProductComment() {
         {data?.fetchUseditemQuestions.map((el) => (
           <div key={uuidv4()}>
             <span>{el.contents}</span>
+            <span>
+              <BiEditAlt />
+            </span>
+            <span onClick={onClickDelete(el._id)}>
+              <AiFillDelete />
+            </span>
           </div>
         ))}
       </div>

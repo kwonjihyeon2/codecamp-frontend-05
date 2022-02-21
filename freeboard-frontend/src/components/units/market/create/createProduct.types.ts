@@ -30,5 +30,5 @@ export interface IMyVariableUpdateItem {
   remarks: string;
   price: number;
   contents: string;
-  images: [string];
+  images: string[];
 }
