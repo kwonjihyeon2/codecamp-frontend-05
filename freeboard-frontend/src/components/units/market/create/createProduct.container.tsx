@@ -10,7 +10,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
 import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./createProduct.queries";
-import { IpropsCreateItem, IPropsType } from "./createProduct.types";
+import {
+  IMyVariableUpdateItem,
+  IpropsCreateItem,
+  IPropsType,
+} from "./createProduct.types";
 
 export default function CreateProductContainer(props: IPropsType) {
   const router = useRouter();
@@ -20,7 +24,7 @@ export default function CreateProductContainer(props: IPropsType) {
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
 
-  const [updateUsedItem] = useMutation<
+  const [updateUseditem] = useMutation<
     Pick<IMutation, "updateUseditem">,
     IMutationUpdateUseditemArgs
   >(UPDATE_USED_ITEM);
@@ -59,21 +63,29 @@ export default function CreateProductContainer(props: IPropsType) {
     }
   };
 
+  console.log(props.isEdit);
+  console.log(String(router.query.ItemId));
   const onClickEdit = async (data: IpropsCreateItem) => {
-    // const variables :IMutationUpdateUseditemArgs ={};
-
     try {
-      await updateUsedItem({
+      const variables: IMyVariableUpdateItem = {};
+
+      if (data.name) variables.name = data.name;
+      if (data.price) variables.price = data.price;
+      if (data.contents) variables.contents = data.contents;
+      if (data.remarks) variables.remarks = data.remarks;
+
+      await updateUseditem({
         variables: {
-          updateUseditemInput: {
-            ...data,
-          },
+          updateUseditemInput: variables,
           useditemId: String(router.query.ItemId),
         },
       });
 
-      console.log(props.fetchItem);
+      router.push(`/market/${router.query.ItemId}`);
     } catch (error) {
+      Modal.error({
+        content: "수정실패",
+      });
       console.log(error.message);
     }
   };

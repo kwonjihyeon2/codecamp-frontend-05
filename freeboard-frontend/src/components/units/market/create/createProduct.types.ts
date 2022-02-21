@@ -24,3 +24,11 @@ export interface IpropsCreateUI {
   isEdit: boolean;
   fetchItem?: Pick<IQuery, "fetchUseditem">;
 }
+
+export interface IMyVariableUpdateItem {
+  name: string;
+  remarks: string;
+  price: number;
+  contents: string;
+  images: [string];
+}

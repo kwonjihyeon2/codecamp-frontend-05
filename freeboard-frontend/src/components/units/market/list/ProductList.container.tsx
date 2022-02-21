@@ -1,23 +1,14 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
   IUseditem,
 } from "../../../../commons/types/generated/types";
-
-const FETCH_ITEMS = gql`
-  query fetchUseditems($isSoldout: Boolean, $search: String, $page: Int) {
-    fetchUseditems(isSoldout: $isSoldout, search: $search, page: $page) {
-      _id
-      name
-      contents
-      remarks
-      price
-    }
-  }
-`;
+import ItemListUI from "./ProductList.presenter";
+import { FETCH_ITEMS } from "./Product.queries";
+import { useContext, useEffect } from "react";
+import { MakeGlobalContext } from "../../../../../pages/_app";
 
 export default function ItemList() {
   const router = useRouter();
@@ -25,20 +16,28 @@ export default function ItemList() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_ITEMS);
-  console.log(data);
+  // console.log(data);
+
+  // const [cartToday, setCartToday] = useState([]);
+  const { todayView, setTodayView } = useContext(MakeGlobalContext);
+
+  useEffect(() => {
+    const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
+    if (setTodayView) setTodayView(baskets);
+  }, []);
 
   const MoveToDetail = (el: IUseditem) => () => {
     router.push(`/market/${el._id}`);
+    const cart = JSON.parse(localStorage.getItem("basket") || "[]");
+
+    const { __typename, ...newArr } = el;
+    cart.push(newArr);
+
+    localStorage.setItem("basket", JSON.stringify(cart));
+    if (setTodayView) setTodayView(cart);
   };
 
   return (
-    <div>
-      {data?.fetchUseditems.map((el) => (
-        <div key={uuidv4()} onClick={MoveToDetail(el)}>
-          <span>{el.name}</span>
-          <span>{el.remarks}</span>
-        </div>
-      ))}
-    </div>
+    <ItemListUI MoveToDetail={MoveToDetail} data={data} todayView={todayView} />
   );
 }

@@ -6,7 +6,11 @@ export default function CreateProductUI(props: IpropsCreateUI) {
   return (
     <div>
       <h1>상품 {`${props.isEdit ? "수정" : "등록"}`}하기</h1>
-      <form onSubmit={props.handleSubmit(props.onClickSubmit)}>
+      <form
+        onSubmit={props.handleSubmit(
+          props.isEdit ? props.onClickEdit : props.onClickSubmit
+        )}
+      >
         <div>
           상품명{" "}
           <input
@@ -14,6 +18,7 @@ export default function CreateProductUI(props: IpropsCreateUI) {
             defaultValue={
               props.isEdit ? props.fetchItem?.fetchUseditem.name : ""
             }
+            // readOnly={!!props.fetchItem?.fetchUseditem.name}
             {...props.register("name")}
           />
         </div>
@@ -24,6 +29,7 @@ export default function CreateProductUI(props: IpropsCreateUI) {
             defaultValue={
               props.isEdit ? props.fetchItem?.fetchUseditem.remarks : ""
             }
+            // readOnly={!!props.fetchItem?.fetchUseditem.name}
             {...props.register("remarks")}
           />
         </div>
@@ -34,6 +40,7 @@ export default function CreateProductUI(props: IpropsCreateUI) {
             defaultValue={
               props.isEdit ? props.fetchItem?.fetchUseditem.contents : ""
             }
+            // readOnly={!!props.fetchItem?.fetchUseditem.name}
             {...props.register("contents")}
           />
         </div>
@@ -60,11 +67,7 @@ export default function CreateProductUI(props: IpropsCreateUI) {
             onChangefile={props.onChangefile}
           />
         ))}
-        <button
-          onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
-        >
-          {`${props.isEdit ? "수정" : "등록"}`}하기
-        </button>
+        <button>{props.isEdit ? "수정하기" : "등록하기"}</button>
       </form>
     </div>
   );

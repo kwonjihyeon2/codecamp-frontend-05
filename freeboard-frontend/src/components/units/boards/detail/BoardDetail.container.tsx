@@ -17,7 +17,6 @@ import {
   IMutationDislikeBoardArgs,
 } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
-// import ReactPlayer from 'react-player'
 
 export default function FreeBoardDetail() {
   const router = useRouter();

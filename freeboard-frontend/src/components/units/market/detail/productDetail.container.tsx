@@ -1,7 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { MakeGlobalContext } from "../../../../../pages/_app";
 import { MoveToPageHook } from "../../../commons-components/hooks/MoveToPageHook";
 import { FETCH_USED_ITEM, DELETE_ITEM } from "./productDetail.queries";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ItemDetailContainer() {
   const router = useRouter();
@@ -10,6 +13,7 @@ export default function ItemDetailContainer() {
   });
 
   const { moveToPage } = MoveToPageHook();
+  const { todayView, setTodayView } = useContext(MakeGlobalContext);
   const [deleteProduct] = useMutation(DELETE_ITEM);
 
   const onClickDeleteItem = async () => {
@@ -24,6 +28,11 @@ export default function ItemDetailContainer() {
       console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
+    if (setTodayView) setTodayView(baskets);
+  }, []);
 
   return (
     <div>
@@ -53,6 +62,22 @@ export default function ItemDetailContainer() {
         수정하기
       </button>
       <button onClick={onClickDeleteItem}>삭제하기</button>
+
+      <div>
+        <h1>오늘 본 상품</h1>
+        <div>
+          {todayView?.map((el) => (
+            <div key={uuidv4()}>
+              <span>{el.name}</span>
+              <span>{el.remarks}</span>
+              <span>{el.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h1>댓글</h1>
+      </div>
     </div>
   );
 }

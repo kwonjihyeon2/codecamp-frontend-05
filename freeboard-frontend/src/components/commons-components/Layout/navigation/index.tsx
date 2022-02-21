@@ -31,8 +31,7 @@ const LayOutDesignNavi = () => {
   const router = useRouter();
 
   const { userInfo, accessToken } = useContext(MakeGlobalContext);
-
-  console.log(userInfo, accessToken);
+  // console.log(userInfo, accessToken);
 
   const MoveToLogin = () => {
     router.push("/Login");
