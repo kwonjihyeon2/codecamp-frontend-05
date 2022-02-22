@@ -10,7 +10,9 @@ interface IPropsDesign {
   children: ReactChild;
 }
 
-const LayOutDesignBody = styled.div``;
+const LayOutDesignBody = styled.div`
+  width: 100%;
+`;
 
 const HIDDEN_HEADERS = ["/"];
 const HIDDEN_BANNERS = ["/Login", "/Login/join"];

@@ -1,48 +1,25 @@
-import { useMutation, gql, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
+import ProductCommentItem from "../EditComments/ProductEditComment";
 import { v4 as uuidv4 } from "uuid";
-import { BiEditAlt } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-
-const CREATE_PRODUCT_COMMENT = gql`
-  mutation createUseditemQuestion(
-    $createUseditemQuestionInput: CreateUseditemQuestionInput!
-    $useditemId: ID!
-  ) {
-    createUseditemQuestion(
-      createUseditemQuestionInput: $createUseditemQuestionInput
-      useditemId: $useditemId
-    ) {
-      _id
-      contents
-      createdAt
-    }
-  }
-`;
-
-const FETCH_ITEM_COMMENT = gql`
-  query fetchUseditemQuestions($page: Int, $useditemId: ID!) {
-    fetchUseditemQuestions(page: $page, useditemId: $useditemId) {
-      _id
-      contents
-    }
-  }
-`;
-
-const DELETE_COMMENT = gql`
-  mutation deleteUseditemQuestion($useditemQuestionId: ID!) {
-    deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
-  }
-`;
+import {
+  CREATE_PRODUCT_COMMENT,
+  FETCH_ITEM_COMMENT,
+  DELETE_COMMENT,
+} from "./product.comment.queries";
+import CommentAnswerItem from "../commentsAnswer/commentsAnswer.container";
+import { useState } from "react";
 
 export default function ProductComment() {
   const router = useRouter();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    mode: "onChange",
+  });
 
   const [createComment] = useMutation<
     Pick<IMutation, "createUseditemQuestion">,
@@ -52,7 +29,7 @@ export default function ProductComment() {
     variables: { page: 1, useditemId: String(router.query.ItemId) },
   });
 
-  console.log(data?.fetchUseditemQuestions);
+  // console.log(data?.fetchUseditemQuestions);
   const [deleteComment] = useMutation(DELETE_COMMENT);
 
   const onClickSubmit = async (data) => {
@@ -71,6 +48,7 @@ export default function ProductComment() {
         });
       },
     });
+    // console.log(data);
   };
 
   const onClickDelete = (useditemQuestionId: string) => async () => {
@@ -94,6 +72,12 @@ export default function ProductComment() {
     });
   };
 
+  const [isOpen, setIsOpen] = useState("");
+
+  const onClickOpen = (el) => () => {
+    setIsOpen(el);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onClickSubmit)}>
@@ -104,13 +88,13 @@ export default function ProductComment() {
       <div>
         {data?.fetchUseditemQuestions.map((el) => (
           <div key={uuidv4()}>
-            <span>{el.contents}</span>
-            <span>
-              <BiEditAlt />
-            </span>
-            <span onClick={onClickDelete(el._id)}>
-              <AiFillDelete />
-            </span>
+            <ProductCommentItem
+              el={el}
+              data={data}
+              onClickDelete={onClickDelete}
+            />
+            <button onClick={onClickOpen(el._id)}>댓글 보기</button>
+            <CommentAnswerItem el={el} isOpen={isOpen} />
           </div>
         ))}
       </div>
