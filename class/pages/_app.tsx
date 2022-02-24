@@ -21,6 +21,7 @@ import {
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import Head from "next/head";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -82,16 +83,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <GlobalContext.Provider value={value}>
-      <ApolloProvider client={client}>
-        <Global styles={globalSampleStyle} />
-        <LayoutSample>
-          <Component {...pageProps} />
-        </LayoutSample>
+    <>
+      {/* 모든페이지에 카카오맵 다운로드 -> 비효율적
+      <Head>
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f"
+        ></script>
+      </Head> */}
+      <GlobalContext.Provider value={value}>
+        <ApolloProvider client={client}>
+          <Global styles={globalSampleStyle} />
+          <LayoutSample>
+            <Component {...pageProps} />
+          </LayoutSample>
 
-        {/* component가 각각의 껍데기 layout으로 묶어주고 각 인덱스로,, */}
-      </ApolloProvider>
-    </GlobalContext.Provider>
+          {/* component가 각각의 껍데기 layout으로 묶어주고 각 인덱스로,, */}
+        </ApolloProvider>
+      </GlobalContext.Provider>
+    </>
   );
 }
 

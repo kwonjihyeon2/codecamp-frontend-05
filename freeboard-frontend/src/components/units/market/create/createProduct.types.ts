@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
 import { IQuery } from "../../../../commons/types/generated/types";
 
@@ -23,6 +24,13 @@ export interface IpropsCreateUI {
   onClickEdit: (data) => void;
   isEdit: boolean;
   fetchItem?: Pick<IQuery, "fetchUseditem">;
+  onChangeContents: (value) => void;
+  onToggleModal: () => void;
+  isModal: boolean;
+  onPostcode: (data) => void;
+  ChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  zonecode?: string;
+  Address?: string;
 }
 
 export interface IMyVariableUpdateItem {

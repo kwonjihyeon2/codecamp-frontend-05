@@ -41,12 +41,31 @@ export default function CreateProductContainer(props: IPropsType) {
     mode: "onChange",
   });
 
+  const [isModal, setIsModal] = useState(false);
+  const [Address, setAddress] = useState("");
+  const [zonecode, setZonecode] = useState("");
+
+  const onToggleModal = () => {
+    setIsModal((prev) => !prev);
+  };
+
+  const onPostcode = (data) => {
+    console.log(data);
+    setAddress(data.address);
+    setZonecode(data.zonecode);
+    onToggleModal();
+  };
+
   const onClickSubmit = async (data: IpropsCreateItem) => {
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
             ...data,
+            useditemAddress: {
+              zipcode: zonecode,
+              address: Address,
+            },
             price: Number(data.price),
             images: uploadfile,
           },
@@ -62,8 +81,6 @@ export default function CreateProductContainer(props: IPropsType) {
       console.log(error.message);
     }
   };
-
-  console.log(props.isEdit);
 
   const onClickEdit = async (data: IpropsCreateItem) => {
     try {
@@ -85,7 +102,7 @@ export default function CreateProductContainer(props: IPropsType) {
       router.push(`/market/${router.query.ItemId}`);
     } catch (error) {
       Modal.error({
-        content: "수정실패",
+        content: error.message,
       });
       console.log(error.message);
     }
@@ -108,6 +125,11 @@ export default function CreateProductContainer(props: IPropsType) {
       onClickEdit={onClickEdit}
       fetchItem={props.fetchItem}
       onChangeContents={onChangeContents}
+      isModal={isModal}
+      Address={Address}
+      zonecode={zonecode}
+      onToggleModal={onToggleModal}
+      onPostcode={onPostcode}
     />
   );
 }
