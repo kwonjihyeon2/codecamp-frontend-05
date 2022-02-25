@@ -7,6 +7,7 @@ import { DELETE_ITEM } from "./productDetail.queries";
 
 export default function ItemDetailContainer(props) {
   const router = useRouter();
+  // if (props.loading) return "loading";
 
   const { todayView, setTodayView } = useContext(MakeGlobalContext);
   const [deleteProduct] = useMutation(DELETE_ITEM);

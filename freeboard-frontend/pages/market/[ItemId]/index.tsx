@@ -11,19 +11,20 @@ import { FETCH_USED_ITEM } from "../../../src/components/units/market/detail/pro
 export default function ItemDetailPage() {
   const router = useRouter();
 
-  const { data } = useQuery<
+  const { data, loading } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.ItemId) },
   });
-
+  console.log(data);
   // if (loading) return "loading";
+
   // console.log(data?.fetchUseditem.useditemAddress?.address);
 
   return (
     <>
-      <ItemDetailContainer data={data} />
+      <ItemDetailContainer data={data} loading={loading} />
       <ProductComment />
     </>
   );

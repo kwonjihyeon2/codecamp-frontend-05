@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { MakeGlobalContext } from "../../../../../pages/_app";
-import { withAuth } from "../../hoc/withAuth";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -27,11 +26,11 @@ const NaviList = styled.li`
   font-weight: 500;
 `;
 
-const LayOutDesignNavi = () => {
+export default function LayOutDesignNavi() {
   const router = useRouter();
 
   const { userInfo, accessToken } = useContext(MakeGlobalContext);
-  // console.log(userInfo, accessToken);
+  console.log(444, accessToken);
 
   const MoveToLogin = () => {
     router.push("/Login");
@@ -57,6 +56,4 @@ const LayOutDesignNavi = () => {
       </WrapperDiv>
     </Wrapper>
   );
-};
-
-export default withAuth(LayOutDesignNavi);
+}

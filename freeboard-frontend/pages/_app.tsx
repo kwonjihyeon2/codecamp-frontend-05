@@ -18,9 +18,12 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { onError } from "@apollo/client/link/error";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAccessToken } from "../src/commons/libraries/getAccessToken";
+import { useRouter } from "next/router";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -79,21 +82,46 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("saveToken")) {
-      setAccessToken(localStorage.getItem("saveToken") || "");
-    }
-    if (localStorage.getItem("userInfo")) {
-      setUserInfo(JSON.parse(localStorage.getItem("userInfo") || ""));
-    }
+    // if (localStorage.getItem("saveToken")) {
+    //   setAccessToken(localStorage.getItem("saveToken") || "");
+    // }
+    // if (localStorage.getItem("userInfo")) {
+    //   setUserInfo(JSON.parse(localStorage.getItem("userInfo") || ""));
+    // }
+    console.log("000");
+    getAccessToken().then((newAccessToken) => {
+      setAccessToken(newAccessToken);
+    });
   }, []);
+  console.log(111, accessToken);
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        if (err.extensions.code === "UNAUTHENTICATED") {
+          getAccessToken().then((newAccessToken) => {
+            setAccessToken(newAccessToken);
+
+            operation.setContext({
+              headers: {
+                ...operation.getContext().headers,
+                Authorization: `Bearer ${newAccessToken}`,
+              },
+            });
+            return forward(operation);
+          });
+        }
+      }
+    }
+  });
 
   const uploadLink = createUploadLink({
-    uri: "http://backend05.codebootcamp.co.kr/graphql",
+    uri: "https://backend05.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: "include",
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
+    link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(), // uri에서 받아온 데이터를 임시저장하는 공간
   });
 

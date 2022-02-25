@@ -11,8 +11,10 @@ declare const window: typeof globalThis & {
 };
 
 export default function ItemDetailPageUI(props) {
+  console.log(props.data?.fetchUseditem);
   useEffect(() => {
     if (props.data) {
+      const address = props.data?.fetchUseditem.useditemAddress?.address;
       // map api
       const script = document.createElement("script");
       script.src =
@@ -36,10 +38,7 @@ export default function ItemDetailPageUI(props) {
 
           // 주소로 좌표를 검색합니다
           geocoder.addressSearch(
-            `${
-              props.data?.fetchUseditem.useditemAddress?.address ||
-              "제주특별자치도 제주시 첨단로 242"
-            }`,
+            address || "제주특별자치도 제주시 첨단로 242",
             function (result, status: string) {
               // 정상적으로 검색이 완료됐으면
               if (status === window.kakao.maps.services.Status.OK) {
@@ -111,7 +110,7 @@ export default function ItemDetailPageUI(props) {
                 간단설명{" "}
                 <ProductMyInput
                   type="text"
-                  dafaultValue={props.data?.fetchUseditem.remarks || ""}
+                  dafaultValue={props.data?.fetchUseditem.remarks}
                 />
               </div>
               <div>
@@ -163,8 +162,7 @@ export default function ItemDetailPageUI(props) {
             <input
               type="text"
               defaultValue={
-                props.data?.fetchUseditem.useditemAddress?.address ||
-                "제주특별자치도 제주시 첨단로 242"
+                props.data?.fetchUseditem.useditemAddress?.address || ""
               }
             />
           </div>

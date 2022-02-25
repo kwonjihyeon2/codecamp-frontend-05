@@ -16,3 +16,11 @@ export const FETCH_USER_LOGGED_IN = gql`
     }
   }
 `;
+
+export const LOGIN_USER_EX = gql`
+  mutation loginUserExample($email: String!, $password: String!) {
+    loginUserExample(email: $email, password: $password) {
+      accessToken
+    }
+  }
+`;

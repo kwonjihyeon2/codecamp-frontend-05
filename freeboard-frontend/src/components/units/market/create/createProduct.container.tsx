@@ -87,7 +87,7 @@ export default function CreateProductContainer(props: IPropsType) {
       const variables: IMyVariableUpdateItem = {};
 
       if (data.name) variables.name = data.name;
-      if (data.price) variables.price = data.price;
+      if (data.price) variables.price = Number(data.price);
       if (data.contents) variables.contents = data.contents;
       if (data.remarks) variables.remarks = data.remarks;
       if (uploadfile) variables.images = uploadfile;
