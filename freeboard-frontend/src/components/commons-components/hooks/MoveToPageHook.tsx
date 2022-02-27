@@ -1,10 +1,6 @@
 import { useRouter } from "next/router";
 
-type IPage =
-  | "/market"
-  | "/boards"
-  | "/mainpage"
-  | `/market/${router.query.ItemId}/edit`;
+type IPage = "/market" | "/boards" | "/mainpage" | `/market/${string}/edit`;
 
 export function MoveToPageHook() {
   const router = useRouter();

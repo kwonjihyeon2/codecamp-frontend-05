@@ -12,6 +12,7 @@ declare const window: typeof globalThis & {
 
 export default function ItemDetailPageUI(props) {
   console.log(props.data?.fetchUseditem);
+
   useEffect(() => {
     if (props.data) {
       const address = props.data?.fetchUseditem.useditemAddress?.address;
@@ -73,114 +74,124 @@ export default function ItemDetailPageUI(props) {
   const { moveToPage } = MoveToPageHook();
 
   return (
-    <L.Wrapper>
-      <L.WrapperBody>
-        <div>
-          <L.WrapperContents>
-            <div>
-              {props.data?.fetchUseditem.images.map((_: any, index: number) => (
-                <div key={uuidv4()}>
+    <>
+      <L.Wrapper>
+        <L.WrapperBody>
+          <div>
+            <L.WrapperContents>
+              <div>
+                {props.data?.fetchUseditem.images.map(
+                  (_: any, index: number) => (
+                    <div key={uuidv4()}>
+                      <div>
+                        <img
+                          style={{ width: "80%" }}
+                          src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[index]}`}
+                          alt="이미지"
+                        />
+                      </div>
+                    </div>
+                  )
+                ) || (
                   <div>
                     <img
                       style={{ width: "80%" }}
-                      src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[index]}`}
+                      src={"/basic.jpeg"}
                       alt="이미지"
                     />
                   </div>
-                </div>
-              )) && (
+                )}
+              </div>
+              <div>
+                <h1>
+                  상품명{" "}
+                  <ProductMyInput
+                    type="text"
+                    dafaultValue={props.data?.fetchUseditem.name || ""}
+                    value={props.data?.fetchUseditem.name || ""}
+                  />
+                </h1>
                 <div>
-                  <img
-                    style={{ width: "80%" }}
-                    src="/basic.jpeg"
-                    alt="이미지"
+                  간단설명{" "}
+                  <ProductMyInput
+                    type="text"
+                    dafaultValue={props.data?.fetchUseditem.remarks}
+                    value={props.data?.fetchUseditem.remarks || ""}
                   />
                 </div>
+                <div>
+                  판매가격{" "}
+                  <input
+                    type="text"
+                    defaultValue={props.data?.fetchUseditem.price || ""}
+                  />
+                  {/* 이걸로 할인가격 나타내보자 */}
+                </div>
+                <div>
+                  태그 <input type="text" />
+                </div>
+
+                <button onClick={moveToPage("/market")}>목록으로</button>
+                <button
+                  onClick={moveToPage(`/market/${router.query.ItemId}/edit`)}
+                >
+                  수정하기
+                </button>
+                <button onClick={props.onClickDeleteItem}>삭제하기</button>
+                <div>
+                  <button>찜</button>
+                  <button>장바구니 담기</button>
+                  <button onClick={props.onClickBuyItem}>구매하기</button>
+                </div>
+              </div>
+            </L.WrapperContents>
+            <L.WrapperDetail>
+              상품 설명
+              {process.browser && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: Dompurify.sanitize(
+                      String(props.data?.fetchUseditem.contents)
+                    ),
+                  }}
+                />
               )}
-            </div>
+            </L.WrapperDetail>
             <div>
-              <h1>
-                상품명{" "}
-                <ProductMyInput
-                  type="text"
-                  dafaultValue={props.data?.fetchUseditem.name || ""}
-                />
-              </h1>
-              <div>
-                간단설명{" "}
-                <ProductMyInput
-                  type="text"
-                  dafaultValue={props.data?.fetchUseditem.remarks}
-                />
-              </div>
-              <div>
-                판매가격{" "}
-                <input
-                  type="text"
-                  defaultValue={props.data?.fetchUseditem.price || ""}
-                />
-                {/* 이걸로 할인가격 나타내보자 */}
-              </div>
-              <div>
-                태그 <input type="text" />
-              </div>
+              <h4>거래위치</h4>
 
-              <button onClick={moveToPage("/market")}>목록으로</button>
-              <button
-                onClick={moveToPage(`/market/${router.query.ItemId}/edit`)}
-              >
-                수정하기
-              </button>
-              <button onClick={props.onClickDeleteItem}>삭제하기</button>
-              <div>
-                <button>찜</button>
-                <button>장바구니 담기</button>
-              </div>
-            </div>
-          </L.WrapperContents>
-          <L.WrapperDetail>
-            상품 설명
-            {process.browser && (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: Dompurify.sanitize(
-                    String(props.data?.fetchUseditem.contents)
-                  ),
-                }}
+              <div id="map" style={{ width: 500, height: 400 }}></div>
+              <ProductMyInput
+                type="text"
+                value={
+                  props.data?.fetchUseditem.useditemAddress?.zipcode ||
+                  "위치가 설정되지않았습니다."
+                }
               />
-            )}
-          </L.WrapperDetail>
-          <div>
-            <h4>거래위치</h4>
-            <div id="map" style={{ width: 500, height: 400 }}></div>
-            <input
-              type="text"
-              defaultValue={
-                props.data?.fetchUseditem.useditemAddress?.zipcode || "63309"
-              }
-            />
-            <input
-              type="text"
-              defaultValue={
-                props.data?.fetchUseditem.useditemAddress?.address || ""
-              }
-            />
+              <ProductMyInput
+                type="text"
+                value={
+                  props.data?.fetchUseditem.useditemAddress?.address ||
+                  "위치가 설정되지않았습니다."
+                }
+              />
+            </div>
           </div>
-        </div>
 
-        <L.ViewBox>
-          <h1>오늘 본 상품</h1>
-          <div>
-            {props.todayView?.map((el) => (
-              <div key={uuidv4()}>
-                <span>{el.name}</span>
-                <span>{el.remarks}</span>
-                <span>{el.price}</span>
-              </div>
-            ))}
-          </div>
-        </L.ViewBox>
-      </L.WrapperBody>
-    </L.Wrapper>
+          <L.ViewBox>
+            <h1>오늘 본 상품</h1>
+            <div>
+              {props.todayView?.map((el) => (
+                <div key={uuidv4()}>
+                  <span>{el.name}</span>
+                  <span>{el.remarks}</span>
+                  <span>{el.price}</span>
+                </div>
+              ))}
+            </div>
+          </L.ViewBox>
+        </L.WrapperBody>
+      </L.Wrapper>
+    </>
   );
 }

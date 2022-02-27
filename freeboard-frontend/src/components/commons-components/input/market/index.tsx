@@ -7,5 +7,11 @@ const ProductMyInput = styled.input`
 `;
 
 export default function ProductInput(props) {
-  return <ProductMyInput type={props.type} value={props.value} />;
+  return (
+    <ProductMyInput
+      type={props.type}
+      value={props.value}
+      defaultValue={props.defaultValue}
+    />
+  );
 }

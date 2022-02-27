@@ -23,7 +23,6 @@ import { onError } from "@apollo/client/link/error";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
-import { useRouter } from "next/router";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -71,6 +70,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
   const [todayView, setTodayView] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true)
 
   const value = {
     accessToken: accessToken,
@@ -88,12 +88,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     // if (localStorage.getItem("userInfo")) {
     //   setUserInfo(JSON.parse(localStorage.getItem("userInfo") || ""));
     // }
-    console.log("000");
     getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken);
     });
   }, []);
-  console.log(111, accessToken);
+
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {

@@ -8,6 +8,7 @@ export const FETCH_ITEMS = gql`
       contents
       remarks
       price
+      images
     }
   }
 `;

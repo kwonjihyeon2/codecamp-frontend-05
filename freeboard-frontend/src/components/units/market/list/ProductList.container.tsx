@@ -7,8 +7,7 @@ import {
 } from "../../../../commons/types/generated/types";
 import ItemListUI from "./ProductList.presenter";
 import { FETCH_ITEMS } from "./Product.queries";
-import { useContext, useEffect } from "react";
-import { MakeGlobalContext } from "../../../../../pages/_app";
+import { useEffect, useState } from "react";
 
 export default function ItemList() {
   const router = useRouter();
@@ -16,14 +15,12 @@ export default function ItemList() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_ITEMS);
-  console.log(data);
 
-  // const [cartToday, setCartToday] = useState([]);
-  const { todayView, setTodayView } = useContext(MakeGlobalContext);
+  const [viewToday, setViewToday] = useState([]);
 
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
-    if (setTodayView) setTodayView(baskets);
+    if (setViewToday) setViewToday(baskets);
   }, []);
 
   const MoveToDetail = (el: IUseditem) => () => {
@@ -34,10 +31,11 @@ export default function ItemList() {
     cart.push(newArr);
 
     localStorage.setItem("basket", JSON.stringify(cart));
-    if (setTodayView) setTodayView(cart);
+    if (setViewToday) setViewToday(cart);
+    console.log(el.images);
   };
 
   return (
-    <ItemListUI MoveToDetail={MoveToDetail} data={data} todayView={todayView} />
+    <ItemListUI MoveToDetail={MoveToDetail} data={data} viewToday={viewToday} />
   );
 }

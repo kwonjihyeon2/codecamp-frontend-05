@@ -18,9 +18,6 @@ export default function ItemDetailPage() {
     variables: { useditemId: String(router.query.ItemId) },
   });
   console.log(data);
-  // if (loading) return "loading";
-
-  // console.log(data?.fetchUseditem.useditemAddress?.address);
 
   return (
     <>

@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { MakeGlobalContext } from "../../../../../pages/_app";
 import ItemDetailPageUI from "./productDetail.presenter";
-import { DELETE_ITEM } from "./productDetail.queries";
+import { DELETE_ITEM, BUY_ITEM } from "./productDetail.queries";
+import { Modal } from "antd";
 
 export default function ItemDetailContainer(props) {
   const router = useRouter();
@@ -30,11 +31,33 @@ export default function ItemDetailContainer(props) {
     }
   };
 
+  const [createPointBuyAndSelling] = useMutation(BUY_ITEM);
+
+  const onClickBuyItem = async () => {
+    console.log(111);
+    try {
+      const result = await createPointBuyAndSelling({
+        variables: {
+          useritemId: `${router.query.ItemId}`,
+        },
+        refetchQueries: [],
+      });
+      console.log(result);
+      Modal.success({
+        content: "구매 성공 !",
+      });
+      router.push("/market");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <ItemDetailPageUI
       todayView={todayView}
       data={props.data}
       onClickDeleteItem={onClickDeleteItem}
+      onClickBuyItem={onClickBuyItem}
     />
   );
 }

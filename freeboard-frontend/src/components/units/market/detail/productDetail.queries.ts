@@ -22,3 +22,13 @@ export const DELETE_ITEM = gql`
     deleteUseditem(useditemId: $useditemId)
   }
 `;
+
+export const BUY_ITEM = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      contents
+    }
+  }
+`;
