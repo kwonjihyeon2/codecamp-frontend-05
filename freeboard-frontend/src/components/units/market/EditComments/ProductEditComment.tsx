@@ -4,6 +4,9 @@ import { UPDATE_COMMENT } from "./productEditComment.queries";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import * as QA from "./ProductEditComment.styles";
+import { getMyDate } from "../../../../commons/libraries/uitils";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function ProductCommentItem(props) {
   const { register, handleSubmit } = useForm({
@@ -47,32 +50,41 @@ export default function ProductCommentItem(props) {
 
   return (
     <>
-      {isEdit ? (
-        <div>
-          <form onSubmit={handleSubmit(onClickUpdate(props.el._id))}>
-            <input
-              type="text"
-              {...register("contents")}
-              defaultValue={props.el.contents}
-            />
-
-            <button>수정</button>
-          </form>
+      <QA.Wrapper>
+        <div style={{ display: "flex" }}>
+          <FaUserCircle style={{ fontSize: "32" }} />
+          <QA.CommentUser>
+            <div style={{ display: "flex" }}>
+              <span>
+                {props.el.user.name}
+                <QA.CmData>{getMyDate(props.el.createdAt)}</QA.CmData>
+              </span>
+            </div>
+            {isEdit ? (
+              <div>
+                <form onSubmit={handleSubmit(onClickUpdate(props.el._id))}>
+                  <input
+                    type="text"
+                    {...register("contents")}
+                    defaultValue={props.el.contents}
+                  />
+                  <button>수정</button>
+                </form>
+              </div>
+            ) : (
+              <p>{props.el.contents}</p>
+            )}
+          </QA.CommentUser>
         </div>
-      ) : (
-        <>
-          <div>
-            <span>{props.el.user.name}</span>
-            <span>{props.el.contents}</span>
-            <span onClick={onChangeEdit(props.el._id)}>
-              <BiEditAlt />
-            </span>
-            <span onClick={props.onClickDelete(props.el._id)}>
-              <AiFillDelete />
-            </span>
-          </div>
-        </>
-      )}
+        <div style={{ display: "flex" }}>
+          <QA.CommentButton onClick={onChangeEdit(props.el._id)}>
+            <BiEditAlt />
+          </QA.CommentButton>
+          <QA.CommentButton onClick={props.onClickDelete(props.el._id)}>
+            <AiFillDelete />
+          </QA.CommentButton>
+        </div>
+      </QA.Wrapper>
     </>
   );
 }

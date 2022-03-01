@@ -99,8 +99,13 @@ export default function LoginContainer() {
     }
   };
 
+  const onClickJoin = () => {
+    router.push("/Login/join");
+  };
+
   return (
     <LoginPageUI
+      onClickJoin={onClickJoin}
       onChangeInputs={onChangeInputs}
       userError={userError}
       passwordError={passwordError}

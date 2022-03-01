@@ -4,11 +4,12 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../src/commons/types/generated/types";
+import { withAuth } from "../../../src/components/commons-components/hoc/withAuth";
 import ProductComment from "../../../src/components/units/market/comments/Product.comment.container";
 import ItemDetailContainer from "../../../src/components/units/market/detail/productDetail.container";
 import { FETCH_USED_ITEM } from "../../../src/components/units/market/detail/productDetail.queries";
 
-export default function ItemDetailPage() {
+export const ItemDetailPage = () => {
   const router = useRouter();
 
   const { data, loading } = useQuery<
@@ -25,4 +26,6 @@ export default function ItemDetailPage() {
       <ProductComment />
     </>
   );
-}
+};
+
+export default withAuth(ItemDetailPage);

@@ -33,7 +33,7 @@ export default function LoginPageUI(props: IpropsLogin) {
         </L.LoginBtn>
         <div>
           <L.UlButton>
-            <L.LiButton>회원가입</L.LiButton>
+            <L.LiButton onClick={props.onClickJoin}>회원가입</L.LiButton>
             <L.LiButton>이메일 찾기</L.LiButton>
             <L.LiButton>비밀번호 찾기</L.LiButton>
           </L.UlButton>

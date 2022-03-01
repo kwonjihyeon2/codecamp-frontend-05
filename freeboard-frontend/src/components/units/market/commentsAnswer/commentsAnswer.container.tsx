@@ -94,7 +94,7 @@ export default function CommentAnswerItem(props) {
 
   return (
     <div>
-      {props.isOpen === props.el._id ? (
+      {props.isOpenComment === props.el._id ? (
         <div>
           <form onSubmit={handleSubmit(onClickCreateAnswer)}>
             <input type="text" {...register("contents")} />

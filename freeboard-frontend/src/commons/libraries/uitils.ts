@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import { ChangeEvent } from "react";
 
 export const getMyDate = (myDate: any) => {
   const GetNewDate = new Date(myDate);
@@ -33,4 +34,8 @@ export const checkFileValidation = (clickfile: File | undefined) => {
     return false;
   }
   return true;
+};
+
+export const handelError = (event: ChangeEvent<HTMLImageElement>) => {
+  event.target.src = "/basic.jpeg";
 };

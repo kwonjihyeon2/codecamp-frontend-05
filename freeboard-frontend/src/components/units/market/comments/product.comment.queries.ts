@@ -29,6 +29,7 @@ export const FETCH_ITEM_COMMENT = gql`
         name
         email
       }
+      createdAt
     }
   }
 `;

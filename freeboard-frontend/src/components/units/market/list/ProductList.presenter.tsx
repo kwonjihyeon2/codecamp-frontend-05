@@ -3,12 +3,14 @@ import * as L from "./ProductList.style";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import BestItemList from "../bestList/Bestlist.container";
+import { handelError } from "../../../../commons/libraries/uitils";
 
 export default function ItemListUI(props) {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
@@ -23,32 +25,46 @@ export default function ItemListUI(props) {
 
   return (
     <L.Wrapper>
-      <div>
-        <h1>목록</h1>
-        {props.data?.fetchUseditems.map((el) => (
-          <div key={uuidv4()} onClick={props.MoveToDetail(el)}>
-            <span>{el.name}</span>
-            <span>{el.remarks}</span>
-          </div>
-        ))}
-      </div>
       <L.WrapperList>
-        <h1>오늘 본 상품</h1>
+        <p>오늘 본 상품</p>
         <L.ListSide>
           <Slider {...settings}>
             {props.viewToday.map((el) => (
               <L.ListBox key={uuidv4()}>
-                {/* <div>{el.images[0]}</div> */}
                 <img
-                  style={{ width: "80px" }}
+                  style={{ width: "100%" }}
                   src={`https://storage.googleapis.com/${el.images[0]}`}
+                  onError={handelError}
                 />
-                {/* <div>{el.name}</div> */}
+                <div>{el.name}</div>
               </L.ListBox>
             ))}
           </Slider>
         </L.ListSide>
       </L.WrapperList>
+      <div>
+        <BestItemList />
+        <L.WrapperBox>
+          <div>
+            <h1>목록</h1>
+            <L.WrapperListBox>
+              {props.data?.fetchUseditems.map((el) => (
+                <div key={uuidv4()} onClick={props.MoveToDetail(el)}>
+                  <div>
+                    <img
+                      style={{ width: "100px" }}
+                      src={`https://storage.googleapis.com/${el.images[0]}`}
+                      onError={handelError}
+                    />
+                  </div>
+                  <span>{el.name}</span>
+                  <span>{el.remarks}</span>
+                </div>
+              ))}
+            </L.WrapperListBox>
+          </div>
+        </L.WrapperBox>
+      </div>
     </L.Wrapper>
   );
 }

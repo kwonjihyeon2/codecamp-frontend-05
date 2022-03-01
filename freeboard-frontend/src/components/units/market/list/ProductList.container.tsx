@@ -30,9 +30,9 @@ export default function ItemList() {
     const { __typename, ...newArr } = el;
     cart.push(newArr);
 
+    const reverse = cart.reverse();
     localStorage.setItem("basket", JSON.stringify(cart));
-    if (setViewToday) setViewToday(cart);
-    console.log(el.images);
+    if (setViewToday) setViewToday(reverse);
   };
 
   return (

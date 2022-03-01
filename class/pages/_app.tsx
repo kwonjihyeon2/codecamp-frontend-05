@@ -118,6 +118,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(), //uri에서 받아온 데이터를 임시저장하는 공간(내컴퓨터 메모리공간)
+    connectToDevTools: true,
   });
 
   return (

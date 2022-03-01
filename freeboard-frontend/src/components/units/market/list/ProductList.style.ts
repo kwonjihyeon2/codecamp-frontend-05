@@ -1,12 +1,33 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
+  max-width: 1240px;
+  width: 100%;
+  margin: 50px auto;
+  /* display: flex;
+  flex-direction: column;
+  position: relative;
+  align-self: flex-start;
+  height: unset; */
+`;
+
+export const WrapperBox = styled.div`
+  width: 100%;
+  /* display: flex;
+  align-self: flex-start; */
+`;
+
+export const WrapperListBox = styled.div`
   width: 100%;
   display: flex;
+  cursor: pointer;
 `;
 
 export const WrapperList = styled.div`
-  width: 200px;
+  position: fixed;
+  top: 40%;
+  right: 3%;
+  width: 100px;
   border: 1px solid #000;
 `;
 

@@ -3,13 +3,12 @@ import * as J from "./joinStyle";
 
 interface IPropsJoinUI {
   onClickJoin: () => void;
-  onChangeInputs: (
-    el: string
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeInputs: (event: ChangeEvent<HTMLInputElement>) => void;
   isActive: boolean;
   nameError: string;
   userError: string;
   passwordError: string;
+  inputs: {};
 }
 
 export default function JoinPageUI(props: IPropsJoinUI) {
@@ -20,20 +19,23 @@ export default function JoinPageUI(props: IPropsJoinUI) {
           <J.Title>회원가입</J.Title>
           <J.ChangeInput
             type="text"
+            name="userID"
             placeholder="이메일을 입력해주세요."
-            onChange={props.onChangeInputs("userID")}
+            onChange={props.onChangeInputs}
           />
           <J.ErrorColor>{props.userError}</J.ErrorColor>
           <J.ChangeInput
             type="password"
+            name="userPassword"
             placeholder="영문, 숫자, 특수문자 조합 8-16자"
-            onChange={props.onChangeInputs("userPassword")}
+            onChange={props.onChangeInputs}
           />
           <J.ErrorColor>{props.passwordError}</J.ErrorColor>
           <J.ChangeInput
             type="text"
+            name="userName"
             placeholder="이름을 입력해주세요"
-            onChange={props.onChangeInputs("userName")}
+            onChange={props.onChangeInputs}
           />
           <J.ErrorColor>{props.nameError}</J.ErrorColor>
           <J.LoginBtn isActive={props.isActive} onClick={props.onClickJoin}>

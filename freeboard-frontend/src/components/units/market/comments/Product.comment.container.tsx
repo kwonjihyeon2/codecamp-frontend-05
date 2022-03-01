@@ -5,15 +5,13 @@ import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
-import ProductCommentItem from "../EditComments/ProductEditComment";
-import { v4 as uuidv4 } from "uuid";
 import {
   CREATE_PRODUCT_COMMENT,
   FETCH_ITEM_COMMENT,
   DELETE_COMMENT,
 } from "./product.comment.queries";
-import CommentAnswerItem from "../commentsAnswer/commentsAnswer.container";
 import { useState } from "react";
+import ProductCommentUI from "./Product.comment.presenter";
 
 export default function ProductComment() {
   const router = useRouter();
@@ -33,6 +31,7 @@ export default function ProductComment() {
   const [deleteComment] = useMutation(DELETE_COMMENT);
 
   const onClickSubmit = async (data) => {
+    console.log(data);
     await createComment({
       variables: {
         createUseditemQuestionInput: { contents: data.contents },
@@ -72,32 +71,22 @@ export default function ProductComment() {
     });
   };
 
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpenComment, setIsOpenComment] = useState("");
 
   const onClickOpen = (el) => () => {
-    setIsOpen(el);
+    setIsOpenComment(el);
   };
+  // console.log(isOpenComment);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onClickSubmit)}>
-        <input type="text" {...register("contents")} />
-
-        <button>등록</button>
-      </form>
-      <div>
-        {data?.fetchUseditemQuestions.map((el) => (
-          <div key={uuidv4()}>
-            <ProductCommentItem
-              el={el}
-              data={data}
-              onClickDelete={onClickDelete}
-            />
-            <button onClick={onClickOpen(el._id)}>댓글 보기</button>
-            <CommentAnswerItem el={el} isOpen={isOpen} />
-          </div>
-        ))}
-      </div>
-    </div>
+    <ProductCommentUI
+      data={data}
+      handleSubmit={handleSubmit}
+      register={register}
+      onClickSubmit={onClickSubmit}
+      onClickOpen={onClickOpen}
+      onClickDelete={onClickDelete}
+      isOpenComment={isOpenComment}
+    />
   );
 }
