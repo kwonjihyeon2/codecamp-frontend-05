@@ -1,15 +1,14 @@
 import * as L from "./productDetail.style";
-import ProductMyInput from "../../../commons-components/input/market/index";
 import { v4 as uuidv4 } from "uuid";
 import Dompurify from "dompurify";
 import { MoveToPageHook } from "../../../commons-components/hooks/MoveToPageHook";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { handelError } from "../../../../commons/libraries/uitils";
-import { BsSuitHeart } from "react-icons/bs";
+import { BsFillSuitHeartFill, BsSuitHeart } from "react-icons/bs";
 import { FiMoreVertical, FiShoppingCart } from "react-icons/fi";
-import ProductBigButton from "../../../commons-components/button/market01/index";
 import { RiArrowGoBackLine } from "react-icons/ri";
+import ProductBigButton from "../../../commons-components/button/market01/index";
 import ProductSmallButton from "../../../commons-components/button/market03";
 
 declare const window: typeof globalThis & {
@@ -17,7 +16,7 @@ declare const window: typeof globalThis & {
 };
 
 export default function ItemDetailPageUI(props) {
-  console.log(props.data?.fetchUseditem);
+  // console.log(props.data?.fetchUseditem);
 
   useEffect(() => {
     if (props.data) {
@@ -84,17 +83,11 @@ export default function ItemDetailPageUI(props) {
     setIsopen((prev) => !prev);
   };
 
-  console.log(isOpen);
   return (
     <L.Wrapper>
       <L.WrapperBody>
         <L.SlickBox>
           <L.WrapperContents>
-            {/* {props.data?.fetchUseditem.images.map((_: any, index: number) => (
-                <L.SlickBox key={uuidv4()}>
-                 
-                </L.SlickBox>
-              ))} */}
             <div style={{ width: "50%" }}>
               <img
                 style={{ width: "100%" }}
@@ -114,13 +107,23 @@ export default function ItemDetailPageUI(props) {
                     {props.data?.fetchUseditem.remarks}
                   </L.ProductRemarks>
                 </div>
-                <L.Icons>
-                  <BsSuitHeart />
+                <L.Icons
+                  onClick={props.onClickPicked(props.data?.fetchUseditem._id)}
+                >
+                  {props.picked ? (
+                    <BsSuitHeart />
+                  ) : (
+                    <BsFillSuitHeartFill style={{ color: "red" }} />
+                  )}
                 </L.Icons>
               </L.productTitle>
               <L.productTitle>
-                <div>
-                  태그 <input type="text" />
+                <div
+                  style={{ display: "flex", width: "35%", flexWrap: "wrap" }}
+                >
+                  {props.data?.fetchUseditem.tags.map((el) => (
+                    <L.TagStyle key={uuidv4()}>{`# ${el}`}</L.TagStyle>
+                  ))}
                 </div>
                 <L.MoreBox isOpen={isOpen}>
                   <ProductSmallButton

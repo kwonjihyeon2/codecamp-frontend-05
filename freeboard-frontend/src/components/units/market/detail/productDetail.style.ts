@@ -102,6 +102,12 @@ export const buttonBox = styled.div`
   margin: 20px 0;
 `;
 
+export const TagStyle = styled.div`
+  margin-right: 10px;
+  border-radius: 3px;
+  color: #fa622f;
+`;
+
 export const IButton = styled.button`
   width: 10%;
   border: 1px solid #bdbdbd;

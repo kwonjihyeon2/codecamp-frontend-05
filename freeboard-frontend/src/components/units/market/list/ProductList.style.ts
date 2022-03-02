@@ -3,12 +3,22 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   max-width: 1240px;
   width: 100%;
-  margin: 50px auto;
+  margin: 100px auto;
   /* display: flex;
   flex-direction: column;
   position: relative;
   align-self: flex-start;
   height: unset; */
+`;
+
+export const BannerStyle = styled.div`
+  width: 100%;
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: rgb(188, 175, 149);
+  cursor: pointer;
 `;
 
 export const WrapperBox = styled.div`
@@ -17,10 +27,25 @@ export const WrapperBox = styled.div`
   align-self: flex-start; */
 `;
 
-export const WrapperListBox = styled.div`
-  width: 100%;
+export const WrapperTitle = styled.h1`
+  font-size: 1.75rem;
+  font-weight: 700;
   display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+
+export const WrapperListBox = styled.div`
+  margin: 50px 0;
   cursor: pointer;
+  .slick-next {
+    right: 10px;
+    top: 35%;
+  }
+  .slick-next:before {
+    font-size: 2.5rem;
+    color: black;
+  }
 `;
 
 export const WrapperList = styled.div`
@@ -31,39 +56,23 @@ export const WrapperList = styled.div`
   border: 1px solid #000;
 `;
 
-export const ListSide = styled.div`
-  padding: 20px 0;
-  overflow: hidden;
-  .slick-slider {
-    height: 200px;
-    /* overflow: hidden; */
-  }
-  .slick-prev {
-    top: -5%;
-    left: 45%;
-    &:before {
-      content: "<";
-      font-size: 16px;
-      color: red;
-    }
-  }
-  .slick-next {
-    top: 100%;
-    left: 45%;
-    &:before {
-      content: ">";
-      font-size: 16px;
-      color: red;
-    }
-  }
-  .slick-slide div div {
-    width: 100%;
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
+export const SlickBox = styled.div`
+  padding: 0 10px;
 `;
 
-export const ListBox = styled.div``;
+export const ListBox = styled.div`
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 10px;
+`;
+
+export const ListImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const ProductName = styled.span`
+  font-size: 1rem;
+  font-weight: 700;
+`;

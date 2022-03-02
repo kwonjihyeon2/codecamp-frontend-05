@@ -9,6 +9,7 @@ export const FETCH_USED_ITEM = gql`
       contents
       price
       images
+      tags
       useditemAddress {
         zipcode
         address
@@ -29,6 +30,27 @@ export const BUY_ITEM = gql`
       _id
       name
       contents
+    }
+  }
+`;
+
+export const FETCH_PICKED_COUNT = gql`
+  query fetchUseditemsCountIPicked {
+    fetchUseditemsCountIPicked
+  }
+`;
+
+export const PICK_ITEMS = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;
+
+export const FETCH_PICKED = gql`
+  query fetchUseditemsIPicked($search: String, $page: Int) {
+    fetchUseditemsIPicked(search: $search, page: $page) {
+      _id
+      pickedCount
     }
   }
 `;

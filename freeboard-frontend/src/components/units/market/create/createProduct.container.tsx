@@ -56,6 +56,29 @@ export default function CreateProductContainer(props: IPropsType) {
     onToggleModal();
   };
 
+  const [tag, setTag] = useState([]);
+
+  const onChangeTag = (event) => {
+    if (event.target.value && event.key === "Enter") {
+      const NewTag = [...tag, event.target.value];
+      if (NewTag.length > 5) {
+        Modal.error({
+          content: "태그는 5개까지만 등록 가능합니다",
+        });
+        event.target.value = "";
+        return;
+      }
+      setTag(NewTag);
+      event.target.value = "";
+    }
+  };
+
+  const onDeleteTag = (number) => () => {
+    const SliceTag = tag.splice(number, 1);
+    setTag(SliceTag);
+  };
+  console.log(tag);
+
   const onClickSubmit = async (data: IpropsCreateItem) => {
     try {
       const result = await createUseditem({
@@ -68,6 +91,7 @@ export default function CreateProductContainer(props: IPropsType) {
             },
             price: Number(data.price),
             images: uploadfile,
+            tags: tag,
           },
         },
       });
@@ -130,6 +154,9 @@ export default function CreateProductContainer(props: IPropsType) {
       zonecode={zonecode}
       onToggleModal={onToggleModal}
       onPostcode={onPostcode}
+      onChangeTag={onChangeTag}
+      tag={tag}
+      onDeleteTag={onDeleteTag}
     />
   );
 }

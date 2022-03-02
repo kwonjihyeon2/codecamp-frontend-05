@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
+import { MdClose } from "react-icons/md";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -45,9 +46,26 @@ export default function CreateProductUI(props: IpropsCreateUI) {
           {...props.register("price")}
         />
       </div>
-      <div>
-        태그 <input type="text" />
+      <div style={{ display: "flex" }}>
+        태그{" "}
+        {props.tag.map((el, index) => (
+          <div
+            onClick={props.onDeleteTag(index)}
+            key={uuidv4()}
+            style={{
+              display: "flex",
+            }}
+          >
+            {el}
+            <span
+              style={{ margin: "0 5px", display: "flex", alignItems: "center" }}
+            >
+              <MdClose />
+            </span>
+          </div>
+        ))}
       </div>
+      <input type="text" onKeyPress={props.onChangeTag} />
       <div>
         <h4>거래 지역</h4>
         <div>

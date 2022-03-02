@@ -10,61 +10,43 @@ export default function ItemListUI(props) {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 1,
+    speed: 500,
+    slidesToShow: 4,
     slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    swipeToSlide: true,
-    // beforeChange: function (currentSlide, nextSlide) {
-    //   console.log("before change", currentSlide, nextSlide);
-    // },
-    // afterChange: function (currentSlide) {
-    //   console.log("after change", currentSlide);
-    // },
+    centerPadding: "20px",
   };
 
   return (
     <L.Wrapper>
-      <L.WrapperList>
-        <p>오늘 본 상품</p>
-        <L.ListSide>
-          <Slider {...settings}>
-            {props.viewToday.map((el) => (
-              <L.ListBox key={uuidv4()}>
-                <img
-                  style={{ width: "100%" }}
-                  src={`https://storage.googleapis.com/${el.images[0]}`}
-                  onError={handelError}
-                />
-                <div>{el.name}</div>
-              </L.ListBox>
-            ))}
-          </Slider>
-        </L.ListSide>
-      </L.WrapperList>
-      <div>
-        <BestItemList />
-        <L.WrapperBox>
-          <div>
-            <h1>목록</h1>
-            <L.WrapperListBox>
+      <BestItemList />
+      <L.BannerStyle>
+        <img style={{ width: "350px" }} src="/main/banner.png" />
+      </L.BannerStyle>
+      <L.WrapperBox>
+        <div>
+          <L.WrapperTitle>오늘 등록 상품 TOP10</L.WrapperTitle>
+          <L.WrapperListBox>
+            <Slider {...settings}>
               {props.data?.fetchUseditems.map((el) => (
-                <div key={uuidv4()} onClick={props.MoveToDetail(el)}>
-                  <div>
-                    <img
-                      style={{ width: "100px" }}
+                <L.SlickBox key={uuidv4()} onClick={props.MoveToDetail(el)}>
+                  <L.ListBox>
+                    <L.ListImg
                       src={`https://storage.googleapis.com/${el.images[0]}`}
                       onError={handelError}
                     />
-                  </div>
-                  <span>{el.name}</span>
-                  <span>{el.remarks}</span>
-                </div>
+                  </L.ListBox>
+
+                  <L.ProductName>{el.name}</L.ProductName>
+                  <p style={{ color: "#bdbdbd" }}>{el.remarks}</p>
+                  <p>
+                    <L.ProductName>{el.price}</L.ProductName>원
+                  </p>
+                </L.SlickBox>
               ))}
-            </L.WrapperListBox>
-          </div>
-        </L.WrapperBox>
-      </div>
+            </Slider>
+          </L.WrapperListBox>
+        </div>
+      </L.WrapperBox>
     </L.Wrapper>
   );
 }
