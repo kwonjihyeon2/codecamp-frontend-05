@@ -5,7 +5,8 @@ type IPage =
   | "/boards"
   | "/mainpage"
   | `/market/${string}/edit`
-  | `/market/${string}`;
+  | `/market/${string}`
+  | `/mypage/${string}`;
 
 export function MoveToPageHook() {
   const router = useRouter();

@@ -15,7 +15,7 @@ const LayOutDesignBody = styled.div`
 `;
 
 const HIDDEN_HEADERS = ["/"];
-const HIDDEN_BANNERS = ["/Login", "/Login/join"];
+const HIDDEN_BANNERS = ["/Login", "/Login/join", "/mypage"];
 
 export default function LayOutDesign(props: IPropsDesign) {
   const router = useRouter();
