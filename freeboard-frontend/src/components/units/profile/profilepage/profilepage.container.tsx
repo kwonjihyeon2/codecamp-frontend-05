@@ -6,6 +6,9 @@ import SoldItemContainer from "../soldItem-list/soldItem.container";
 import BuyListContainer from "../buyItem-list/buyItemlist.container";
 import ChargeListContainer from "../charge-list/chargelist.container";
 import * as P from "./profilepage.style";
+import { useQuery } from "@apollo/client";
+import { IQuery } from "../../../../commons/types/generated/types";
+import { FETCH_IPICKED_COUNT, FETCH_USER_LOGGED_IN } from "./profilepage.query";
 
 export default function ProfileContainer() {
   const [buylist, setBuylist] = useState(true);
@@ -31,6 +34,11 @@ export default function ProfileContainer() {
     setChargelist(true);
   };
 
+  const { data } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+  const { data: IpickData } =
+    useQuery<Pick<IQuery, "fetchUseditemsCountIPicked">>(FETCH_IPICKED_COUNT);
+
   return (
     <P.Wrapper>
       <P.WrapperBody>
@@ -46,8 +54,8 @@ export default function ProfileContainer() {
             <div>
               <P.ProfileImg src="/mypage/profile.jpeg" />
             </div>
-            <P.ProfileName>유저네임</P.ProfileName>
-            <p>포인트 | 9670</p>
+            <P.ProfileName>{data?.fetchUserLoggedIn.name}</P.ProfileName>
+            <p>포인트 | {data?.fetchUserLoggedIn.userPoint?.amount}</p>
             <ProductSmallButton
               style={{
                 borderRadius: "3px",
@@ -71,7 +79,7 @@ export default function ProfileContainer() {
                   <P.IconStyle>
                     <BsSuitHeart />
                   </P.IconStyle>
-                  좋아요 0
+                  좋아요 {IpickData?.fetchUseditemsCountIPicked}
                 </li>
                 <li>
                   <P.IconStyle>

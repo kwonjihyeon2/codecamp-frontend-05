@@ -1,6 +1,9 @@
+import { withAuth } from "../../src/components/commons-components/hoc/withAuth";
 import ProfileContainer from "../../src/components/units/profile/profilepage/profilepage.container";
 
-export default function ProfilePage() {
+export const ProfilePage = () => {
   // return <ProfilePageContainer />
   return <ProfileContainer />;
-}
+};
+
+export default withAuth(ProfilePage);
