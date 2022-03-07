@@ -5,27 +5,27 @@ import "slick-carousel/slick/slick.css";
 export default function SampleBanner() {
   const MySliderList = [
     {
-      imageSrc: "/layout/slide1.jpg",
+      imageSrc: "/layout/slickimg03.jpeg",
       title: "첫번째 슬라이드",
-      firstContents: "백엔드 모집",
-      secondContents: "3년 이상",
+      firstContents: "오스트레일리아 최애 캐릭터 블루이처럼 살아보기",
+      secondContents: "구경해보기",
     },
     {
-      imageSrc: "/layout/slide.jpg",
-      firstContents: "백엔드 모집",
-      secondContents: "3년 이상",
+      imageSrc: "/layout/slickimg02.jpeg",
+      firstContents: "내일 아침 떠나요, 랜선 미식 여행",
+      secondContents: "구경해보기",
       title: "두번째 슬라이드",
     },
     {
-      imageSrc: "/layout/bannerimg03.jpeg",
-      firstContents: "프론트엔드 모집",
-      secondContents: "3년 이상",
+      imageSrc: "/layout/slickimg01.jpeg",
+      firstContents: "여행 중 만나는 이색적인 즐길 거리",
+      secondContents: "구경해보기",
       title: "세번째 슬라이드",
     },
     {
-      imageSrc: "/layout/slide1.jpg",
-      firstContents: "백엔드 모집",
-      secondContents: "3년 이상",
+      imageSrc: "/layout/slickimg04.jpeg",
+      firstContents: "지속 가능한 건강관리 팁 알아보기",
+      secondContents: "구경해보기",
       title: "네번째 슬라이드",
     },
   ];
@@ -34,7 +34,7 @@ export default function SampleBanner() {
     dots: false,
     speed: 500,
     autoplay: true,
-    autoplayspeed: 1000,
+    autoplayspeed: 2000,
     centerMode: true,
     centerPadding: "60px",
     Infinity: true,
@@ -58,7 +58,7 @@ export default function SampleBanner() {
               <S.ColorImg src={el.imageSrc} alt={el.title} />
               <S.TextBox>
                 <S.CommonsText>{el.firstContents}</S.CommonsText>
-                <S.CommonsText>{el.secondContents}</S.CommonsText>
+                <S.CommonSubText>{el.secondContents}</S.CommonSubText>
               </S.TextBox>
             </S.SlickBox>
           </div>

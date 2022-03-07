@@ -91,8 +91,8 @@ export default function ProfileContainer() {
             </P.ProfileChoice>
           </P.WrapperProfile>
           <P.WrapperList>
-            {soldlist && <SoldItemContainer />}
             {buylist && <BuyListContainer />}
+            {soldlist && <SoldItemContainer />}
             {chargelist && <ChargeListContainer />}
           </P.WrapperList>
         </P.WrapperContents>

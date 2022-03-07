@@ -8,9 +8,18 @@ export default function BoardsDetailPage(props) {
   return (
     <div>
       <Head>
-        <meta property="og:title" content={props.myBoardData.title} />
+        {/* <meta property="og:title" content={props.myBoardData.title} />
         <meta property="og:description" content={props.myBoardData.contents} />
-        <meta property="og:image" content={props.myBoardData.images[0]} />
+        <meta property="og:image" content={props.myBoardData.images[0]} /> */}
+        <meta property="og:title" content="테스트중입니다" />
+        <meta
+          property="og:description"
+          content="설명이 들어가는 공간입니다 👻"
+        />
+        <meta
+          property="og:image"
+          content="https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E"
+        />
       </Head>
       <div>
         안녕하세요 게시글 상세 페이지입니다, 게시글 ID는 {router.query.boardId}

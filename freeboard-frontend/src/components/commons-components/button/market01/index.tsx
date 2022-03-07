@@ -7,6 +7,7 @@ const BigButton = styled.button`
   color: #fff;
   outline: none;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 export default function ProductBigButton(props) {

@@ -5,6 +5,7 @@ import LayOutDesignBanner from "./Banner/index";
 import LayOutDesignNavi from "./navigation/index";
 import LayOutDesignFooter from "./footer/index";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 interface IPropsDesign {
   children: ReactChild;
@@ -23,13 +24,15 @@ export default function LayOutDesign(props: IPropsDesign) {
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
   const isHiddenBanner = HIDDEN_BANNERS.includes(router.asPath);
 
+  const [openNavi, setOpenNavi] = useState(false);
+
   console.log(router.asPath);
   return (
     <div>
       {!isHiddenHeader && (
         <div>
-          <LayOutDesignNavi />
-          <LayOutDesignHead />
+          <LayOutDesignNavi openNavi={openNavi} />
+          <LayOutDesignHead openNavi={openNavi} setOpenNavi={setOpenNavi} />
           {!isHiddenBanner && <LayOutDesignBanner />}
         </div>
       )}
