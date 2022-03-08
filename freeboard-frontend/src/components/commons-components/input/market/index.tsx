@@ -12,6 +12,7 @@ export default function ProductInput(props) {
       type={props.type}
       value={props.value}
       defaultValue={props.defaultValue}
+      placeholder={props.placeholder}
     />
   );
 }

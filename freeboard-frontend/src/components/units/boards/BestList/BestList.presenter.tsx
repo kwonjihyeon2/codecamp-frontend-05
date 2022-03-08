@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1240px;
-  margin: 50px auto;
+  margin: 30px auto;
 `;
 
 const TitleBox = styled.div`
@@ -27,6 +27,12 @@ const BestImg = styled.img`
   /* @media (max-width: 1240px) {
     width: 100%;
   } */
+`;
+
+const TitleText = styled.div`
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2;
 `;
 
 const ViewAll = styled.p`
@@ -64,7 +70,7 @@ export default function BestListPageUI(props: IPropsData) {
   return (
     <Wrapper>
       <TitleBox>
-        <h1>이번주 인기 게시물</h1>
+        <TitleText>이번주 인기 게시물</TitleText>
         <ViewAll onClick={props.MoveToAll}>전체보기</ViewAll>
       </TitleBox>
       <WrapperList>

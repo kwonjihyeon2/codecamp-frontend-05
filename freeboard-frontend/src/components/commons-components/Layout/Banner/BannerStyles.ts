@@ -84,7 +84,7 @@ export const StyledSlider = styled(Slider)`
   .slick-slide img {
     width: 100%;
     margin: 0 auto;
-    height: 600px;
+    height: 80vh;
   }
 
   @media (max-width: 1239px) {

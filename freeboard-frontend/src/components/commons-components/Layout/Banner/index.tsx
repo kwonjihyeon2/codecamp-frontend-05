@@ -2,7 +2,7 @@ import * as S from "./BannerStyles";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-export default function SampleBanner() {
+export default function LayOutDesignBanner() {
   const MySliderList = [
     {
       imageSrc: "/layout/slickimg03.jpeg",

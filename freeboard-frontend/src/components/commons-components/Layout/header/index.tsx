@@ -1,91 +1,69 @@
-import styled from "@emotion/styled/";
 import { MoveToPageHook } from "../../hooks/MoveToPageHook";
 import { FaSearch, FaUserShield } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import ProductMyInput from "../../input/market/index";
+import * as H from "./header.styled";
 
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 30px 0;
-  background-color: #000;
-`;
-const HeaderList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  align-items: center;
-  color: #fff;
-`;
+interface IpropsHeader {
+  openNavi: boolean;
+  setOpenNavi: Dispatch<SetStateAction<boolean>>;
+}
 
-const HeaderLogo = styled.div`
-  width: 100px;
-  margin-right: 10px;
-`;
-const NavList = styled.ul`
-  display: flex;
-  cursor: pointer;
-  margin-bottom: 0;
-`;
-
-const NavLi = styled.li`
-  margin: 0 10px;
-  font-weight: 700;
-  border-bottom: 1px solid #000;
-  &:hover {
-    transition: all 0.5s;
-    transform: translateY(-5px);
-    border-bottom: 1px solid #fff;
-  }
-`;
-
-const UserBox = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-size: 1rem;
-  cursor: pointer;
-`;
-
-const UserIcon = styled.div`
-  width: 80px;
-  margin-left: 20px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 30px;
-  padding: 10px 5px;
-  font-size: 1rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-export default function LayOutDesignHead(props) {
+export default function LayOutDesignHead(props: IpropsHeader) {
   const { moveToPage } = MoveToPageHook();
 
   const onClickOpenNavi = () => {
-    props.setOpenNavi((prev: boolean) => !prev);
+    props.setOpenNavi((prev) => !prev);
   };
-  console.log(props.openNavi);
+  // console.log(props.openNavi);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+  });
+  // console.log(scrollPosition);
 
   return (
-    <Wrapper>
-      <HeaderList>
-        <HeaderLogo onClick={moveToPage("/mainpage")}>로고</HeaderLogo>
-        <NavList>
-          <NavLi>OPEN-API</NavLi>
-          <NavLi onClick={moveToPage("/boards")}>COMMUNITY</NavLi>
-          <NavLi onClick={moveToPage("/market")}>MARKET</NavLi>
-          <NavLi>MY</NavLi>
-        </NavList>
-        <UserBox>
-          <FaSearch />
-          <UserIcon onClick={onClickOpenNavi}>
+    <H.Wrapper scrollPosition={scrollPosition}>
+      <H.HeaderList>
+        <H.HeaderLogo
+          scrollPosition={scrollPosition}
+          onClick={moveToPage("/mainpage")}
+        >
+          로고
+        </H.HeaderLogo>
+        {scrollPosition > 100 ? (
+          <H.SearchBox>
+            <ProductMyInput type="text" placeholder="검색어를 입력하세요" />
+            <H.SearchIconSpan>
+              <FaSearch />
+            </H.SearchIconSpan>
+          </H.SearchBox>
+        ) : (
+          <H.NavList>
+            <H.NavLi>OPEN-API</H.NavLi>
+            <H.NavLi onClick={moveToPage("/boards")}>COMMUNITY</H.NavLi>
+            <H.NavLi onClick={moveToPage("/market")}>MARKET</H.NavLi>
+            <H.NavLi>MY</H.NavLi>
+          </H.NavList>
+        )}
+        <H.UserBox>
+          {scrollPosition > 100 ? (
+            <div></div>
+          ) : (
+            <div>
+              <FaSearch />
+            </div>
+          )}
+          <H.UserIcon onClick={onClickOpenNavi}>
             <FiMenu />
             <FaUserShield style={{ fontSize: "1.5rem" }} />
-          </UserIcon>
-        </UserBox>
-      </HeaderList>
-    </Wrapper>
+          </H.UserIcon>
+        </H.UserBox>
+      </H.HeaderList>
+    </H.Wrapper>
   );
 }

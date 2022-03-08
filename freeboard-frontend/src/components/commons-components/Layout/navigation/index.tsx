@@ -20,10 +20,10 @@ const Wrapper = styled.div`
 const WrapperDiv = styled.div`
   position: absolute;
   background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   top: 100px;
   right: 15%;
   width: 200px;
-  height: 300px;
   padding: 35px;
   border-radius: 30px;
   z-index: 10000;
@@ -38,26 +38,39 @@ const WrapperDiv = styled.div`
   }
 `;
 
-const WrapperUl = styled.ul`
+const LoginUl = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+`;
+
+const LogoutUl = styled.ul`
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 const NaviList = styled.li`
-  margin-left: 10px;
   cursor: pointer;
   font-weight: 500;
+  margin: 10px 0;
 `;
 
 const NaviListStyle = styled.li`
   display: flex;
   flex-direction: column;
+  font-size: 1.25rem;
 `;
+
 const NaviDivStyle = styled.div`
-  font-size: 0.8rem;
+  font-size: 0.5rem;
   color: #bdbdbd;
+`;
+
+const UserIcon = styled.li`
+  font-size: 2rem;
 `;
 
 const FETCH_USER_LOGGED_IN = gql`
@@ -102,33 +115,44 @@ export default function LayOutDesignNavi(props) {
   return (
     <Wrapper openNavi={props.openNavi}>
       <WrapperDiv>
-        <WrapperUl>
-          {accessToken ? (
-            <>
-              <NaviListStyle>
-                <div>
-                  {data?.fetchUserLoggedIn.name}{" "}
-                  <span onClick={LogOutUser}>
-                    <MdOutlineLogout />
-                  </span>
-                </div>
-                <NaviDivStyle>
-                  마이 포인트 {data?.fetchUserLoggedIn.userPoint?.amount}
-                </NaviDivStyle>
-              </NaviListStyle>
-              <NaviList>
-                <FaUserCircle />
-              </NaviList>
-            </>
-          ) : (
-            <>
-              <NaviList onClick={MoveToLogin}>로그인</NaviList>
-              <NaviList>회원가입</NaviList>
-              <NaviList>고객센터</NaviList>
-            </>
-          )}
-        </WrapperUl>
-        <div>마이페이지</div>
+        {accessToken ? (
+          <LoginUl>
+            <NaviListStyle>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontWeight: "700",
+                }}
+              >
+                {data?.fetchUserLoggedIn.name}{" "}
+                <MdOutlineLogout
+                  onClick={LogOutUser}
+                  style={{
+                    marginLeft: "5px",
+                  }}
+                />
+              </div>
+              <NaviDivStyle>
+                마이 포인트 {data?.fetchUserLoggedIn.userPoint?.amount}
+              </NaviDivStyle>
+            </NaviListStyle>
+            <UserIcon>
+              <FaUserCircle />
+            </UserIcon>
+          </LoginUl>
+        ) : (
+          <LogoutUl>
+            <NaviList onClick={MoveToLogin}>로그인</NaviList>
+            <NaviList>회원가입</NaviList>
+          </LogoutUl>
+        )}
+        <ul>
+          <NaviList>OPEN-API</NaviList>
+          <NaviList>커뮤니티</NaviList>
+          <NaviList>중고마켓</NaviList>
+          <NaviList>마이페이지</NaviList>
+        </ul>
       </WrapperDiv>
     </Wrapper>
   );

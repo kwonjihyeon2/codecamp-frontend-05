@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  border-top: 1px solid #e0e0e0;
+  margin: 50px 0;
 `;
 
 export const WrapperBody = styled.div`
@@ -51,6 +51,7 @@ export const WrapperProfile = styled.div`
   box-shadow: 0 2px 4px 0 rgba(63, 71, 77, 0.06);
   padding: 50px 50px;
   text-align: center;
+  border-radius: 20px;
 `;
 
 export const ProfileImg = styled.img`

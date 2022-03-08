@@ -1,11 +1,10 @@
-import { ReactChild } from "react";
+import { ReactChild, useState } from "react";
 import styled from "@emotion/styled";
 import LayOutDesignHead from "./header/index";
 import LayOutDesignBanner from "./Banner/index";
 import LayOutDesignNavi from "./navigation/index";
 import LayOutDesignFooter from "./footer/index";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 interface IPropsDesign {
   children: ReactChild;
