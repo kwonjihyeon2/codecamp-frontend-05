@@ -5,6 +5,7 @@ import {
 } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
 import { getMyDate, handelError } from "../../../../commons/libraries/uitils";
+import * as B from "./buyItemlist.styled";
 
 const FETCH_IBOUGHT = gql`
   query fetchUseditemsIBought($search: String, $page: Int) {
@@ -28,14 +29,13 @@ export default function BuyListContainer() {
 
   return (
     <div>
-      <h1>
-        구매내역<span>지난 3년간 구매 내역 조회가 가능합니다.</span>
-      </h1>
+      <B.BuyTitle>
+        구매내역
+        <B.BuyTitleSpan>지난 3년간 구매 내역 조회가 가능합니다.</B.BuyTitleSpan>
+      </B.BuyTitle>
       {data?.fetchUseditemsIBought.map((el) => (
-        <div key={uuidv4()}>
-          <div style={{ borderBottom: "1px solid #bdbdbd" }}>
-            {getMyDate(el.createdAt)}
-          </div>
+        <B.BuyItemBox key={uuidv4()}>
+          <div>{getMyDate(el.createdAt)}</div>
           <div style={{ display: "flex" }}>
             <div style={{ width: "50px", height: "50px" }}>
               <img
@@ -54,7 +54,7 @@ export default function BuyListContainer() {
               <div>가격 | {el.price}원</div>
             </div>
           </div>
-        </div>
+        </B.BuyItemBox>
       ))}
     </div>
   );

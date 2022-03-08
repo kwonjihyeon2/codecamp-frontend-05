@@ -47,7 +47,7 @@ export default function LayOutDesignHead(props: IpropsHeader) {
             <H.NavLi>OPEN-API</H.NavLi>
             <H.NavLi onClick={moveToPage("/boards")}>COMMUNITY</H.NavLi>
             <H.NavLi onClick={moveToPage("/market")}>MARKET</H.NavLi>
-            <H.NavLi>MY</H.NavLi>
+            <H.NavLi onClick={moveToPage("/mypage")}>MY</H.NavLi>
           </H.NavList>
         )}
         <H.UserBox>
@@ -55,7 +55,7 @@ export default function LayOutDesignHead(props: IpropsHeader) {
             <div></div>
           ) : (
             <div>
-              <FaSearch />
+              <FaSearch style={{ color: "#fff" }} />
             </div>
           )}
           <H.UserIcon onClick={onClickOpenNavi}>

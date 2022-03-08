@@ -21,7 +21,7 @@ const WrapperTitle = styled.h1`
   font-size: 1.75rem;
   font-weight: 700;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   text-align: center;
 `;
 

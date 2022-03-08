@@ -11,7 +11,7 @@ import { IQuery } from "../../../../commons/types/generated/types";
 import { FETCH_IPICKED_COUNT, FETCH_USER_LOGGED_IN } from "./profilepage.query";
 
 export default function ProfileContainer() {
-  const [buylist, setBuylist] = useState(false);
+  const [buylist, setBuylist] = useState(true);
   const [soldlist, setSoldlist] = useState(false);
   const [chargelist, setChargelist] = useState(false);
   //   const [setting, setSetting] = useState();
@@ -42,6 +42,12 @@ export default function ProfileContainer() {
   return (
     <P.Wrapper>
       <P.WrapperBody>
+        <P.WrapperUl>
+          <P.NaviList onClick={onClickBuyList}>구매 내역</P.NaviList>
+          <P.NaviList onClick={onClickSoldList}>판매 내역</P.NaviList>
+          <P.NaviList onClick={onClickChargeList}>충전 내역</P.NaviList>
+          <P.NaviList>설정</P.NaviList>
+        </P.WrapperUl>
         <P.WrapperContents>
           <P.WrapperProfile>
             <div>
@@ -83,12 +89,6 @@ export default function ProfileContainer() {
               </P.ProfileChoiceul>
             </P.ProfileChoice>
           </P.WrapperProfile>
-          <P.WrapperUl>
-            <P.NaviList onClick={onClickBuyList}>구매 내역</P.NaviList>
-            <P.NaviList onClick={onClickSoldList}>판매 내역</P.NaviList>
-            <P.NaviList onClick={onClickChargeList}>충전 내역</P.NaviList>
-            <P.NaviList>설정</P.NaviList>
-          </P.WrapperUl>
           <P.WrapperList>
             {buylist && <BuyListContainer />}
             {soldlist && <SoldItemContainer />}

@@ -1,27 +1,18 @@
 import BestListPageUI from "./BestList.presenter";
-import { useQuery, gql } from "@apollo/client";
-import { useRouter } from "next/router";
-
-const BEST_BOARDS = gql`
-  query fetchBoardsOfTheBest {
-    fetchBoardsOfTheBest {
-      _id
-      writer
-      title
-      contents
-      images
-      updatedAt
-    }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import { BEST_BOARDS, BEST_ITEMS } from "./BestList.queries";
+import { IQuery } from "../../../../commons/types/generated/types";
+import { MoveToPageHook } from "../../../commons-components/hooks/MoveToPageHook";
 
 export default function BestListPage() {
   const { data } = useQuery(BEST_BOARDS);
+  const { data: BestData } =
+    useQuery<Pick<IQuery, "fetchUseditemsOfTheBest">>(BEST_ITEMS);
+  console.log(BestData?.fetchUseditemsOfTheBest);
 
-  const router = useRouter();
-  const MoveToAll = () => {
-    router.push("/boards");
-  };
+  const { moveToPage } = MoveToPageHook();
 
-  return <BestListPageUI data={data} MoveToAll={MoveToAll} />;
+  return (
+    <BestListPageUI BestData={BestData} data={data} moveToPage={moveToPage} />
+  );
 }

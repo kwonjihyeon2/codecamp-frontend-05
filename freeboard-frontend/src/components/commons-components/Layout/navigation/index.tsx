@@ -1,11 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-// import { useEffect } from "react";
 import { useContext } from "react";
 import { MakeGlobalContext } from "../../../../../pages/_app";
 import { IMutation, IQuery } from "../../../../commons/types/generated/types";
-// import { useFetchUserInfoHook } from "../../hooks/useFetchUser";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 

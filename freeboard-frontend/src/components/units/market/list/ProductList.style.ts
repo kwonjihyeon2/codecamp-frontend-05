@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   max-width: 1240px;
   width: 100%;
-  margin: 100px auto;
+  margin: 80px auto;
   /* display: flex;
   flex-direction: column;
   position: relative;
@@ -31,7 +31,7 @@ export const WrapperTitle = styled.h1`
   font-size: 1.75rem;
   font-weight: 700;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   text-align: center;
 `;
 
@@ -57,7 +57,7 @@ export const WrapperList = styled.div`
 `;
 
 export const SlickBox = styled.div`
-  padding: 0 10px;
+  padding-right: 20px;
 `;
 
 export const ListBox = styled.div`

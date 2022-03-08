@@ -9,6 +9,7 @@ const Wrapper = styled.div`
 `;
 
 const TitleBox = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -16,9 +17,7 @@ const TitleBox = styled.div`
 const WrapperList = styled.div`
   display: flex;
   justify-content: space-between;
-  /* @media (max-width: 1240px) {
-    flex-wrap: wrap;
-  } */
+  margin: 20px 0 50px 0;
 `;
 
 const BestImg = styled.img`
@@ -63,22 +62,23 @@ const DayTitle = styled.p`
 
 interface IPropsData {
   data: any;
-  MoveToAll: () => void;
+  moveToPage: (page) => () => void;
+  BestData: any;
 }
 
 export default function BestListPageUI(props: IPropsData) {
   return (
     <Wrapper>
       <TitleBox>
-        <TitleText>이번주 인기 게시물</TitleText>
-        <ViewAll onClick={props.MoveToAll}>전체보기</ViewAll>
+        <TitleText>흥미로운 아이디어 둘러보기</TitleText>
+        <ViewAll onClick={props.moveToPage("/boards")}>전체보기</ViewAll>
       </TitleBox>
       <WrapperList>
         {props.data?.fetchBoardsOfTheBest.map((el: any) => (
           <div key={uuidv4()}>
-            <div>
+            <div style={{ height: "35vh" }}>
               <BestImg
-                style={{ width: "300px" }}
+                style={{ width: "18.5rem", height: "100%", objectFit: "cover" }}
                 src={
                   el.images[0]
                     ? `https://storage.googleapis.com/${el.images[0]}`
@@ -93,7 +93,34 @@ export default function BestListPageUI(props: IPropsData) {
           </div>
         ))}
       </WrapperList>
-      <div>중고마켓 제품 보여주기</div>
+      <TitleBox>
+        <TitleText>합리적인 소비를 위한 추천</TitleText>
+        <ViewAll onClick={props.moveToPage("/market")}>전체보기</ViewAll>
+      </TitleBox>
+      <WrapperList>
+        {props.BestData?.fetchUseditemsOfTheBest.map((el: any) => (
+          <div key={uuidv4()}>
+            <div style={{ height: "35vh" }}>
+              <BestImg
+                style={{
+                  width: "18.5rem",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                src={
+                  el.images[0]
+                    ? `https://storage.googleapis.com/${el.images[0]}`
+                    : "/basic.jpeg"
+                }
+              />
+            </div>
+            <TitleFont>{el.name}</TitleFont>
+            <ContentStyle>{el.remarks}</ContentStyle>
+            <DayTitle>{el.price}원</DayTitle>
+            <DayTitle>{getMyDate(el.updatedAt)}</DayTitle>
+          </div>
+        ))}
+      </WrapperList>
     </Wrapper>
   );
 }
