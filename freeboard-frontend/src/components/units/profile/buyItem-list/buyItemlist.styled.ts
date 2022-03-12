@@ -13,8 +13,15 @@ export const BuyTitleSpan = styled.span`
 `;
 
 export const BuyItemBox = styled.div`
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
+  border-bottom: 1px solid #e0e0e0;
   padding: 20px;
-  margin: 20px 0;
 `;
+
+export const ItemInfoBox = styled.div`
+  display : flex;
+  margin-top : 10px;
+`
+
+export const ItemPrice = styled.span`
+  font-weight : 700;
+`

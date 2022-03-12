@@ -8,15 +8,15 @@ import { MdOutlineLogout } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 
 const Wrapper = styled.div`
-  display : ${(props) => (props.openNavi ? "block" : "none;")}
+  display: ${(props) => (props.openNavi ? "block" : "none;")};
   width: 1240px;
-  background : #000;
-  margin : 0 auto;
-  position : relative;
+  background: #000;
+  margin: 0 auto;
+  position: relative;
 `;
 
 const WrapperDiv = styled.div`
-  position: absolute;
+  position: fixed;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   top: 100px;

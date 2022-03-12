@@ -40,7 +40,6 @@ export default function LayOutDesignBanner() {
     Infinity: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true,
     responsive: [
       {
         breakpoint: 1024,

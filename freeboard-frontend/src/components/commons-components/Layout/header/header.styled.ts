@@ -7,11 +7,9 @@ interface Istyle {
 export const Wrapper = styled.div`
   width: 100%;
   padding: 20px 0;
-  background-color: ${(props: Istyle) =>
-    props.scrollPosition > 100 ? "#fff" : "#000"};
-  position: ${(props) => (props.scrollPosition > 100 ? "fixed" : "static")};
-  box-shadow: ${(props) =>
-    props.scrollPosition > 100 ? "0 2px 10px rgba(0,0,0,0.06)" : "none"};
+  background-color: #fff;
+  position: ${(props: Istyle) => (props.scrollPosition > 100 ? "fixed" : "static")};
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
   top: 0;
   left: 0;
   z-index: 100;
@@ -29,8 +27,7 @@ export const HeaderList = styled.div`
 export const HeaderLogo = styled.div`
   width: 100px;
   margin-right: 10px;
-  color: ${(props: Istyle) =>
-    props.scrollPosition > 100 ? "rgb(255, 56, 92)" : "#fff"};
+  color: rgb(255, 56, 92);
   z-index: 1000;
   cursor: pointer;
 `;
@@ -44,12 +41,13 @@ export const NavList = styled.ul`
 export const NavLi = styled.li`
   margin: 0 10px;
   font-weight: 700;
-  color: #fff;
-  border-bottom: 1px solid #000;
+  color: #000;
+  border-bottom: 1px solid #ffff;
   &:hover {
     transition: all 0.5s;
     transform: translateY(-5px);
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid rgb(255, 56, 92);
+    color: rgb(255, 56, 92);
   }
 `;
 

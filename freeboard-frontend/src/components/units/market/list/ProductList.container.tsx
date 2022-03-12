@@ -16,6 +16,11 @@ export default function ItemList() {
     IQueryFetchUseditemsArgs
   >(FETCH_ITEMS);
 
+  const { data:moreData,fetchMore } = useQuery<
+    Pick<IQuery, "fetchUseditems">,
+    IQueryFetchUseditemsArgs
+  >(FETCH_ITEMS);
+
   const [viewToday, setViewToday] = useState([]);
 
   useEffect(() => {
@@ -36,6 +41,6 @@ export default function ItemList() {
   };
 
   return (
-    <ItemListUI MoveToDetail={MoveToDetail} data={data} viewToday={viewToday} />
+    <ItemListUI fetchMore={fetchMore} moreData={moreData} MoveToDetail={MoveToDetail} data={data} viewToday={viewToday} />
   );
 }

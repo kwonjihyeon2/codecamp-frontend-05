@@ -30,7 +30,6 @@ export default function LayOutDesignHead(props: IpropsHeader) {
     <H.Wrapper scrollPosition={scrollPosition}>
       <H.HeaderList>
         <H.HeaderLogo
-          scrollPosition={scrollPosition}
           onClick={moveToPage("/mainpage")}
         >
           로고
@@ -55,7 +54,7 @@ export default function LayOutDesignHead(props: IpropsHeader) {
             <div></div>
           ) : (
             <div>
-              <FaSearch style={{ color: "#fff" }} />
+              <FaSearch style={{ color: "#000" }} />
             </div>
           )}
           <H.UserIcon onClick={onClickOpenNavi}>
