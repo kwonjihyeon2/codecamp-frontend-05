@@ -56,7 +56,7 @@ export default function BuyListContainer() {
         구매내역
         <B.BuyTitleSpan>지난 3년간 구매 내역 조회가 가능합니다.</B.BuyTitleSpan>
       </B.BuyTitle>
-      <div style={{height : "500px", overflow : "auto"}}>
+      <B.BuyItemListBox >
         <InfiniteScroll
             pageStart={0}
             loadMore={MoreLoadData}
@@ -87,7 +87,7 @@ export default function BuyListContainer() {
           </B.BuyItemBox>
         ))}
         </InfiniteScroll>
-      </div>
+      </B.BuyItemListBox>
     </div>
   );
 }

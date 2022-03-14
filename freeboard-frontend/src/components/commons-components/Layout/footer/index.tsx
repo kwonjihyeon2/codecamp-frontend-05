@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
   width: 100%;
-  background-color: black;
-  color: white;
+  background-color: #F7F7F7;
+  border-top : 1px solid #bdbdbd;
+  /* color: white; */
   padding: 50px 0;
   margin-top: 30px;
 `;

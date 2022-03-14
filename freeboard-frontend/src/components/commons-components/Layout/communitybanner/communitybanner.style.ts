@@ -43,7 +43,7 @@ export const CommonsText = styled.div`
 `;
 
 export const ColorImg = styled.img`
-  filter: brightness(70%);
+  /* filter: brightness(90%); */
   width: 100%;
   height: 100%;
   border-radius: 20px;

@@ -23,9 +23,6 @@ const WrapperList = styled.div`
 const BestImg = styled.img`
   width: 100%;
   border-radius: 10px;
-  /* @media (max-width: 1240px) {
-    width: 100%;
-  } */
 `;
 
 const TitleText = styled.div`
@@ -46,7 +43,6 @@ const TitleFont = styled.p`
 
 const ContentStyle = styled.h2`
   margin: 10px 0;
-  /* font-size: 40px; / */
   font-weight: 700;
   width: 95%;
   overflow: hidden;
@@ -59,6 +55,34 @@ const DayTitle = styled.p`
   font-size: 12px;
   color: #bdbdbd;
 `;
+
+const RoutingBox = styled.div`
+width : 100%;
+  padding : 50px;
+  background-color : #FF385C;
+  border-radius : 20px;
+`
+const TextBox = styled.div`
+  font-size : 3rem;
+  width : 30%;
+  word-break: keep-all;
+  font-weight : 700;
+  line-height : 1.2;
+  color : #fff;
+`
+
+const ButtonBox = styled.button`
+  margin-top : 30px;
+  padding : 10px 30px;
+  border : 1px solid #fff;
+  border-radius : 10px;
+  background-color : #FF385C;
+  outline : none;
+  cursor : pointer;
+  color : #fff;
+  font-weight : 700;
+`
+
 
 interface IPropsData {
   data: any;
@@ -92,6 +116,12 @@ export default function BestListPageUI(props: IPropsData) {
             <DayTitle>{getMyDate(el.updatedAt)}</DayTitle>
           </div>
         ))}
+      </WrapperList>
+      <WrapperList>
+        <RoutingBox>
+          <TextBox>인기 상품의 비결이 궁금하신가요?</TextBox>
+          <ButtonBox onClick={props.moveToPage("/market")}>보러가기</ButtonBox>
+        </RoutingBox>
       </WrapperList>
       <TitleBox>
         <TitleText>합리적인 소비를 위한 추천</TitleText>
