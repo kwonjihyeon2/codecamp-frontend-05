@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm, UseFormHandleSubmit } from "react-hook-form";
 import {
   IMutation,
   IMutationCreateUseditemQuestionAnswerArgs,
@@ -7,23 +7,26 @@ import {
   IQuery,
   IQueryFetchUseditemQuestionAnswersArgs,
 } from "../../../../commons/types/generated/types";
+import { IComment } from "../comments/Product.comment.types";
 import EditCommentAnswerItem from "../EditcommentAnswer/EditCommentAnswer.container";
 import {
   CREATE_COMMENT_ANSWER,
   FETCH_COMMENT_ANSWER,
   DELETE_COMMENT_ANSWER,
 } from "./commentsAnswer.queries";
+import { ICommentAnswer } from "./commentsAnswer.types";
 
-export default function CommentAnswerItem(props) {
+export default function CommentAnswerItem(props: ICommentAnswer) {
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditemQuestionAnswers">,
     IQueryFetchUseditemQuestionAnswersArgs
   >(FETCH_COMMENT_ANSWER, {
     variables: {
       page: 1,
-      useditemQuestionId: String(props.el._id),
+      useditemQuestionId: String(props.isOpenComment),
     },
   });
+  console.log(data);
 
   const [createCommentAnswer] = useMutation<
     Pick<IMutation, "createUseditemQuestionAnswer">,
@@ -39,33 +42,49 @@ export default function CommentAnswerItem(props) {
     mode: "onChange",
   });
 
-  const QuestionId = String(props.el._id);
-
   const onClickCreateAnswer = async (data) => {
+    // console.log(data);
     try {
       await createCommentAnswer({
         variables: {
           createUseditemQuestionAnswerInput: {
             contents: data.contents,
           },
-          useditemQuestionId: String(props.el._id),
+          useditemQuestionId: String(props.isOpenComment),
         },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              fetchUseditemQuestionAnswers: (prev) => {
-                return [data?.createUseditemQuestionAnswer, ...prev];
-              },
+        refetchQueries: [
+          {
+            variables: {
+              page: 1,
+              useditemQuestionId: String(props.isOpenComment),
             },
-          });
-        },
+            query: FETCH_COMMENT_ANSWER,
+          },
+        ],
+        // update(cache, { data }) {
+        //   cache.readQuery({
+        //     query: FETCH_COMMENT_ANSWER,
+        //     variables: {
+        //       page: 1,
+        //       useditemQuestionId: String(props.isOpenComment),
+        //     },
+        //   });
+        // },
+        // update(cache, { data }) {
+        //   cache.modify({
+        //     fields: {
+        //       fetchUseditemQuestionAnswers: (prev) => {
+        //         return [data?.createUseditemQuestionAnswer, ...prev];
+        //       },
+        //     },
+        //   });
+        // },
       });
-      console.log(data?.fetchUseditemQuestionAnswers);
     } catch (error) {
       console.log(error.message);
     }
   };
-
+  // console.log(data?.fetchUseditemQuestionAnswers);
   const onClickDeleteAnswer =
     (useditemQuestionAnswerId: string) => async () => {
       try {
@@ -91,7 +110,6 @@ export default function CommentAnswerItem(props) {
         console.log(error.message);
       }
     };
-
   return (
     <div>
       {props.isOpenComment === props.el._id ? (
@@ -104,7 +122,7 @@ export default function CommentAnswerItem(props) {
             {data?.fetchUseditemQuestionAnswers.map((el) => (
               <div key={el._id}>
                 <EditCommentAnswerItem
-                  QuestionId={QuestionId}
+                  isOpenComment={props.isOpenComment}
                   el={el}
                   data={data}
                   onClickDeleteAnswer={onClickDeleteAnswer}

@@ -49,15 +49,14 @@ export default function CreateProductContainer(props: IPropsType) {
     setIsModal((prev) => !prev);
   };
 
-  const onPostcode = (data) => {
+  const onPostcode = (data: any) => {
     console.log(data);
     setAddress(data.address);
     setZonecode(data.zonecode);
     onToggleModal();
   };
 
-  const [tag, setTag] = useState([]);
-
+  const [tag, setTag] = useState<string[]>([]);
   const onChangeTag = (event) => {
     if (event.target.value && event.key === "Enter") {
       const NewTag = [...tag, event.target.value];
@@ -73,11 +72,11 @@ export default function CreateProductContainer(props: IPropsType) {
     }
   };
 
-  const onDeleteTag = (number) => () => {
+  const onDeleteTag = (number: number) => () => {
     const SliceTag = tag.splice(number, 1);
     setTag(SliceTag);
   };
-  console.log(tag);
+  // console.log(tag);
 
   const onClickSubmit = async (data: IpropsCreateItem) => {
     try {
@@ -132,7 +131,7 @@ export default function CreateProductContainer(props: IPropsType) {
     }
   };
 
-  const onChangeContents = (value) => {
+  const onChangeContents = (value: string) => {
     console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");

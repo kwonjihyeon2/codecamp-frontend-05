@@ -49,17 +49,20 @@ export default function OptimisticUIPage() {
         likeBoard: (data?.fetchBoard.likeCount || 0) + 1,
       },
       update(cache, { data }) {
-        //data : likeBoard요청을 통해 받아온 데이터
+        //data : likeBoard요청을 통해 받아온 결과 데이터
         cache.writeQuery({
           //writeQuery : 해당 캐시를 직접 작성한다
-          query: FETCH_BOARD,
-          variables: { boardId: "621c2067155b2d0029673581" },
+          query: FETCH_BOARD, //apollo-cache에 저장된 query를 바꿔주기위해
+          variables: {
+            boardId: "621c2067155b2d0029673581",
+            //내가 요청한 mutation을 선택
+          },
           data: {
             //기존 query영역에 바꿔줄 데이터를 입력
             fetchBoard: {
               _id: "621c2067155b2d0029673581",
               __typename: "Board",
-              likeCount: data?.likeBoard,
+              likeCount: data?.likeBoard, //요청을 통해 받아온 결과,
             },
           },
         });

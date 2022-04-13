@@ -1,5 +1,9 @@
 import { ChangeEvent } from "react";
-import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
+import {
+  FieldValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IpropsCreateItem {
@@ -16,27 +20,29 @@ export interface IPropsType {
 }
 
 export interface IpropsCreateUI {
-  register: any;
-  onClickSubmit: (data) => void;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  register: UseFormRegister<FieldValues> | any;
+  onClickSubmit: (data: IpropsCreateItem) => Promise<void>;
+  handleSubmit: UseFormHandleSubmit<FieldValues> | any;
   onChangefile: (file: string, index: number) => void;
   uploadfile: string[];
-  onClickEdit: (data) => void;
+  onClickEdit: (data: IpropsCreateItem) => Promise<void>;
   isEdit: boolean;
-  fetchItem?: Pick<IQuery, "fetchUseditem">;
-  onChangeContents: (value) => void;
+  fetchItem: Pick<IQuery, "fetchUseditem"> | undefined;
+  onChangeContents: (value: string) => void;
   onToggleModal: () => void;
   isModal: boolean;
-  onPostcode: (data) => void;
-  ChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
-  zonecode?: string;
-  Address?: string;
+  onPostcode: (data: any) => void;
+  zonecode: any;
+  Address: any;
+  onChangeTag: (event) => void;
+  onDeleteTag: (number: number) => () => void;
+  tag: string[];
 }
 
 export interface IMyVariableUpdateItem {
-  name: string;
-  remarks: string;
-  price: number;
-  contents: string;
-  images: string[];
+  name?: string;
+  remarks?: string;
+  price?: number;
+  contents?: string;
+  images?: string[];
 }

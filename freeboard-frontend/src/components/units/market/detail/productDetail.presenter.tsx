@@ -10,12 +10,13 @@ import { FiMoreVertical, FiShoppingCart } from "react-icons/fi";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import ProductBigButton from "../../../commons-components/button/market01/index";
 import ProductSmallButton from "../../../commons-components/button/market03";
+import { IPropsDetailType, IUserTodayView } from "./productDetail.types";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function ItemDetailPageUI(props) {
+export default function ItemDetailPageUI(props: IPropsDetailType) {
   // console.log(props.data?.fetchUseditem);
 
   useEffect(() => {
@@ -121,7 +122,7 @@ export default function ItemDetailPageUI(props) {
                 <div
                   style={{ display: "flex", width: "35%", flexWrap: "wrap" }}
                 >
-                  {props.data?.fetchUseditem.tags.map((el) => (
+                  {props.data?.fetchUseditem.tags?.map((el) => (
                     <L.TagStyle key={uuidv4()}>{`# ${el}`}</L.TagStyle>
                   ))}
                 </div>
@@ -193,7 +194,7 @@ export default function ItemDetailPageUI(props) {
             </L.WrapperText>
           </L.WrapperContents>
           <L.WrapperDetail>
-            상품 설명
+            <L.ViewText>상품 설명</L.ViewText>
             {process.browser && (
               <div
                 dangerouslySetInnerHTML={{
@@ -204,7 +205,7 @@ export default function ItemDetailPageUI(props) {
               />
             )}
             <div>
-              <h4>거래위치</h4>
+              <L.ViewText>거래위치</L.ViewText>
               <div style={{ display: "flex" }}>
                 <p>
                   {props.data?.fetchUseditem.useditemAddress?.zipcode && ""}
@@ -231,13 +232,18 @@ export default function ItemDetailPageUI(props) {
       <L.ViewBox>
         <L.ViewText>오늘 본 상품</L.ViewText>
         <L.ContentsBox>
-          {props.todayView?.map((el) => (
-            <div style={{ marginBottom: "10px" }} key={uuidv4()}>
+          {props.todayView?.map((el: IUserTodayView) => (
+            <div
+              onClick={props.onClickMoveItem(el._id)}
+              style={{ marginBottom: "10px" }}
+              key={uuidv4()}
+            >
               <img
                 style={{ width: "100%" }}
-                src={`https://storage.googleapis.com/${el.images[0]}`}
+                src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                onError={handelError}
               />
-              <div>{el.name}</div>
+              <L.TextWrap>{el.name}</L.TextWrap>
             </div>
           ))}
         </L.ContentsBox>

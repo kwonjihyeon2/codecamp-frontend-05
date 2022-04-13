@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import {
   IMutation,
   IMutationCreateUseditemQuestionArgs,
+  IMutationDeleteUseditemQuestionArgs,
+  IQuery,
+  IQueryFetchUseditemQuestionsArgs,
 } from "../../../../commons/types/generated/types";
 import {
   CREATE_PRODUCT_COMMENT,
@@ -12,6 +15,7 @@ import {
 } from "./product.comment.queries";
 import { useState } from "react";
 import ProductCommentUI from "./Product.comment.presenter";
+import { IComment } from "./Product.comment.types";
 
 export default function ProductComment() {
   const router = useRouter();
@@ -23,14 +27,21 @@ export default function ProductComment() {
     Pick<IMutation, "createUseditemQuestion">,
     IMutationCreateUseditemQuestionArgs
   >(CREATE_PRODUCT_COMMENT);
-  const { data } = useQuery(FETCH_ITEM_COMMENT, {
+
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditemQuestions">,
+    IQueryFetchUseditemQuestionsArgs
+  >(FETCH_ITEM_COMMENT, {
     variables: { page: 1, useditemId: String(router.query.ItemId) },
   });
 
   // console.log(data?.fetchUseditemQuestions);
-  const [deleteComment] = useMutation(DELETE_COMMENT);
+  const [deleteComment] = useMutation<
+    Pick<IMutation, "deleteUseditemQuestion">,
+    IMutationDeleteUseditemQuestionArgs
+  >(DELETE_COMMENT);
 
-  const onClickSubmit = async (data) => {
+  const onClickSubmit = async (data: IComment) => {
     console.log(data);
     await createComment({
       variables: {
@@ -55,7 +66,7 @@ export default function ProductComment() {
       variables: { useditemQuestionId: useditemQuestionId },
       update(cache, { data }) {
         // console.log(data);
-        const deletedId = data.deleteUseditemQuestion;
+        const deletedId = data?.deleteUseditemQuestion;
 
         cache.modify({
           fields: {
@@ -63,6 +74,7 @@ export default function ProductComment() {
               const filteredPrev = prev.filter(
                 (el) => readField("_id", el) !== deletedId
               );
+              console.log(filteredPrev, prev);
               return [...filteredPrev];
             },
           },
@@ -73,10 +85,11 @@ export default function ProductComment() {
 
   const [isOpenComment, setIsOpenComment] = useState("");
 
-  const onClickOpen = (el) => () => {
+  const onClickOpen = (el: string) => () => {
     setIsOpenComment(el);
+    // console.log(el);
   };
-  // console.log(isOpenComment);
+  console.log(isOpenComment);
 
   return (
     <ProductCommentUI

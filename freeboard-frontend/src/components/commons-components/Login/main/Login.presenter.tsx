@@ -7,6 +7,7 @@ interface IpropsLogin {
   passwordError: String;
   isActive: boolean;
   onClickLogin: () => void;
+  onClickJoin: () => void;
 }
 
 export default function LoginPageUI(props: IpropsLogin) {

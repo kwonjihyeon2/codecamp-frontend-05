@@ -39,13 +39,13 @@ export default function EditCommentAnswerItem(props) {
           {
             variables: {
               page: 1,
-              useditemQuestionId: String(props.QuestionId),
+              useditemQuestionId: String(props.isOpenComment),
             },
             query: FETCH_COMMENT_ANSWER,
           },
         ],
       });
-      console.log(props.QuestionId);
+      console.log(props.isOpenComment);
       setIsEdit((prev) => !prev);
     } catch (error) {
       console.log(error.message);

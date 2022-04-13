@@ -46,22 +46,11 @@ interface IUserInfo {
   _id?: string;
 }
 
-interface IUserTodayView {
-  name?: string;
-  email?: string;
-  _id?: string;
-  images?: [string];
-  remarks?: string;
-  price?: number;
-}
-
 interface IpropsContext {
   accessToken?: string;
   setAccessToken?: Dispatch<SetStateAction<string>>;
   userInfo?: IUserInfo;
   setUserInfo?: Dispatch<SetStateAction<IUserInfo>>;
-  todayView?: IUserTodayView[];
-  setTodayView?: Dispatch<SetStateAction<IUserTodayView[]>>;
 }
 
 export const MakeGlobalContext = createContext<IpropsContext>({});
@@ -69,7 +58,6 @@ export const MakeGlobalContext = createContext<IpropsContext>({});
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
-  const [todayView, setTodayView] = useState([]);
   // const [isLoading, setIsLoading] = useState(true)
 
   const value = {
@@ -77,8 +65,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     setAccessToken: setAccessToken,
     userInfo,
     setUserInfo,
-    todayView,
-    setTodayView,
   };
 
   useEffect(() => {

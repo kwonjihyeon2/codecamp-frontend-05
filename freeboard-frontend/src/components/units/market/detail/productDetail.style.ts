@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
+import { IpropsButton } from "./productDetail.types";
 
 export const Wrapper = styled.div`
   width: 100%;
   max-width: 1240px;
   display: flex;
-  /* justify-content: center; */
+  justify-content: space-between;
   margin: 50px auto;
 `;
 
@@ -84,7 +85,7 @@ export const TextBox = styled.div`
 `;
 
 export const WrapperDetail = styled.div`
-  margin: 50px 0;
+  margin: 30px 0;
   padding: 30px 0;
   width: 100%;
   border-top: 2px solid #ededed;
@@ -125,15 +126,10 @@ export const IButton = styled.button`
   }
 `;
 
-interface IpropsButton {
-  isOpen: boolean;
-}
-
 export const MoreBox = styled.div`
   position: absolute;
   top: -20%;
   right: 5%;
-  /* width: 100px; */
   display: ${(props: IpropsButton) => (props.isOpen ? "flex" : "none")};
   justify-content: space-between;
   border-radius: 10px;
@@ -151,14 +147,18 @@ export const ViewBox = styled.div`
   padding: 10px;
 `;
 
-export const ViewText = styled.p`
+export const ViewText = styled.h4`
   font-weight: 700;
   font-size: 1rem;
+  margin: 1rem 0;
 `;
 
 export const ContentsBox = styled.div`
   border: 1px solid #c9c9c9;
   width: 100%;
+`;
+
+export const TextWrap = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

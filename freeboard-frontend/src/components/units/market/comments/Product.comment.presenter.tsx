@@ -2,8 +2,10 @@ import ProductCommentItem from "../EditComments/ProductEditComment";
 import { v4 as uuidv4 } from "uuid";
 import CommentAnswerItem from "../commentsAnswer/commentsAnswer.container";
 import * as PC from "./Product.comment.style";
+import { IUseditemQuestion } from "../../../../commons/types/generated/types";
+import { ICommentUI } from "./Product.comment.types";
 
-export default function ProductCommentUI(props) {
+export default function ProductCommentUI(props: ICommentUI) {
   return (
     <PC.Wrapper>
       <PC.WrapperBox>
@@ -18,12 +20,12 @@ export default function ProductCommentUI(props) {
           />
 
           <PC.CommentForm onSubmit={props.handleSubmit(props.onClickSubmit)}>
-            <div>{}/100</div>
+            <div>/100</div>
             <PC.CommentButton>등록하기</PC.CommentButton>
           </PC.CommentForm>
         </PC.WrapperComment>
         <div>
-          {props.data?.fetchUseditemQuestions.map((el) => (
+          {props.data?.fetchUseditemQuestions.map((el: IUseditemQuestion) => (
             <PC.CommentQna key={uuidv4()}>
               <ProductCommentItem
                 el={el}

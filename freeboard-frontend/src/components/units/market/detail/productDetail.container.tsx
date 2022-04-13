@@ -11,25 +11,39 @@ import {
   FETCH_PICKED,
 } from "./productDetail.queries";
 import { Modal } from "antd";
+import {
+  IMutation,
+  IMutationCreatePointTransactionOfBuyingAndSellingArgs,
+  IMutationDeleteUseditemArgs,
+  IMutationToggleUseditemPickArgs,
+  IQuery,
+  IQueryFetchUseditemsIPickedArgs,
+} from "../../../../commons/types/generated/types";
+import { IPropsType } from "./productDetail.types";
 
-export default function ItemDetailContainer(props) {
+export default function ItemDetailContainer(props: IPropsType) {
   const router = useRouter();
-  // if (props.loading) return "loading";
 
-  const { todayView, setTodayView } = useContext(MakeGlobalContext);
-  const [deleteProduct] = useMutation(DELETE_ITEM);
+  const [todayView, setTodayView] = useState([]);
+  useEffect(() => {
+    const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
+    if (setTodayView) setTodayView(baskets);
+  }, []);
 
-  // useEffect(() => {
-  //   const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
-  //   if (setTodayView) setTodayView(baskets);
-  // }, []);
+  const onClickMoveItem = (_id: string) => () => {
+    router.push(`/market/${_id}`);
+  };
+
+  const [deleteProduct] = useMutation<
+    Pick<IMutation, "deleteUseditem">,
+    IMutationDeleteUseditemArgs
+  >(DELETE_ITEM);
 
   const onClickDeleteItem = async () => {
     try {
       await deleteProduct({
         variables: { useditemId: String(router.query.ItemId) },
       });
-
       console.log(router.query.ItemId);
       router.push("/market");
     } catch (error) {
@@ -37,10 +51,12 @@ export default function ItemDetailContainer(props) {
     }
   };
 
-  const [createPointBuyAndSelling] = useMutation(BUY_ITEM);
+  const [createPointBuyAndSelling] = useMutation<
+    Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
+    IMutationCreatePointTransactionOfBuyingAndSellingArgs
+  >(BUY_ITEM);
 
   const onClickBuyItem = async () => {
-    console.log(111);
     try {
       const result = await createPointBuyAndSelling({
         variables: {
@@ -58,16 +74,22 @@ export default function ItemDetailContainer(props) {
     }
   };
 
-  const { data: PickedData } = useQuery(FETCH_PICKED, {
+  const { data: PickedData } = useQuery<
+    Pick<IQuery, "fetchUseditemsIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_PICKED, {
     variables: {
       page: 1,
       search: "",
     },
   });
   const [picked, setPicked] = useState(true);
-  const [toggleItemPick] = useMutation(PICK_ITEMS);
+  const [toggleItemPick] = useMutation<
+    Pick<IMutation, "toggleUseditemPick">,
+    IMutationToggleUseditemPickArgs
+  >(PICK_ITEMS);
 
-  const onClickPicked = (el) => async () => {
+  const onClickPicked = (el: string | undefined) => async () => {
     try {
       const pickResult = await toggleItemPick({
         variables: {
@@ -80,14 +102,13 @@ export default function ItemDetailContainer(props) {
       console.log(error.message);
     }
   };
-  console.log(PickedData);
+  // console.log(PickedData);
 
   useEffect(() => {
     const pick = PickedData?.fetchUseditemsIPicked.filter(
-      (el) => el._id === props.data?.fetchUseditem._id
+      (el: any) => el._id === props.data?.fetchUseditem._id
     );
-    // console.log("===================");
-    console.log(props.data?.fetchUseditem._id, pick?.length);
+    // console.log(props.data?.fetchUseditem._id, pick);
 
     if (pick?.length) {
       setPicked(false);
@@ -97,13 +118,13 @@ export default function ItemDetailContainer(props) {
   return (
     <ItemDetailPageUI
       onClickPicked={onClickPicked}
-      setPicked={setPicked}
       picked={picked}
       PickedData={PickedData}
       todayView={todayView}
       data={props.data}
       onClickDeleteItem={onClickDeleteItem}
       onClickBuyItem={onClickBuyItem}
+      onClickMoveItem={onClickMoveItem}
     />
   );
 }
