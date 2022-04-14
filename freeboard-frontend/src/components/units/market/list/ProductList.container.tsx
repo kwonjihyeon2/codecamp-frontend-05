@@ -11,12 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function ItemList() {
   const router = useRouter();
-  const { data } = useQuery<
-    Pick<IQuery, "fetchUseditems">,
-    IQueryFetchUseditemsArgs
-  >(FETCH_ITEMS);
-
-  const { data:moreData,fetchMore } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_ITEMS);
@@ -41,6 +36,6 @@ export default function ItemList() {
   };
 
   return (
-    <ItemListUI fetchMore={fetchMore} moreData={moreData} MoveToDetail={MoveToDetail} data={data} viewToday={viewToday} />
+    <ItemListUI fetchMore={fetchMore} MoveToDetail={MoveToDetail} data={data} />
   );
 }

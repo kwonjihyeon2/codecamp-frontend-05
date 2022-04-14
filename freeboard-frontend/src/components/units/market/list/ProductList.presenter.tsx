@@ -5,9 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BestItemList from "../bestList/Bestlist.container";
 import { handelError } from "../../../../commons/libraries/uitils";
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from "react-infinite-scroller";
+import { IPropsList } from "./ProductList.types";
 
-export default function ItemListUI(props) {
+export default function ItemListUI(props: IPropsList) {
   const settings = {
     dots: false,
     infinite: true,
@@ -18,14 +19,14 @@ export default function ItemListUI(props) {
   };
 
   const MoreLoadData = () => {
-    if (!props.moreData) return;
+    if (!props.data) return;
 
     props.fetchMore({
       variables: {
-        page: Math.ceil(props.moreData?.fetchUseditems.length / 10) + 1,
+        page: Math.ceil(props.data?.fetchUseditems.length / 10) + 1,
         search: "",
       },
-      updateQuery: ( prev, { fetchMoreResult }) => {
+      updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult?.fetchUseditems)
           return { fetchUseditems: [...prev.fetchUseditems] };
 
@@ -36,8 +37,8 @@ export default function ItemListUI(props) {
           ],
         };
       },
-    })
-  }
+    });
+  };
 
   return (
     <L.Wrapper>
@@ -54,7 +55,7 @@ export default function ItemListUI(props) {
                 <L.SlickBox key={uuidv4()} onClick={props.MoveToDetail(el)}>
                   <L.ListBox>
                     <L.ListImg
-                      src={`https://storage.googleapis.com/${el.images[0]}`}
+                      src={`https://storage.googleapis.com/${el.images?.[0]}`}
                       onError={handelError}
                     />
                   </L.ListBox>
@@ -69,32 +70,37 @@ export default function ItemListUI(props) {
             </Slider>
           </L.WrapperListBox>
         </div>
-        <div >
-        <L.WrapperTitle>마켓의 모든 상품을 만나보세요</L.WrapperTitle>
-        <InfiniteScroll
+        <div>
+          <L.WrapperTitle>마켓의 모든 상품을 만나보세요</L.WrapperTitle>
+          <InfiniteScroll
             pageStart={0}
             loadMore={MoreLoadData}
             hasMore={true}
             // useWindow={false}
-        >
-        <div style={{margin : "50px 0",display : "flex", justifyContent:"space-between" ,flexWrap:"wrap"}}>
-        {props.moreData?.fetchUseditems.map((el) => (
-          <div style={{width : "23%"}} key={uuidv4()} onClick={props.MoveToDetail(el)}>
-            <L.ListBox>
-              <L.ListImg
-                src={`https://storage.googleapis.com/${el.images[0]}`}
-                onError={handelError}
-              />
-            </L.ListBox>
+          >
+            <L.ArrayBox>
+              {props.data?.fetchUseditems.map((el) => (
+                <div
+                  style={{ width: "23%" }}
+                  key={uuidv4()}
+                  onClick={props.MoveToDetail(el)}
+                >
+                  <L.ListBox>
+                    <L.ListImg
+                      src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                      onError={handelError}
+                    />
+                  </L.ListBox>
 
-            <L.ProductName>{el.name}</L.ProductName>
-            <p style={{ color: "#bdbdbd" }}>{el.remarks}</p>
-            <p>
-              <L.ProductName>{el.price}</L.ProductName>원
-            </p>
-          </div>
-        ))}</div>
-         </InfiniteScroll>
+                  <L.ProductName>{el.name}</L.ProductName>
+                  <p style={{ color: "#bdbdbd" }}>{el.remarks}</p>
+                  <p>
+                    <L.ProductName>{el.price}</L.ProductName>원
+                  </p>
+                </div>
+              ))}
+            </L.ArrayBox>
+          </InfiniteScroll>
         </div>
       </L.WrapperBox>
     </L.Wrapper>

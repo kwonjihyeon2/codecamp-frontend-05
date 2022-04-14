@@ -1,9 +1,10 @@
-import ProductCommentItem from "../EditComments/ProductEditComment";
+import ProductCommentItem from "../EditComments/ProductEditComment.container";
 import { v4 as uuidv4 } from "uuid";
 import CommentAnswerItem from "../commentsAnswer/commentsAnswer.container";
 import * as PC from "./Product.comment.style";
 import { IUseditemQuestion } from "../../../../commons/types/generated/types";
 import { ICommentUI } from "./Product.comment.types";
+import ProductClickButton from "../../../commons-components/button/market04";
 
 export default function ProductCommentUI(props: ICommentUI) {
   return (
@@ -21,7 +22,7 @@ export default function ProductCommentUI(props: ICommentUI) {
 
           <PC.CommentForm onSubmit={props.handleSubmit(props.onClickSubmit)}>
             <div>/100</div>
-            <PC.CommentButton>등록하기</PC.CommentButton>
+            <ProductClickButton name="등록하기" />
           </PC.CommentForm>
         </PC.WrapperComment>
         <div>

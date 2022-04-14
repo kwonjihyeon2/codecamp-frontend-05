@@ -1,16 +1,23 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiFillDelete } from "react-icons/ai";
+import { BiEditAlt } from "react-icons/bi";
+import { getMyDate } from "../../../../commons/libraries/uitils";
 import {
   IMutation,
   IMutationUpdateUseditemQuestionAnswerArgs,
 } from "../../../../commons/types/generated/types";
+import ProductClickButton from "../../../commons-components/button/market04";
+import CommentInput from "../../../commons-components/input/marketComment";
 import {
   FETCH_COMMENT_ANSWER,
   UPDATE_COMMENT_ANSWER,
 } from "./EditCommentAnswer.queries";
+import * as EA from "./EditCommentAnswer.style";
+import { IPropsAnswer } from "./EditCommentAnswer.types";
 
-export default function EditCommentAnswerItem(props) {
+export default function EditCommentAnswerItem(props: IPropsAnswer) {
   const { register, handleSubmit } = useForm({
     mode: "onChange",
   });
@@ -53,26 +60,42 @@ export default function EditCommentAnswerItem(props) {
   };
 
   return (
-    <div>
+    <EA.Wrapper>
       {isEdit ? (
         <div>
+          <EA.WrapperEdit>
+            <EA.ProfileIcon />
+            <EA.ProfileInfo>{props.el.user.name}</EA.ProfileInfo>
+          </EA.WrapperEdit>
           <form onSubmit={handleSubmit(onClickEdit(props.el._id))}>
-            <input
+            <CommentInput
               type="text"
-              {...register("contents")}
+              register={register("contents")}
               defaultValue={props.el.contents}
             />
-
-            <button>등록</button>
+            <ProductClickButton name="수정하기" />
           </form>
         </div>
       ) : (
-        <div>
-          {props.el.contents}
-          <span onClick={onChangeEdit}>수정</span>
-          <span onClick={props.onClickDeleteAnswer(props.el._id)}>삭제</span>
-        </div>
+        <EA.WrapperEdit style={{ justifyContent: "space-between" }}>
+          <div>
+            <EA.WrapperEdit>
+              <EA.ProfileIcon />
+              <EA.ProfileInfo>{props.el.user.name}</EA.ProfileInfo>
+            </EA.WrapperEdit>
+            <EA.CommentTxt>{props.el.contents}</EA.CommentTxt>
+          </div>
+
+          <div>
+            <EA.CommentButton onClick={onChangeEdit}>
+              <BiEditAlt />
+            </EA.CommentButton>
+            <EA.CommentButton onClick={props.onClickDeleteAnswer(props.el._id)}>
+              <AiFillDelete />
+            </EA.CommentButton>
+          </div>
+        </EA.WrapperEdit>
       )}
-    </div>
+    </EA.Wrapper>
   );
 }

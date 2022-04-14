@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../commons/styles/media";
 import { IpropsButton } from "./productDetail.types";
 
 export const Wrapper = styled.div`
@@ -7,6 +8,9 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 50px auto;
+  @media (max-width: 1199px) {
+    justify-content: center;
+  } ;
 `;
 
 export const WrapperBody = styled.div`
@@ -145,6 +149,9 @@ export const ViewBox = styled.div`
   width: 100px;
   border: 1px solid #c9c9c9;
   padding: 10px;
+  @media (max-width: 1199px) {
+    display: none;
+  } ;
 `;
 
 export const ViewText = styled.h4`

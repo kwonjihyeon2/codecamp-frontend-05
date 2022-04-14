@@ -5,6 +5,9 @@ export const Wrapper = styled.div`
   max-width: 1240px;
   display: flex;
   margin: 0 auto;
+  @media (max-width: 1199px) {
+    justify-content: center;
+  } ;
 `;
 
 export const WrapperBox = styled.div`
@@ -29,13 +32,7 @@ export const CommentInput = styled.input`
   padding: 15px;
   margin: 10px 0;
   border: none;
-`;
-
-export const CommentButton = styled.button`
-  padding: 10px 20px;
-  background-color: #000;
-  color: #fff;
-  border: none;
+  outline: none;
 `;
 
 export const CommentQna = styled.div`
@@ -58,4 +55,5 @@ export const MoreStyle = styled.button`
   border: none;
   background-color: #fff;
   color: #c9c9c9;
+  cursor: pointer;
 `;

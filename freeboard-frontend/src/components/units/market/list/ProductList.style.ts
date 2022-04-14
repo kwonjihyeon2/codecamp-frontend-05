@@ -23,15 +23,12 @@ export const BannerStyle = styled.div`
 
 export const WrapperBox = styled.div`
   width: 100%;
-  /* display: flex;
-  align-self: flex-start; */
 `;
 
 export const WrapperTitle = styled.h1`
   font-size: 1.75rem;
   font-weight: 700;
   display: flex;
-  /* justify-content: center; */
   text-align: center;
 `;
 
@@ -75,4 +72,11 @@ export const ListImg = styled.img`
 export const ProductName = styled.span`
   font-size: 1rem;
   font-weight: 700;
+`;
+
+export const ArrayBox = styled.div`
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;

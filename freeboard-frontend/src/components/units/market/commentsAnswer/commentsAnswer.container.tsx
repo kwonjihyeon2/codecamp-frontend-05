@@ -7,6 +7,8 @@ import {
   IQuery,
   IQueryFetchUseditemQuestionAnswersArgs,
 } from "../../../../commons/types/generated/types";
+import ProductClickButton from "../../../commons-components/button/market04";
+import CommentInput from "../../../commons-components/input/marketComment";
 import { IComment } from "../comments/Product.comment.types";
 import EditCommentAnswerItem from "../EditcommentAnswer/EditCommentAnswer.container";
 import {
@@ -115,8 +117,8 @@ export default function CommentAnswerItem(props: ICommentAnswer) {
       {props.isOpenComment === props.el._id ? (
         <div>
           <form onSubmit={handleSubmit(onClickCreateAnswer)}>
-            <input type="text" {...register("contents")} />
-            <button>등록</button>
+            <CommentInput type="text" register={register("contents")} />
+            <ProductClickButton name="등록하기" />
           </form>
           <div>
             {data?.fetchUseditemQuestionAnswers.map((el) => (

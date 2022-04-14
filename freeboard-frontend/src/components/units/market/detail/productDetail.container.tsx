@@ -1,13 +1,11 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { MakeGlobalContext } from "../../../../../pages/_app";
+import { useEffect, useState } from "react";
 import ItemDetailPageUI from "./productDetail.presenter";
 import {
   DELETE_ITEM,
   BUY_ITEM,
   PICK_ITEMS,
-  FETCH_PICKED_COUNT,
   FETCH_PICKED,
 } from "./productDetail.queries";
 import { Modal } from "antd";
@@ -25,6 +23,7 @@ export default function ItemDetailContainer(props: IPropsType) {
   const router = useRouter();
 
   const [todayView, setTodayView] = useState([]);
+
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
     if (setTodayView) setTodayView(baskets);
