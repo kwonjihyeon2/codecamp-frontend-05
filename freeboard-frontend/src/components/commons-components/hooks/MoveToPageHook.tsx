@@ -7,7 +7,8 @@ type IPage =
   | `/market/${string}/edit`
   | `/market/${string}`
   | `/mypage/${string}`
-  | "/mypage";
+  | "/mypage"
+  | "/openapi";
 
 export function MoveToPageHook() {
   const router = useRouter();

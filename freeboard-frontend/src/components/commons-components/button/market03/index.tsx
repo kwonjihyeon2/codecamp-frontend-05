@@ -10,7 +10,14 @@ const SmallButton = styled.button`
   margin: 5px;
 `;
 
-export default function ProductSmallButton(props) {
+interface IPropsSmall {
+  style?: {};
+  type?: "button" | "reset" | "submit" | undefined;
+  onClick?: () => void | ((id: Number) => () => void);
+  name?: string;
+}
+
+export default function ProductSmallButton(props: IPropsSmall) {
   return (
     <>
       <SmallButton

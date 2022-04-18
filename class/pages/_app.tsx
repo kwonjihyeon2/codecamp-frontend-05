@@ -25,7 +25,6 @@ import { initializeApp } from "firebase/app";
 import Head from "next/head";
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
 // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -127,7 +126,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <script
           type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f"
+          src=`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_KEY}`
         ></script>
       </Head> */}
       <GlobalContext.Provider value={value}>
@@ -151,7 +150,7 @@ export default MyApp;
 
 // function MyApp({ Component, pageProps }: AppProps) {
 //   const client = new ApolloClient({
-//     uri: "http://backend05.codebootcamp.co.kr/graphql",
+//      uri: `${process.env.NEXT_PUBLIC_APOLLO_URI}`,
 //     cache: new InMemoryCache(), // uri에서 받아온 데이터를 임시저장하는 공간
 //   });
 

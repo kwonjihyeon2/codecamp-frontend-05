@@ -13,6 +13,9 @@ const CurrentTable = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 10px auto;
+  li {
+    width: 33%;
+  }
 `;
 
 export default function OpenApiPage() {
@@ -28,7 +31,7 @@ export default function OpenApiPage() {
   useEffect(() => {
     async function fetchCurrent() {
       const result = await axios.get(
-        "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur.json"
+        `${process.env.NEXT_PUBLIC_OPEN_API_CURRENT}`
       );
 
       const myKorea = Number(result.data.eur.krw).toFixed(2);
@@ -46,7 +49,7 @@ export default function OpenApiPage() {
   useEffect(() => {
     async function fetchPrev() {
       const result = await axios.get(
-        "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/2022-02-04/currencies/eur.json"
+        `${process.env.NEXT_PUBLIC_OPEN_API_DATE}`
       );
 
       const Myprevkorea = Number(result.data.eur.krw).toFixed(2);
@@ -84,7 +87,7 @@ export default function OpenApiPage() {
         <li>{(Number(Jpy) - Number(prevJpy)).toFixed(2)}</li>
       </CurrentTable>
 
-      <div>firebase</div>
+      <div>firebase DB 이용</div>
     </Wrapper>
   );
 }

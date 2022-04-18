@@ -9,29 +9,20 @@ import * as P from "./profilepage.style";
 import { useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { FETCH_IPICKED_COUNT, FETCH_USER_LOGGED_IN } from "./profilepage.query";
+import ChargePageContainer from "../chargeProfile/chargeProfile.container";
+import CartPageContainer from "../cart/cart.container";
 
 export default function ProfileContainer() {
-  const [buylist, setBuylist] = useState(true);
-  const [soldlist, setSoldlist] = useState(false);
-  const [chargelist, setChargelist] = useState(false);
-  //   const [setting, setSetting] = useState();
+  const [listIndex, setListIndex] = useState<number>(0);
+  const listArr = [
+    { index: 0, contents: <BuyListContainer /> },
+    { index: 1, contents: <SoldItemContainer /> },
+    { index: 2, contents: <ChargeListContainer /> },
+  ];
 
-  const onClickSoldList = () => {
-    setBuylist(false);
-    setSoldlist(true);
-    setChargelist(false);
-  };
-
-  const onClickBuyList = () => {
-    setBuylist(true);
-    setSoldlist(false);
-    setChargelist(false);
-  };
-
-  const onClickChargeList = () => {
-    setBuylist(false);
-    setSoldlist(false);
-    setChargelist(true);
+  const onClickMove = (id: number) => () => {
+    console.log(id);
+    setListIndex(id);
   };
 
   const { data } =
@@ -43,58 +34,79 @@ export default function ProfileContainer() {
     <P.Wrapper>
       <P.WrapperBody>
         <P.WrapperUl>
-          <P.NaviList onClick={onClickBuyList}>구매 내역</P.NaviList>
-          <P.NaviList onClick={onClickSoldList}>판매 내역</P.NaviList>
-          <P.NaviList onClick={onClickChargeList}>충전 내역</P.NaviList>
-          <P.NaviList>설정</P.NaviList>
+          <P.NaviList onClick={onClickMove(0)}>구매 내역</P.NaviList>
+          <P.NaviList onClick={onClickMove(1)}>판매 내역</P.NaviList>
+          <P.NaviList onClick={onClickMove(2)}>충전 내역</P.NaviList>
+          <P.NaviList onClick={onClickMove(3)}>장바구니</P.NaviList>
+          <P.NaviList onClick={onClickMove(4)}>설정</P.NaviList>
         </P.WrapperUl>
-        <P.WrapperContents>
-          <P.WrapperProfile>
-            <div>
-              <P.ProfileImg src="/mypage/profile.jpeg" />
-            </div>
-            <P.ProfileName>{data?.fetchUserLoggedIn.name}</P.ProfileName>
-            <p>포인트 | {data?.fetchUserLoggedIn.userPoint?.amount}</p>
-            <ProductSmallButton
-              style={{
-                borderRadius: "3px",
-                margin: "0",
-                padding: "5px 15px",
-                color: "#000",
-                border: "1px solid #e0e0e0",
-                backgroundColor: "#fff",
-              }}
-              name="설정"
-            />
-            <P.ProfileChoice>
-              <P.ProfileChoiceul>
-                <li>
-                  <P.IconStyle>
-                    <IoCartOutline />
-                  </P.IconStyle>
-                  장바구니
-                </li>
-                <li>
-                  <P.IconStyle>
-                    <BsSuitHeart />
-                  </P.IconStyle>
-                  좋아요 {IpickData?.fetchUseditemsCountIPicked}
-                </li>
-                <li>
-                  <P.IconStyle>
-                    <IoTicketOutline />
-                  </P.IconStyle>
-                  내 쿠폰 0
-                </li>
-              </P.ProfileChoiceul>
-            </P.ProfileChoice>
-          </P.WrapperProfile>
-          <P.WrapperList>
-            {buylist && <BuyListContainer />}
-            {soldlist && <SoldItemContainer />}
-            {chargelist && <ChargeListContainer />}
-          </P.WrapperList>
-        </P.WrapperContents>
+        {listIndex === 3 || listIndex === 4 ? (
+          <>
+            {listIndex === 3 && <CartPageContainer />}
+            {listIndex === 4 && <ChargePageContainer />}
+          </>
+        ) : (
+          <P.WrapperContents>
+            <P.WrapperProfile>
+              <P.ProfileLeft>
+                <P.ProfileLeftInfo>
+                  <div>
+                    <P.ProfileImg src="/mypage/profile.jpeg" />
+                  </div>
+                  <P.InfoName>
+                    <P.ProfileName>
+                      {data?.fetchUserLoggedIn.name}
+                    </P.ProfileName>
+                    <p>포인트 | {data?.fetchUserLoggedIn.userPoint?.amount}</p>
+                    <ProductSmallButton
+                      onClick={onClickMove(4)}
+                      style={{
+                        borderRadius: "3px",
+                        margin: "0",
+                        padding: "5px 15px",
+                        color: "#000",
+                        border: "1px solid #e0e0e0",
+                        backgroundColor: "#fff",
+                      }}
+                      name="설정"
+                    />
+                  </P.InfoName>
+                </P.ProfileLeftInfo>
+                <P.ProfileChoice>
+                  <P.ProfileChoiceul>
+                    <li style={{ cursor: "pointer" }} onClick={onClickMove(3)}>
+                      <P.IconStyle>
+                        <IoCartOutline />
+                      </P.IconStyle>
+                      장바구니
+                    </li>
+                    <li>
+                      <P.IconStyle>
+                        <BsSuitHeart />
+                      </P.IconStyle>
+                      좋아요 {IpickData?.fetchUseditemsCountIPicked}
+                    </li>
+                    <li>
+                      <P.IconStyle>
+                        <IoTicketOutline />
+                      </P.IconStyle>
+                      내 쿠폰 0
+                    </li>
+                  </P.ProfileChoiceul>
+                </P.ProfileChoice>
+              </P.ProfileLeft>
+            </P.WrapperProfile>
+            <P.WrapperList>
+              <P.ListContainer>
+                {listIndex === listArr[listIndex].index ? (
+                  <>{listArr[listIndex].contents}</>
+                ) : (
+                  <></>
+                )}
+              </P.ListContainer>
+            </P.WrapperList>
+          </P.WrapperContents>
+        )}
       </P.WrapperBody>
     </P.Wrapper>
   );

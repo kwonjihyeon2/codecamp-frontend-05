@@ -15,8 +15,7 @@ export default function KakaoMapPage() {
   useEffect(() => {
     //2. useEffect에서 맵 다운받고 -> 그 이후에 화면 렌더되도록
     const script = document.createElement("script"); //<script>생성
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f&autoload=false";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_KEY}&autoload=false`;
     document.head.appendChild(script);
 
     script.onload = () => {

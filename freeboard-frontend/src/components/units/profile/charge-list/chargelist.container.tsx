@@ -9,7 +9,6 @@ import styled from "@emotion/styled";
 
 const ChargeBox = styled.div`
   width: 100%;
-  padding: 50px 20px;
 `;
 
 const ChargeUl = styled.ul`
@@ -26,17 +25,12 @@ export default function ChargeListContainer() {
   const { data } = useQuery<
     Pick<IQuery, "fetchPointTransactionsOfLoading">,
     IQueryFetchPointTransactionsOfLoadingArgs
-  >(
-    FETCH_CHARGE_LIST
-    //     ,{
-    //     variables : { search : ""}
-    // }
-  );
+  >(FETCH_CHARGE_LIST);
   console.log(data?.fetchPointTransactionsOfLoading);
 
   return (
     <div>
-      <h1>충전내역</h1>
+      <h1>포인트 충전내역</h1>
       <ChargeBox>
         <div>
           <ChargeUl>

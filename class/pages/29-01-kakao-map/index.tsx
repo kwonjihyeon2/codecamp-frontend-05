@@ -27,7 +27,7 @@ export default function KakaoMapPage() {
       <Head>
         <script
           type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f"
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_KEY}`}
         ></script>
       </Head>
       <div id="map" style={aaa}></div>

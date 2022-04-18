@@ -1,31 +1,42 @@
 import { useQuery, useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useState } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IMutation,
+  IMutationCreatePointTransactionOfLoadingArgs,
+  IQuery,
+} from "../../../../commons/types/generated/types";
 import ChargePageUI from "./chargeProfile.presenter";
 import { FETCH_USER_INFO, IMP_UID } from "./chargeProfile.queries";
+// import dotenv from "dotenv";
 
 declare const window: typeof globalThis & {
   IMP: any;
 };
+// dotenv.config();
 
 export default function ChargePageContainer() {
   const { data } = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_INFO);
 
   const [amount, setAmount] = useState(0);
   const [changeMount, setChangeMount] = useState(0);
+  const [isShow, setIsShow] = useState(false);
 
   const onClickAmount = (number: number) => () => {
     setChangeMount(number);
     setAmount(number);
-    console.log(number);
   };
+  console.log(amount, "이건 change : " + changeMount);
 
-  const [createPoint] = useMutation(IMP_UID);
+  const [createPoint] = useMutation<
+    Pick<IMutation, "createPointTransactionOfLoading">,
+    IMutationCreatePointTransactionOfLoadingArgs
+  >(IMP_UID);
 
   const onClickPayment = () => {
+    setIsShow((prev) => !prev);
     const IMP = window.IMP; // 생략 가능
-    IMP.init("imp49910675"); // Example: imp00000000, 가맹점 식별 코드 넣는 곳
+    IMP.init("imp49910675"); // 가맹점 식별 코드
 
     // 결제창 호출 관련
     IMP.request_pay(
@@ -33,7 +44,6 @@ export default function ChargePageContainer() {
         // param
         pg: "html5_inicis",
         pay_method: "card",
-        // merchant_uid: "ORD20180131-0000011", 상품ID는 중복불가 => 생략 시 자동생성됨
         name: "포인트 충전",
         amount,
         buyer_email: `${data?.fetchUserLoggedIn.email}`,
@@ -81,6 +91,7 @@ export default function ChargePageContainer() {
         changeMount={changeMount}
         onClickAmount={onClickAmount}
         amount={amount}
+        isShow={isShow}
       />
     </>
   );

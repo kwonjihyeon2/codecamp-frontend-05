@@ -1,4 +1,3 @@
-import "../styles/globals.css"; // 나중에 삭제할..
 import "antd/dist/antd.css";
 import {
   ApolloClient,
@@ -100,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://backend05.codebootcamp.co.kr/graphql",
+    uri: `${process.env.NEXT_PUBLIC_APOLLO_URI}`,
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
   });
