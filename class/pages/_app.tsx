@@ -110,7 +110,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://backend05.codebootcamp.co.kr/graphql",
+    uri: `${process.env.NEXT_PUBLIC_APOLLO_URI}`,
     headers: { Authorization: `Bearer ${accessToken}` }, // 로그인 시 받아온 토큰 자리(graph-ql)
     credentials: "include",
   });
