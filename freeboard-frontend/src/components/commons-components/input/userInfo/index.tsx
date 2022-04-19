@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
 
 const UserInput = styled.input`
   width: 40%;
@@ -15,18 +16,18 @@ const UserInput = styled.input`
 interface IPropsInput {
   style?: {};
   type?: string;
-  value?: string;
-  defaultValue?: string;
-  onChange?: () => void;
+  defaultValue?: string | number | readonly string[] | undefined;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  readOnly?: boolean;
 }
 
 export default function UserInfoInput(props: IPropsInput) {
   return (
     <UserInput
       type={props.type}
-      value={props.value}
       defaultValue={props.defaultValue}
       onChange={props.onChange}
+      readOnly={props.readOnly}
     />
   );
 }

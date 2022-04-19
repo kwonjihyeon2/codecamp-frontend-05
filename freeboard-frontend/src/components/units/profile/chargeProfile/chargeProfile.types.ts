@@ -1,13 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, RefObject } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IPropsCharge {
   onClickPayment: () => void;
   data: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
-  changeMount: number;
   onClickAmount: (number: number) => () => void;
   amount: number;
-  isShow: boolean;
+  fileRef: RefObject<HTMLInputElement>;
+  onClickRef: () => void;
+  onChangeName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickEdit: () => void;
 }
 
 export interface IMountColor {

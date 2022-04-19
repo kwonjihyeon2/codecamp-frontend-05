@@ -1,14 +1,10 @@
 import styled from "@emotion/styled";
-import { IMountColor } from "./chargeProfile.types";
 
 export const ButtonColor = styled.button`
-  /* border: 1px solid
-    ${(props: IMountColor) =>
-    props.changeMount === props.amount ? "blue" : "none"}; */
   border: 1px solid #e0e0e0;
   background-color: #fff;
   font-weight: 700;
-  margin-left: 10px;
+  margin-right: 10px;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -22,6 +18,9 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 0 100px 0;
+  @media (max-width: 1199px) {
+    padding: 0 60px 100px 60px;
+  }
 `;
 
 export const WrapperBody = styled.div`
@@ -44,12 +43,15 @@ export const SettingTxt = styled.div`
 
 export const UserName = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 30px;
   position: relative;
   span {
     width: 15%;
     margin-right: 10px;
+  }
+  .btn {
+    border: 1px solid #ff385c;
   }
 `;
 
@@ -72,9 +74,11 @@ export const ChargeBtn = styled.button`
   }
 `;
 
-export const OpenMoney = styled.div`
-  margin-left: 170px;
-  display: ${(props) => (props.isShow ? "flex" : "none")};
+export const MoneyTxt = styled.div`
+  margin-top: 5px;
+  color: #bbb;
+  font-weight: 500;
+  font-size: 0.8rem;
 `;
 
 export const SubmitInfo = styled.button`
@@ -85,4 +89,5 @@ export const SubmitInfo = styled.button`
   background-color: #000;
   color: #fff;
   border-radius: 5px;
+  cursor: pointer;
 `;

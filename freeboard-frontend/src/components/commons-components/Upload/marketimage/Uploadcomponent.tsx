@@ -1,6 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
-import { useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import styled from "@emotion/styled";
+import {
+  IMutation,
+  IMutationUploadFileArgs,
+} from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -21,10 +26,20 @@ const FileImg = styled.img`
   height: 50px;
 `;
 
-export default function MarketUploadfile(props) {
-  const [uploadfile] = useMutation(UPLOAD_FILE);
+interface IPropsUpload {
+  key: string;
+  index: number;
+  fileUrl?: string;
+  onChangefile: (file: string, index: number) => void;
+}
 
-  const onClickfile = async (event) => {
+export default function MarketUploadfile(props: IPropsUpload) {
+  const [uploadfile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+
+  const onClickfile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
@@ -35,11 +50,15 @@ export default function MarketUploadfile(props) {
       props.onChangefile(result.data?.uploadFile.url, props.index);
       console.log(result.data?.uploadFile);
     } catch (error) {
+      Modal.error({
+        title: "업로드 실패",
+        content: String(error.message),
+      });
       console.log(error.message);
     }
   };
 
-  const fileRef = useRef(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const onClickRef = () => {
     fileRef.current?.click();
   };

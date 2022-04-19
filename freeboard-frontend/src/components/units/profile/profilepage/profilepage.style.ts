@@ -18,7 +18,7 @@ export const WrapperUl = styled.ul`
   align-items: center;
   padding: 30px 0;
   @media (max-width: 1199px) {
-    padding: 30px;
+    padding: 30px 60px;
   }
 `;
 
@@ -39,7 +39,7 @@ export const WrapperContents = styled.div`
   justify-content: space-between;
   @media (max-width: 1199px) {
     flex-wrap: wrap;
-    padding: 0 30px;
+    padding: 0 60px;
   }
 `;
 

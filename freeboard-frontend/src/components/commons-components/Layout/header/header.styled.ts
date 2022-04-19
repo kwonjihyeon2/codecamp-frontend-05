@@ -8,18 +8,23 @@ export const Wrapper = styled.div`
   width: 100%;
   padding: 20px 0;
   background-color: #fff;
-  position: ${(props: Istyle) => (props.scrollPosition > 100 ? "fixed" : "static")};
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  position: ${(props: Istyle) =>
+    props.scrollPosition > 100 ? "fixed" : "static"};
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   top: 0;
   left: 0;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 1199px) {
+    padding: 20px 60px;
+  }
 `;
 export const HeaderList = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1240px;
-  margin: 0 auto;
   align-items: center;
   z-index: 1000;
 `;
