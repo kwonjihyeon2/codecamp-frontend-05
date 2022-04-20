@@ -1,4 +1,5 @@
 import styled from "@emotion/styled/";
+import { FaSearch } from "react-icons/fa";
 import { breakPoints } from "../../../../commons/styles/media";
 
 interface Istyle {
@@ -105,4 +106,11 @@ export const SearchIconSpan = styled.span`
   border-radius: 20px;
   display: flex;
   align-items: center;
+`;
+
+export const FaSearchIcon = styled(FaSearch)`
+  display: none;
+  @media ${breakPoints.xsmobile} {
+    display: block;
+  }
 `;

@@ -29,11 +29,7 @@ export default function LayOutDesignHead(props: IpropsHeader) {
   return (
     <H.Wrapper scrollPosition={scrollPosition}>
       <H.HeaderList>
-        <H.HeaderLogo
-          onClick={moveToPage("/mainpage")}
-        >
-          로고
-        </H.HeaderLogo>
+        <H.HeaderLogo onClick={moveToPage("/mainpage")}>로고</H.HeaderLogo>
         {scrollPosition > 100 ? (
           <H.SearchBox>
             <ProductMyInput type="text" placeholder="검색어를 입력하세요" />
@@ -51,7 +47,9 @@ export default function LayOutDesignHead(props: IpropsHeader) {
         )}
         <H.UserBox>
           {scrollPosition > 100 ? (
-            <div></div>
+            <div>
+              <H.FaSearchIcon />
+            </div>
           ) : (
             <div>
               <FaSearch style={{ color: "#000" }} />

@@ -52,7 +52,9 @@ export default function LayOutDesignMainHead(props: IpropsHeader) {
         )}
         <H.UserBox>
           {scrollPosition > 100 ? (
-            <div></div>
+            <div>
+              <H.FaSearchIcon />
+            </div>
           ) : (
             <div>
               <FaSearch style={{ color: "#fff" }} />

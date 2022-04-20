@@ -1,16 +1,16 @@
-import ProductSmallButton from "../../../commons-components/button/market03";
-import { IoCartOutline, IoTicketOutline } from "react-icons/io5";
-import { BsSuitHeart } from "react-icons/bs";
 import { useState } from "react";
-import SoldItemContainer from "../soldItem-list/soldItem.container";
-import BuyListContainer from "../buyItem-list/buyItemlist.container";
-import ChargeListContainer from "../charge-list/chargelist.container";
 import * as P from "./profilepage.style";
 import { useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { FETCH_IPICKED_COUNT, FETCH_USER_LOGGED_IN } from "./profilepage.query";
+import SoldItemContainer from "../soldItem-list/soldItem.container";
+import BuyListContainer from "../buyItem-list/buyItemlist.container";
+import ChargeListContainer from "../charge-list/chargelist.container";
 import ChargePageContainer from "../chargeProfile/chargeProfile.container";
 import CartPageContainer from "../cart/cart.container";
+import ProductSmallButton from "../../../commons-components/button/market03";
+import { IoCartOutline, IoTicketOutline } from "react-icons/io5";
+import { BsSuitHeart } from "react-icons/bs";
 
 export default function ProfileContainer() {
   const [listIndex, setListIndex] = useState<number>(0);
