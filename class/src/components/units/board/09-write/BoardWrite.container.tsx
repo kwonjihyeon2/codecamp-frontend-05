@@ -47,8 +47,7 @@ export default function BoardWrite(props) {
       number: Number(router.query.mynumber),
     };
     if (myWriter !== "") myvariables.writer = myWriter;
-
-    //중괄호 안써주고 두줄을 써주면 두번쨰줄 코드는 항상실행, if문은 한줄만 인식함 그래서 두줄이상 결과는 중괄호를 써줘야함
+    //중괄호 안써주고 두줄을 써주면 두번째줄 코드는 항상실행, if문은 한줄만 인식함 그래서 두줄이상 결과는 중괄호를 써줘야함
     if (myTitle !== "") myvariables.title = myTitle;
     if (myContents !== "") myvariables.contents = myContents;
 

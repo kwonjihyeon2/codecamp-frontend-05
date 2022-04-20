@@ -17,7 +17,6 @@ declare const window: typeof globalThis & {
 };
 
 export default function ChargePageContainer() {
-  const fileRef = useRef<HTMLInputElement>(null);
   const { data } = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_INFO);
 
   const [amount, setAmount] = useState(0);
@@ -25,10 +24,6 @@ export default function ChargePageContainer() {
     setAmount(el);
   };
   // console.log(amount);
-
-  const onClickRef = () => {
-    fileRef.current?.click();
-  };
 
   const [createPoint] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
@@ -82,9 +77,14 @@ export default function ChargePageContainer() {
   };
 
   //updateUser
-  const [name, setName] = useState("");
+  const [name, setName] = useState(`${data?.fetchUserLoggedIn.name}`);
+  const [picture, setPicture] = useState(`${data?.fetchUserLoggedIn.picture}`);
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+  };
+
+  const onChangefile = (file: string) => {
+    setPicture(file);
   };
 
   const [updateUser] = useMutation<
@@ -96,10 +96,10 @@ export default function ChargePageContainer() {
     name?: string;
     picture?: string;
   }
-  const myvariables: IMyVariables = {
-    picture: "",
-  };
-  if (name !== "") myvariables.name = name;
+
+  const myvariables: IMyVariables = {};
+  if (name) myvariables.name = name;
+  if (picture) myvariables.picture = picture;
   console.log(myvariables);
 
   const onClickEdit = async () => {
@@ -135,10 +135,10 @@ export default function ChargePageContainer() {
         data={data}
         onClickAmount={onClickAmount}
         amount={amount}
-        onClickRef={onClickRef}
-        fileRef={fileRef}
         onChangeName={onChangeName}
         onClickEdit={onClickEdit}
+        onChangefile={onChangefile}
+        picture={picture}
       />
     </>
   );

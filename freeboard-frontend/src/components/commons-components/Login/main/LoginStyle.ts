@@ -6,8 +6,14 @@ interface IpropsColor {
 
 export const Wrapper = styled.div`
   width: 100%;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+`;
+
+export const WrapperBody = styled.div`
+  width: 100%;
   max-width: 1240px;
-  padding: 100px;
   display: flex;
   justify-content: center;
 `;

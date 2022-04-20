@@ -20,7 +20,7 @@ const slideup = keyframes`
     }
     to{
         opacity  :100%;
-        bottom : 20%;
+        bottom : 30%;
     }
 `;
 
@@ -30,9 +30,9 @@ export const MainContent = styled.div`
   font-weight: 700;
   text-align: center;
   position: absolute;
-  bottom: 20%;
+  bottom: 30%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
   animation-name: ${slideup};
   animation-duration: 2s;
 `;
@@ -44,12 +44,21 @@ export const WrapperBody = styled.div`
   color: #fff;
 `;
 
-export const LoginBtn = styled.button`
+export const WelcomeBtn = styled.button`
   background: red;
   border: none;
   font-size: 16px;
   font-weight: 700;
   color: #fff;
   margin-top: 30px;
-  padding: 10px 80px;
+  width: 50%;
+  padding: 10px 0;
+`;
+
+export const BtnBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

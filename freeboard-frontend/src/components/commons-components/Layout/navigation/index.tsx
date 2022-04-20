@@ -15,6 +15,7 @@ const FETCH_USER_LOGGED_IN = gql`
       name
       email
       createdAt
+      picture
       userPoint {
         amount
       }
@@ -44,6 +45,13 @@ export default function LayOutDesignNavi(props: IPropsNavi) {
     alert("로그아웃 되었습니다. 메인 페이지로 이동합니다.");
     router.push("/mainpage");
   };
+  const onClickJoin = () => {
+    router.push("/Login/join");
+  };
+
+  const onClickLogin = () => {
+    router.push("/Login");
+  };
 
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
@@ -60,6 +68,7 @@ export default function LayOutDesignNavi(props: IPropsNavi) {
                   onClick={LogOutUser}
                   style={{
                     marginLeft: "5px",
+                    cursor: "pointer",
                   }}
                 />
               </N.NaviStyleBox>
@@ -68,13 +77,20 @@ export default function LayOutDesignNavi(props: IPropsNavi) {
               </N.NaviDivStyle>
             </N.NaviListStyle>
             <N.UserIcon>
-              <FaUserCircle />
+              {data?.fetchUserLoggedIn.picture ? (
+                <img
+                  style={{ width: "100%" }}
+                  src={`https://storage.googleapis.com/${data?.fetchUserLoggedIn.picture}`}
+                />
+              ) : (
+                <FaUserCircle />
+              )}
             </N.UserIcon>
           </N.LoginUl>
         ) : (
           <N.LogoutUl>
-            <N.NaviList onClick={moveToPage("/mainpage")}>로그인</N.NaviList>
-            <N.NaviList>회원가입</N.NaviList>
+            <N.NaviList onClick={onClickLogin}>로그인</N.NaviList>
+            <N.NaviList onClick={onClickJoin}>회원가입</N.NaviList>
           </N.LogoutUl>
         )}
         <ul>

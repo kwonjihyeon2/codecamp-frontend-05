@@ -13,8 +13,8 @@ interface IPropsJoinUI {
 
 export default function JoinPageUI(props: IPropsJoinUI) {
   return (
-    <div>
-      <J.Wrapper>
+    <J.Wrapper>
+      <J.WrapperBody>
         <J.WrapperContainer>
           <J.Title>회원가입</J.Title>
           <J.ChangeInput
@@ -56,7 +56,7 @@ export default function JoinPageUI(props: IPropsJoinUI) {
             구글로 회원가입
           </J.ButtonLink>
         </J.WrapperContainer>
-      </J.Wrapper>
-    </div>
+      </J.WrapperBody>
+    </J.Wrapper>
   );
 }

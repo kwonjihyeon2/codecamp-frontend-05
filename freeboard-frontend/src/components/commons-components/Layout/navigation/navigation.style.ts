@@ -31,6 +31,9 @@ export const WrapperDiv = styled.div`
   @media (max-width: 1310px) {
     right: 0%;
   }
+  @media (max-width: 1199px) {
+    right: 30px;
+  }
 `;
 
 export const LoginUl = styled.ul`
@@ -56,6 +59,7 @@ export const NaviList = styled.li`
 export const NaviListStyle = styled.li`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   font-size: 1.25rem;
 `;
 
@@ -72,4 +76,6 @@ export const NaviDivStyle = styled.div`
 
 export const UserIcon = styled.li`
   font-size: 2rem;
+  width: 35px;
+  display: flex;
 `;

@@ -6,14 +6,20 @@ interface IpropsColor {
 
 export const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+`;
+
+export const WrapperBody = styled.div`
+  width: 100%;
   max-width: 1240px;
-  margin: 100px;
   display: flex;
   justify-content: center;
 `;
 
 export const WrapperContainer = styled.div`
-  width: 30%;
+  width: 35%;
   display: flex;
   flex-direction: column;
   justify-content: center;

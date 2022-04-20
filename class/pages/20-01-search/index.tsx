@@ -24,7 +24,7 @@ export default function SearchPage() {
   >(FETCH_BOARDS); //variables 참고
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value); //undefined로 타입 추론됨 state에 타입 지정해줘야함
+    setSearch(event.target.value); //undefined로 타입 추론됨 state에 타입 지정해줘야함 -> ("") , <string | undefined>
   };
 
   const onClickSearch = () => {
@@ -37,6 +37,9 @@ export default function SearchPage() {
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     if (event.target instanceof Element)
       refetch({ search: keyword, page: Number(event.target.id) });
+    //search : 입력한 검색어의 특정 페이지
+    //1차 검색 후 다른 키워드를 적고 페이지를 이동하면 다른 키워드로 검색이 됨 -> 방지하기위해 여기는 search 값을 -> keword State로 지정해줌
+    //event.target.id 타입 모를때 -> element 안에 있다는 조건을 걸어줌
   };
 
   return (

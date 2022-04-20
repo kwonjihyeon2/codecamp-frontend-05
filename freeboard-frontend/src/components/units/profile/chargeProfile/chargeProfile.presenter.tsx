@@ -1,4 +1,5 @@
 import UserInfoInput from "../../../commons-components/input/userInfo";
+import UploadProfile from "../../../commons-components/Upload/editUser";
 import * as C from "./chargeProfile.style";
 import { IPropsCharge } from "./chargeProfile.types";
 
@@ -47,13 +48,10 @@ export default function ChargePageUI(props: IPropsCharge) {
                 onChange={props.onChangeName}
               />
             </C.UserName>
-            <C.UserName>
-              <span>프로필 이미지</span>
-              <C.Picture onClick={props.onClickRef}>
-                {props.data?.fetchUserLoggedIn.picture}
-              </C.Picture>
-              <input type="file" ref={props.fileRef} />
-            </C.UserName>
+            <UploadProfile
+              picture={props.picture}
+              onChangefile={props.onChangefile}
+            />
             <C.UserName>
               <span>포인트</span>
               <UserInfoInput

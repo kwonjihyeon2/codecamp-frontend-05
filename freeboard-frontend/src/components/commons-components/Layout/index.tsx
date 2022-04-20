@@ -33,7 +33,7 @@ export default function LayOutDesign(props: IPropsDesign) {
   ];
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
-  const isHiddenmain = HIDDEN_MAIN.includes(router.asPath)
+  const isHiddenmain = HIDDEN_MAIN.includes(router.asPath);
   const isHiddenBanner = HIDDEN_BANNERS.includes(router.asPath);
   const isHiddenSubBanner = HIDDEN_SUBBANNER.includes(router.asPath);
 
@@ -46,9 +46,14 @@ export default function LayOutDesign(props: IPropsDesign) {
       {!isHiddenHeader && (
         <div>
           <LayOutDesignNavi openNavi={openNavi} />
-          {!isHiddenmain ? <LayOutDesignHead openNavi={openNavi} setOpenNavi={setOpenNavi} /> : <LayOutDesignMainHead openNavi={openNavi} setOpenNavi={setOpenNavi} />}
-          
-          {}
+          {!isHiddenmain ? (
+            <LayOutDesignHead openNavi={openNavi} setOpenNavi={setOpenNavi} />
+          ) : (
+            <LayOutDesignMainHead
+              openNavi={openNavi}
+              setOpenNavi={setOpenNavi}
+            />
+          )}
           {!isHiddenBanner && <LayOutDesignBanner />}
           {isHiddenSubBanner && <LayOutDesignSubBanner />}
         </div>

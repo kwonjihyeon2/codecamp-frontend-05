@@ -6,10 +6,10 @@ export interface IPropsCharge {
   data: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
   onClickAmount: (number: number) => () => void;
   amount: number;
-  fileRef: RefObject<HTMLInputElement>;
-  onClickRef: () => void;
   onChangeName: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickEdit: () => void;
+  onChangefile: (file: string) => void;
+  picture: string;
 }
 
 export interface IMountColor {

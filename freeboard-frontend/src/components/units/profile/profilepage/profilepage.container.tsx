@@ -51,7 +51,13 @@ export default function ProfileContainer() {
               <P.ProfileLeft>
                 <P.ProfileLeftInfo>
                   <div>
-                    <P.ProfileImg src="/mypage/profile.jpeg" />
+                    {data?.fetchUserLoggedIn.picture ? (
+                      <P.ProfileImg
+                        src={`https://storage.googleapis.com/${data?.fetchUserLoggedIn.picture}`}
+                      />
+                    ) : (
+                      <P.ProfileImg src="/mypage/profile.jpeg" />
+                    )}
                   </div>
                   <P.InfoName>
                     <P.ProfileName>

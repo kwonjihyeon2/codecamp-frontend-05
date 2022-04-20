@@ -1,4 +1,5 @@
 import styled from "@emotion/styled/";
+import { breakPoints } from "../../../../commons/styles/media";
 
 interface Istyle {
   scrollPosition: number;
@@ -18,6 +19,9 @@ export const Wrapper = styled.div`
   justify-content: center;
   @media (max-width: 1199px) {
     padding: 20px 60px;
+  }
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    padding: 20px 30px;
   }
 `;
 export const HeaderList = styled.div`
@@ -41,6 +45,9 @@ export const NavList = styled.ul`
   display: flex;
   cursor: pointer;
   margin-bottom: 0;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    display: none;
+  }
 `;
 
 export const NavLi = styled.li`
