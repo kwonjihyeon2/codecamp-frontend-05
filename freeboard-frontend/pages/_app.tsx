@@ -50,6 +50,8 @@ interface IpropsContext {
   setAccessToken?: Dispatch<SetStateAction<string>>;
   userInfo?: IUserInfo;
   setUserInfo?: Dispatch<SetStateAction<IUserInfo>>;
+  search?: string;
+  setSearch?: Dispatch<SetStateAction<string>>;
 }
 
 export const MakeGlobalContext = createContext<IpropsContext>({});
@@ -57,6 +59,7 @@ export const MakeGlobalContext = createContext<IpropsContext>({});
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
+  const [search, setSearch] = useState("");
   // const [isLoading, setIsLoading] = useState(true)
 
   const value = {
@@ -64,6 +67,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     setAccessToken: setAccessToken,
     userInfo,
     setUserInfo,
+    search,
+    setSearch,
   };
 
   useEffect(() => {

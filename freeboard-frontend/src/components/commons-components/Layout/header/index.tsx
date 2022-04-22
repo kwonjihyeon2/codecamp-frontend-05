@@ -1,9 +1,19 @@
 import { MoveToPageHook } from "../../hooks/MoveToPageHook";
 import { FaSearch, FaUserShield } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import ProductMyInput from "../../input/market/index";
 import * as H from "./header.styled";
+import { MakeGlobalContext } from "../../../../../pages/_app";
+import { useRouter } from "next/router";
+import { ChangeEvent } from "react";
+import _ from "lodash";
 
 interface IpropsHeader {
   openNavi: boolean;
@@ -11,12 +21,14 @@ interface IpropsHeader {
 }
 
 export default function LayOutDesignHead(props: IpropsHeader) {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState("");
   const { moveToPage } = MoveToPageHook();
 
   const onClickOpenNavi = () => {
     props.setOpenNavi((prev) => !prev);
   };
-  // console.log(props.openNavi);
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -26,14 +38,36 @@ export default function LayOutDesignHead(props: IpropsHeader) {
   });
   // console.log(scrollPosition);
 
+  // const { setSearch } = useContext(MakeGlobalContext);
+  // const getDebounce = _.debounce((data) => {
+  //   if (setKeyword) setKeyword(data);
+  // }, 1000);
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+  const onClickSearch = () => {
+    // if (setSearch) setSearch(keyword);
+    router.push({
+      pathname: "/search/index",
+      query: {
+        keyword: keyword,
+      },
+    });
+  };
+
   return (
     <H.Wrapper scrollPosition={scrollPosition}>
       <H.HeaderList>
         <H.HeaderLogo onClick={moveToPage("/mainpage")}>로고</H.HeaderLogo>
         {scrollPosition > 100 ? (
           <H.SearchBox>
-            <ProductMyInput type="text" placeholder="검색어를 입력하세요" />
-            <H.SearchIconSpan>
+            <ProductMyInput
+              type="text"
+              placeholder="검색어를 입력하세요"
+              onChange={onChangeSearch}
+            />
+            <H.SearchIconSpan onClick={onClickSearch}>
               <FaSearch />
             </H.SearchIconSpan>
           </H.SearchBox>

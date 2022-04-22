@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
 
 const ProductMyInput = styled.input`
   border: none;
@@ -11,6 +12,7 @@ interface IPropsInput {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function ProductInput(props: IPropsInput) {
@@ -20,6 +22,7 @@ export default function ProductInput(props: IPropsInput) {
       value={props.value}
       defaultValue={props.defaultValue}
       placeholder={props.placeholder}
+      onChange={props.onChange}
     />
   );
 }

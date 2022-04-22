@@ -28,6 +28,7 @@ export default function SearchPage() {
     refetch({ search: data, page: 1 });
     setKeyword(data);
     //settimeout개념, 마지막 입력하고 1s 후 1번 실행
+    console.log(data);
   }, 1000);
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
