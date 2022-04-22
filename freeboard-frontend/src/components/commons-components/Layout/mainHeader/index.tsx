@@ -55,7 +55,6 @@ export default function LayOutDesignMainHead(props: IpropsHeader) {
       },
     });
   };
-  // console.log(keyword, router.query.keyword);
 
   return (
     <H.Wrapper scrollPosition={scrollPosition}>

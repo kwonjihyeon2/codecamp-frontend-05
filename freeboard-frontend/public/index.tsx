@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MakeGlobalContext } from "../_app";
+import { MakeGlobalContext } from "../pages/_app";
 
 export default function SearchPage() {
   const { search } = useContext(MakeGlobalContext);
