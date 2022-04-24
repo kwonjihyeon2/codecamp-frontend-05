@@ -27,7 +27,10 @@ export default function ItemListUI(props: IPropsList) {
         page: Math.ceil(props.data?.fetchUseditems.length / 10) + 1,
         search: "",
       },
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (
+        prev: any,
+        { fetchMoreResult }: { fetchMoreResult: any }
+      ) => {
         if (!fetchMoreResult?.fetchUseditems)
           return { fetchUseditems: [...prev.fetchUseditems] };
 

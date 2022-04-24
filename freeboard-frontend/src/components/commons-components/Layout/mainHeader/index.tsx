@@ -18,6 +18,7 @@ import _ from "lodash";
 interface IpropsHeader {
   openNavi: boolean;
   setOpenNavi: Dispatch<SetStateAction<boolean>>;
+  // query: { [keyword: string]: string };
 }
 
 export default function LayOutDesignMainHead(props: IpropsHeader) {

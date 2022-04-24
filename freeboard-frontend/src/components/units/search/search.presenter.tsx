@@ -15,8 +15,8 @@ export default function SearchPageUI(props: IPropsSearch) {
           '{props.keyword}'에 대한 통합 검색 결과
           <S.MainSpan>
             {`${
-              props.data?.fetchBoards.length +
-              props.fetchdata?.fetchUseditems.length
+              (props.data?.fetchBoards.length || 0) +
+              (props.fetchdata?.fetchUseditems.length || 0)
             }`}
             건
           </S.MainSpan>
@@ -28,7 +28,7 @@ export default function SearchPageUI(props: IPropsSearch) {
               <S.MainSpan>{props.data?.fetchBoards.length}</S.MainSpan>
             </div>
             <div style={{ marginRight: "10px" }}>
-              {props.data?.fetchBoards.length >= 4 ? (
+              {(props.data?.fetchBoards.length || 0) >= 4 ? (
                 <div>더보기</div>
               ) : (
                 <div></div>
@@ -68,7 +68,7 @@ export default function SearchPageUI(props: IPropsSearch) {
             </div>
 
             <div style={{ marginRight: "10px" }}>
-              {props.fetchdata?.fetchUseditems.length >= 5 ? (
+              {(props.fetchdata?.fetchUseditems.length || 0) >= 5 ? (
                 <div>더보기</div>
               ) : (
                 <div></div>

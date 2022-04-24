@@ -11,25 +11,19 @@ import { FETCH_BOARDS, FETCH_USED_ITEMS } from "./search.queries";
 
 export default function RouterSearchPage() {
   const router = useRouter();
-  const keyword: string = router.query.keyword;
+  const keyword = router.query.keyword;
   console.log(router.query);
 
   const { moveToPage } = MoveToPageHook();
   //test
 
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS,
-    {
-      variables: {
-        search: keyword,
-        page: 1,
-      },
-    }
-  );
-  const { data: fetchdata } = useQuery<
-    Pick<IQuery, "fetchUseditems">,
-    IQueryFetchUseditemsArgs
-  >(FETCH_USED_ITEMS, {
+  const { data } = useQuery(FETCH_BOARDS, {
+    variables: {
+      search: keyword,
+      page: 1,
+    },
+  });
+  const { data: fetchdata } = useQuery(FETCH_USED_ITEMS, {
     variables: {
       search: keyword,
       page: 1,
