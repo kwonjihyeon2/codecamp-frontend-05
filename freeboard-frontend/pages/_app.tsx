@@ -28,12 +28,12 @@ import { getAccessToken } from "../src/commons/libraries/getAccessToken";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCX4TE4xP6jaGfW18fFeUFmeiJ4ifPeXyY",
-  authDomain: "forfreeboard.firebaseapp.com",
-  projectId: "forfreeboard",
-  storageBucket: "forfreeboard.appspot.com",
-  messagingSenderId: "1032669085239",
-  appId: "1:1032669085239:web:a2db23a257ef37c19649b2",
+  apiKey: `${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
+  authDomain: `${process.env.NEXT_PUBLIC_AUTH_DOMAIN}`,
+  projectId: `${process.env.NEXT_PUBLIC_PROJECT_ID}`,
+  storageBucket: `${process.env.NEXT_PUBLIC_BUCKET}`,
+  messagingSenderId: `${process.env.NEXT_PUBLIC_SENDER_ID}`,
+  appId: `${process.env.NEXT_PUBLIC_APP_ID}`,
 };
 
 // Initialize Firebase

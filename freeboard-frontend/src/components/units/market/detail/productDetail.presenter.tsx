@@ -24,8 +24,7 @@ export default function ItemDetailPageUI(props: IPropsDetailType) {
       const address = props.data?.fetchUseditem.useditemAddress?.address;
       // map api
       const script = document.createElement("script");
-      script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f&autoload=false&libraries=services";
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false&libraries=services`;
       document.head.appendChild(script);
 
       script.onload = () => {
@@ -131,12 +130,12 @@ export default function ItemDetailPageUI(props: IPropsDetailType) {
                     style={{ borderRadius: "100%" }}
                     onClick={moveToPage(`/market/${router.query.ItemId}/edit`)}
                     name="수정"
-                  ></ProductSmallButton>
+                  />
                   <ProductSmallButton
                     style={{ borderRadius: "100%" }}
                     onClick={props.onClickDeleteItem}
                     name="삭제"
-                  ></ProductSmallButton>
+                  />
                 </L.MoreBox>
                 <L.Icons onClick={onClickOpen}>
                   <FiMoreVertical />

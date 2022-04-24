@@ -8,8 +8,7 @@ declare const window: typeof globalThis & {
 export default function MapPage() {
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=7c386a558be041dd6a3536203ece273f&autoload=false";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false`;
     document.head.appendChild(script);
 
     script.onload = () => {

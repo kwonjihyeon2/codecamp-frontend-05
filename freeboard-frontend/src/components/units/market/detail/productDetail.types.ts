@@ -24,7 +24,7 @@ export interface IPropsDetailType {
   picked: boolean;
   PickedData: Pick<IQuery, "fetchUseditemsIPicked"> | undefined;
   data: Pick<IQuery, "fetchUseditem"> | undefined;
-  onClickDeleteItem: () => Promise<void>;
+  onClickDeleteItem: () => void;
   onClickBuyItem: () => Promise<void>;
   todayView: IUserTodayView[];
   onClickMoveItem: (_id: string) => () => void;
