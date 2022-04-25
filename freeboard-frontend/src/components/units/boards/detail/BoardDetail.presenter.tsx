@@ -85,18 +85,20 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
           </S.Wrapper>
         </S.BoardContent>
         <S.ShowBox>
-          <h1>추천영상</h1>
-          <S.BodyYouTube>
-            <ReactPlayer
-              url={
-                props.data?.fetchBoard.youtubeUrl
-                  ? props.data?.fetchBoard.youtubeUrl
-                  : "https://youtu.be/F-o1wmQ1AKA"
-              }
-              width={480}
-              height={250}
-            />
-          </S.BodyYouTube>
+          <S.ShowContainer>
+            <h1>추천영상</h1>
+            <S.BodyYouTube>
+              <ReactPlayer
+                url={
+                  props.data?.fetchBoard.youtubeUrl
+                    ? props.data?.fetchBoard.youtubeUrl
+                    : "https://youtu.be/F-o1wmQ1AKA"
+                }
+                width={480}
+                height={250}
+              />
+            </S.BodyYouTube>
+          </S.ShowContainer>
         </S.ShowBox>
       </S.NewBody>
       <S.ButtonBox>

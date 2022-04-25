@@ -36,7 +36,7 @@ export default function LayOutDesignBanner() {
     autoplay: true,
     autoplayspeed: 2000,
     centerMode: true,
-    centerPadding: "60px",
+    centerPadding: "70px",
     Infinity: true,
     slidesToShow: 1,
     slidesToScroll: 1,

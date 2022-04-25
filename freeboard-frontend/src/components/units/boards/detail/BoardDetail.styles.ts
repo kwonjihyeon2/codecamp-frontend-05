@@ -125,9 +125,17 @@ export const DisLikeText = styled.div`
 `;
 
 export const ShowBox = styled.div`
-  position: static;
+  position: sticky;
+  top: 20%;
+  right: 0;
   width: 30%;
-  padding: 80px 0;
+  /* padding: 80px 0;
+  border: 1px solid #bdbdbd; */
+`;
+
+export const ShowContainer = styled.div`
+  width: 100%;
+  margin: 80px 0;
   border: 1px solid #bdbdbd;
 `;
 
