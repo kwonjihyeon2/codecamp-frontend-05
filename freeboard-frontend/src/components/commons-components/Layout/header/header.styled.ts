@@ -55,7 +55,7 @@ export const NavLi = styled.li`
   margin: 0 10px;
   font-weight: 700;
   color: #000;
-  border-bottom: 1px solid #ffff;
+  border-bottom: 1px solid #fff;
   &:hover {
     transition: all 0.5s;
     transform: translateY(-5px);

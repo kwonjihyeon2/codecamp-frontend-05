@@ -42,7 +42,7 @@ export default function LayOutDesign(props: IPropsDesign) {
 
   const [openNavi, setOpenNavi] = useState(false);
 
-  console.log(isSearch);
+  // console.log(isHiddenmain);
 
   return (
     <div>
