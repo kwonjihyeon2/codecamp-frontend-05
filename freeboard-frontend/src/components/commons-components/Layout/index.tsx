@@ -25,13 +25,15 @@ export default function LayOutDesign(props: IPropsDesign) {
   const router = useRouter();
 
   const HIDDEN_BANNERS = [
-    "/Login",
-    "/Login/join",
-    "/mypage",
-    "/boards",
-    `/boards/${router.query.board_Id}`,
-    "/market",
-    `/market/${router.query.ItemId}`,
+    "/Login/",
+    "/Login/join/",
+    "/mypage/",
+    "/boards/",
+    "/boards/new/",
+    `/boards/${router.query.board_Id}/`,
+    "/market/",
+    "/market/new",
+    `/market/${router.query.ItemId}/`,
   ];
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);

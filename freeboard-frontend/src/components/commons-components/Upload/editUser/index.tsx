@@ -80,7 +80,7 @@ export default function UploadProfile(props: IEditProfile) {
 
   return (
     <>
-      {props.picture ? (
+      {props.picture && props.picture !== "null" ? (
         <ImageBox>
           <span>프로필 이미지</span>
           <div
