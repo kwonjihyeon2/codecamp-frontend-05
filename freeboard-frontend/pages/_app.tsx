@@ -104,7 +104,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   const uploadLink = createUploadLink({
-    uri: `${process.env.NEXT_PUBLIC_APOLLO_URI}`,
+    uri: "https://backend05.codebootcamp.co.kr/graphql03",
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
   });
