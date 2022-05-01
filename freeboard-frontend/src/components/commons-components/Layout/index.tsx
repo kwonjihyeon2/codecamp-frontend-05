@@ -17,8 +17,8 @@ const LayOutDesignBody = styled.div`
 `;
 
 const HIDDEN_HEADERS = ["/"];
-const HIDDEN_MAIN = ["/mainpage"];
-const HIDDEN_SUBBANNER = ["/boards", "/market"];
+const HIDDEN_MAIN = ["/mainpage/"];
+const HIDDEN_SUBBANNER = ["/boards/", "/market/"];
 const HIDDEN_SEARCH = "/search/";
 
 export default function LayOutDesign(props: IPropsDesign) {
