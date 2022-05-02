@@ -1,0 +1,11 @@
+#도커 설정 파일(여러가지 도커파일 한번에 실행 가능)
+
+version: "3.3"
+
+services:
+  my_frontend:
+    build:
+      context: . #도커파일 위치
+      dockerfile: Dockerfile #도커 파일 이름
+    ports:
+      - 3000:3000
