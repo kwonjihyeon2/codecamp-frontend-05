@@ -5,19 +5,19 @@ import Head from "next/head";
 import { request, gql } from "graphql-request";
 import { GetServerSideProps } from "next";
 
-// interface IPropsBoard {
-//   data: {
-//     title: string;
-//     contents: string;
-//     images: string[];
-//   };
-// }
+interface IPropsBoard {
+  data: {
+    title: string;
+    contents: string;
+    images: string[];
+  };
+}
 
-export default function BoardDetailPage() {
+export default function BoardDetailPage(props: IPropsBoard) {
   // console.log(props.data);
   return (
     <div>
-      {/* <Head>
+      <Head>
         <meta property="og:title" content={props.data.title} />
         <meta property="og:description" content={props.data.contents} />
         <meta
@@ -28,7 +28,7 @@ export default function BoardDetailPage() {
               : "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E"
           }
         />
-      </Head> */}
+      </Head>
       <div>
         <FreeBoardDetail />
         <FreeBoardComments />
@@ -49,20 +49,20 @@ const FETCH_BOARD = gql`
   }
 `;
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const result = await request(
-//     "https://backend05.codebootcamp.co.kr/graphql03",
-//     FETCH_BOARD,
-//     { boardId: context.query.board_Id }
-//   );
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const result = await request(
+    "https://backend05.codebootcamp.co.kr/graphql",
+    FETCH_BOARD,
+    { boardId: context.query.board_Id }
+  );
 
-//   return {
-//     props: {
-//       data: {
-//         title: result.fetchBoard.title,
-//         contents: result.fetchBoard.contents,
-//         images: result.fetchBoard.images,
-//       },
-//     },
-//   };
-// };
+  return {
+    props: {
+      data: {
+        title: result.fetchBoard.title,
+        contents: result.fetchBoard.contents,
+        images: result.fetchBoard.images,
+      },
+    },
+  };
+};
