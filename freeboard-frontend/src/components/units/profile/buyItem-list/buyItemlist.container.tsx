@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchUseditemsIBoughtArgs,
@@ -6,23 +6,11 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { getMyDate, handelError } from "../../../../commons/libraries/uitils";
 import * as B from "./buyItemlist.styled";
-import InfiniteScroll from 'react-infinite-scroller';
-
-const FETCH_IBOUGHT = gql`
-  query fetchUseditemsIBought($search: String, $page: Int) {
-    fetchUseditemsIBought(search: $search, page: $page) {
-      name
-      remarks
-      contents
-      price
-      images
-      createdAt
-    }
-  }
-`;
+import InfiniteScroll from "react-infinite-scroller";
+import { FETCH_IBOUGHT } from "./buyItemlist.query";
 
 export default function BuyListContainer() {
-  const { data , fetchMore } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditemsIBought">,
     IQueryFetchUseditemsIBoughtArgs
   >(FETCH_IBOUGHT);
@@ -47,8 +35,8 @@ export default function BuyListContainer() {
           ],
         };
       },
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -56,36 +44,38 @@ export default function BuyListContainer() {
         구매내역
         <B.BuyTitleSpan>지난 3년간 구매 내역 조회가 가능합니다.</B.BuyTitleSpan>
       </B.BuyTitle>
-      <B.BuyItemListBox >
+      <B.BuyItemListBox>
         <InfiniteScroll
-            pageStart={0}
-            loadMore={MoreLoadData}
-            hasMore={true}
-            useWindow={false}
+          pageStart={0}
+          loadMore={MoreLoadData}
+          hasMore={true}
+          useWindow={false}
         >
-        {data?.fetchUseditemsIBought.map((el) => (
-          <B.BuyItemBox key={uuidv4()}>
-            <div>{getMyDate(el.createdAt)}</div>
-            <B.ItemInfoBox>
-              <div style={{ width: "50px", height: "50px" }}>
-                <img
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "10px",
-                  }}
-                  src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                  onError={handelError}
-                />
-              </div>
-              <div>
-                <div>구매 상품 | {el.name}</div>
-                <div>구매 가격 | <B.ItemPrice>{el.price}</B.ItemPrice>원</div>
-              </div>
-            </B.ItemInfoBox>
-          </B.BuyItemBox>
-        ))}
+          {data?.fetchUseditemsIBought.map((el) => (
+            <B.BuyItemBox key={uuidv4()}>
+              <div>{getMyDate(el.createdAt)}</div>
+              <B.ItemInfoBox>
+                <div style={{ width: "50px", height: "50px" }}>
+                  <img
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                    src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                    onError={handelError}
+                  />
+                </div>
+                <div>
+                  <div>구매 상품 | {el.name}</div>
+                  <div>
+                    구매 가격 | <B.ItemPrice>{el.price}</B.ItemPrice>원
+                  </div>
+                </div>
+              </B.ItemInfoBox>
+            </B.BuyItemBox>
+          ))}
         </InfiniteScroll>
       </B.BuyItemListBox>
     </div>
