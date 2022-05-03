@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const result = await request(
     "https://backend05.codebootcamp.co.kr/graphql03",
     FETCH_USED_ITEM,
-    { useditemId: context.query.ItemId }
+    { useditemId: String(context.query.ItemId) }
   );
 
   return {

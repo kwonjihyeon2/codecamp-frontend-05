@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   trailingSlash: true,
-  assetPrefix: "/boards",
+  // assetPrefix: "/boards",
   generateBuildId: () => "freeboard-deploy", //ssr, ssg 동일한 파일이라고 인식시킴
   exportPathMap: () => ({
     //정적으로(storage)에서 받아올 파일

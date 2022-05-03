@@ -14,7 +14,6 @@ interface IPropsBoard {
 }
 
 export default function BoardDetailPage(props: IPropsBoard) {
-  // console.log(props.data);
   return (
     <div>
       <Head>
@@ -53,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const result = await request(
     "https://backend05.codebootcamp.co.kr/graphql03",
     FETCH_BOARD,
-    { boardId: context.query.board_Id }
+    { boardId: String(context.query.board_Id) }
   );
 
   return {
