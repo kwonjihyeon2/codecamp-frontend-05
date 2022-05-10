@@ -40,6 +40,7 @@ export const HeaderLogo = styled.div`
   color: rgb(255, 56, 92);
   z-index: 1000;
   cursor: pointer;
+  font-weight: 700;
 `;
 
 export const NavList = styled.ul`

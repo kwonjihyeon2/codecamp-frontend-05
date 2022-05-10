@@ -41,6 +41,7 @@ export const HeaderLogo = styled.div`
     props.scrollPosition > 100 ? "rgb(255, 56, 92)" : "#fff"};
   z-index: 1000;
   cursor: pointer;
+  font-weight: 700;
 `;
 
 export const NavList = styled.ul`

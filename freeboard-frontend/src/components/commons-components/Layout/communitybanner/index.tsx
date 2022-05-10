@@ -51,27 +51,29 @@ export default function LayOutDesignSubBanner() {
 
   return (
     <S.Wrapper>
-      <S.SlickTitle>
-        <S.SlickTitleH1>인기 게시물의 주인공이 되어보세요</S.SlickTitleH1>
-        <div>게시물 등록에 도움이 되는 자료입니다</div>
-      </S.SlickTitle>
-      <S.MySlider {...settings}>
-        {data?.fetchUseditems.map((el, index) => (
-          <S.MainSlick key={index}>
-            <S.SlickimgBox>
-              <S.ColorImg
-                src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                onError={handelError}
-                alt={el.remarks}
-              />
-            </S.SlickimgBox>
-            <S.TextBox>
-              <S.CommonsText>{el.remarks}</S.CommonsText>
-              <S.CommonsText>{el.name}</S.CommonsText>
-            </S.TextBox>
-          </S.MainSlick>
-        ))}
-      </S.MySlider>
+      <S.WrapperContainer>
+        <S.SlickTitle>
+          <S.SlickTitleH1>인기 게시물의 주인공이 되어보세요</S.SlickTitleH1>
+          <div>게시물 등록에 도움이 되는 자료입니다</div>
+        </S.SlickTitle>
+        <S.MySlider {...settings}>
+          {data?.fetchUseditems.map((el, index) => (
+            <S.MainSlick key={index}>
+              <S.SlickimgBox>
+                <S.ColorImg
+                  src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                  onError={handelError}
+                  alt={el.remarks}
+                />
+              </S.SlickimgBox>
+              <S.TextBox>
+                <S.CommonsText>{el.remarks}</S.CommonsText>
+                <S.CommonsText>{el.name}</S.CommonsText>
+              </S.TextBox>
+            </S.MainSlick>
+          ))}
+        </S.MySlider>
+      </S.WrapperContainer>
     </S.Wrapper>
   );
 }

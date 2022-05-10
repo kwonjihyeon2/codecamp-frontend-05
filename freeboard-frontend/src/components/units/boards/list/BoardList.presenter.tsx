@@ -19,7 +19,9 @@ export default function BoardListPageUI(props: IPropsListUI) {
       <S.WrapperTop>
         <div>
           총{" "}
-          <S.BoardCount>{props.dataBoardsCount?.fetchBoardsCount}</S.BoardCount>
+          <S.BoardCount>
+            {props.dataBoardsCount?.fetchBoardsCount}{" "}
+          </S.BoardCount>
           건
         </div>
         <div>

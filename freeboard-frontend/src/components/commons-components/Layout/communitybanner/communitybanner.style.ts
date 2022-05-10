@@ -8,10 +8,17 @@ export const Wrapper = styled.div`
   padding: 30px 50px;
   overflow: hidden;
   background: #000;
+  display: flex;
+  justify-content: center;
+`;
+
+export const WrapperContainer = styled.div`
+  width: 100%;
+  max-width: 1240px;
 `;
 
 export const SlickTitle = styled.div`
-  padding-left: 20px;
+  width: 100%;
   font-size: 1.5rem;
   color: #fff;
 `;
@@ -30,7 +37,7 @@ export const TextBox = styled.div`
 `;
 
 export const MainSlick = styled.div`
-  padding: 0 20px;
+  padding: 0 10px;
   position: relative;
 `;
 
@@ -51,6 +58,7 @@ export const ColorImg = styled.img`
 `;
 
 export const MySlider = styled(Slider)`
+  width: 100%;
   padding-top: 80px;
   .slick-prev,
   .slick-next {

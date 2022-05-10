@@ -59,7 +59,11 @@ export default function LayOutDesignHead(props: IpropsHeader) {
   return (
     <H.Wrapper scrollPosition={scrollPosition}>
       <H.HeaderList>
-        <H.HeaderLogo onClick={moveToPage("/mainpage")}>로고</H.HeaderLogo>
+        <H.HeaderLogo onClick={moveToPage("/mainpage")}>
+          SHARE
+          <br />
+          GROUND
+        </H.HeaderLogo>
         {scrollPosition > 100 ? (
           <H.SearchBox>
             <ProductMyInput
@@ -73,7 +77,7 @@ export default function LayOutDesignHead(props: IpropsHeader) {
           </H.SearchBox>
         ) : (
           <H.NavList>
-            <H.NavLi>OPEN-API</H.NavLi>
+            <H.NavLi onClick={moveToPage("/openapi")}>OPEN-API</H.NavLi>
             <H.NavLi onClick={moveToPage("/boards")}>COMMUNITY</H.NavLi>
             <H.NavLi onClick={moveToPage("/market")}>MARKET</H.NavLi>
             <H.NavLi onClick={moveToPage("/mypage")}>MY</H.NavLi>
