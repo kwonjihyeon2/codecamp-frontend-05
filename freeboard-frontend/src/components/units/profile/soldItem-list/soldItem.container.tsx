@@ -1,7 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
-import { handelError } from "../../../../commons/libraries/uitils";
+import { getMyDate, handelError } from "../../../../commons/libraries/uitils";
+import * as S from "./soldItem.styled";
 
 const FETCH_ISOLD = gql`
   query fetchUseditemsISold($search: String, $page: Int) {
@@ -12,32 +13,39 @@ const FETCH_ISOLD = gql`
       contents
       price
       images
+      createdAt
     }
   }
 `;
-
 export default function SoldItemContainer() {
   const { data } = useQuery<Pick<IQuery, "fetchUseditemsISold">>(FETCH_ISOLD, {
     variables: { search: "", page: 1 },
   });
   console.log(data);
+
   return (
     <div>
-      <h1>판매내역</h1>
-      <div>
+      <S.BuyTitle>판매내역</S.BuyTitle>
+      <S.BuyItemListBox>
         {data?.fetchUseditemsISold.map((el) => (
-          <div key={uuidv4()}>
-            <div>
-              <img
-                src={`https://googlestorage.com/${el.images?.[0]}`}
-                onError={handelError}
-              />
-            </div>
-            <div>{el.name}</div>
-            <div>{el.price}원</div>
-          </div>
+          <S.BuyItemBox key={uuidv4()}>
+            <div>{getMyDate(el.createdAt)}</div>
+            <S.ItemInfoBox>
+              <div style={{ width: "50px", height: "50px" }}>
+                <img
+                  style={{ width: "100%" }}
+                  src={`https://googlestorage.com/${el.images?.[0]}`}
+                  onError={handelError}
+                />
+              </div>
+              <div>
+                <div>{el.name}</div>
+                <div>{el.price}원</div>
+              </div>
+            </S.ItemInfoBox>
+          </S.BuyItemBox>
         ))}
-      </div>
+      </S.BuyItemListBox>
     </div>
   );
 }
