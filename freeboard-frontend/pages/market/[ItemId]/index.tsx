@@ -29,7 +29,7 @@ export const ItemDetailPage = (props: any) => {
   >(FETCH_USED_ITEM, {
     variables: { useditemId: String(router.query.ItemId) },
   });
-  console.log(data);
+  // console.log(data);
   // if (loading) return "loading";
 
   return (

@@ -16,6 +16,7 @@ import {
   IMutationToggleUseditemPickArgs,
   IQuery,
   IQueryFetchUseditemsIPickedArgs,
+  IUseditem,
 } from "../../../../commons/types/generated/types";
 import { IPropsType } from "./productDetail.types";
 
@@ -43,7 +44,7 @@ export default function ItemDetailContainer(props: IPropsType) {
       await deleteProduct({
         variables: { useditemId: String(router.query.ItemId) },
       });
-      console.log(router.query.ItemId);
+      // console.log(router.query.ItemId);
       router.push("/market");
     } catch (error) {
       console.log(error.message);
@@ -96,23 +97,42 @@ export default function ItemDetailContainer(props: IPropsType) {
         },
       });
       setPicked((prev) => !prev);
-      console.log(pickResult);
+      // console.log(pickResult);
     } catch (error) {
       console.log(error.message);
     }
   };
-  // console.log(PickedData);
 
   useEffect(() => {
     const pick = PickedData?.fetchUseditemsIPicked.filter(
       (el: any) => el._id === props.data?.fetchUseditem._id
     );
-    // console.log(props.data?.fetchUseditem._id, pick);
 
     if (pick?.length) {
       setPicked(false);
     }
   }, [PickedData, props.data]);
+
+  const onClickBasket = async () => {
+    let el: IUseditem = props.data?.fetchUseditem;
+    const todayBasket = JSON.parse(localStorage.getItem("todayBasket") || "[]");
+
+    const temp = todayBasket.filter(
+      (basketEl: IUseditem) => basketEl._id === el._id
+    );
+    if (temp.length === 1) {
+      Modal.error({
+        content: "이미 담으신 물품입니다",
+      });
+      return;
+    }
+
+    const { __typename, useditemAddress, contents, ...newEl } = el;
+    todayBasket.push(newEl);
+
+    localStorage.setItem("todayBasket", JSON.stringify(todayBasket));
+    Modal.success({ content: "상품이 장바구니에 담겼습니다." });
+  };
 
   return (
     <ItemDetailPageUI
@@ -124,6 +144,7 @@ export default function ItemDetailContainer(props: IPropsType) {
       onClickDeleteItem={onClickDeleteItem}
       onClickBuyItem={onClickBuyItem}
       onClickMoveItem={onClickMoveItem}
+      onClickBasket={onClickBasket}
     />
   );
 }

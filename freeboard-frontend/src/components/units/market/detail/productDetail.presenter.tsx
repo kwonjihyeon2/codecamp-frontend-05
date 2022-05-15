@@ -174,7 +174,7 @@ export default function ItemDetailPageUI(props: IPropsDetailType) {
                 </L.ProductPrice>
               </L.ProductPriceBox>
               <L.buttonBox>
-                <L.IButton>
+                <L.IButton onClick={props.onClickBasket}>
                   <FiShoppingCart />
                 </L.IButton>
                 <L.IButton onClick={moveToPage("/market")}>

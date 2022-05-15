@@ -28,6 +28,7 @@ export interface IPropsDetailType {
   onClickBuyItem: () => Promise<void>;
   todayView: IUserTodayView[];
   onClickMoveItem: (_id: string) => () => void;
+  onClickBasket: () => void;
 }
 
 export interface IpropsButton {
