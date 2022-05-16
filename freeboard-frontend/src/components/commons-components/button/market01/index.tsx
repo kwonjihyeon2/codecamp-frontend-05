@@ -10,7 +10,14 @@ const BigButton = styled.button`
   cursor: pointer;
 `;
 
-export default function ProductBigButton(props) {
+interface IPropsBig {
+  style?: {};
+  type?: "button" | "reset" | "submit" | undefined;
+  onClick?: () => void;
+  name?: string;
+}
+
+export default function ProductBigButton(props: IPropsBig) {
   return (
     <>
       <BigButton style={props.style} type={props.type} onClick={props.onClick}>

@@ -14,9 +14,9 @@ export const WrapperBody = styled.div`
 
 export const WrapperUl = styled.ul`
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 30px 0;
+  margin: 0;
   @media (max-width: 1199px) {
     padding: 30px 60px;
   }
@@ -26,6 +26,7 @@ export const NaviList = styled.li`
   margin-right: 20px;
   cursor: pointer;
   font-weight: 700;
+  border-bottom: 1px solid #fff;
   &:hover {
     color: rgb(255, 56, 92);
   }
