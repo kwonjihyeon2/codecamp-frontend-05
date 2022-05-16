@@ -5,6 +5,7 @@ import {
   IMutation,
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
+import { breakPoints } from "../../../../commons/styles/media";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -27,6 +28,12 @@ const ImageBox = styled.div`
   span {
     width: 15%;
     margin-right: 10px;
+  }
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    flex-direction: column;
+    span {
+      width: 100%;
+    }
   }
 `;
 

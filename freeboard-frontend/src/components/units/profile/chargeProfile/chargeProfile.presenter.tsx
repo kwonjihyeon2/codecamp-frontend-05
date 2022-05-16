@@ -5,21 +5,11 @@ import { IPropsCharge } from "./chargeProfile.types";
 
 export default function ChargePageUI(props: IPropsCharge) {
   const moneyArr = [
-    {
-      content: 100,
-    },
-    {
-      content: 1000,
-    },
-    {
-      content: 10000,
-    },
-    {
-      content: 30000,
-    },
-    {
-      content: 50000,
-    },
+    { content: 100 },
+    { content: 1000 },
+    { content: 10000 },
+    { content: 30000 },
+    { content: 50000 },
   ];
 
   return (
@@ -30,7 +20,7 @@ export default function ChargePageUI(props: IPropsCharge) {
           <div>
             <C.UserName>
               <span>이메일</span>
-              <div style={{ width: "85%" }}>
+              <C.UserInputBox>
                 <UserInfoInput
                   defaultValue={props.data?.fetchUserLoggedIn.email}
                   readOnly={true}
@@ -38,15 +28,17 @@ export default function ChargePageUI(props: IPropsCharge) {
                 <C.MoneyTxt>
                   이메일을 변경하시려면 운영자에게 메일을 보내주세요
                 </C.MoneyTxt>
-              </div>
+              </C.UserInputBox>
             </C.UserName>
             <C.UserName>
               <span>닉네임</span>
-              <UserInfoInput
-                defaultValue={props.data?.fetchUserLoggedIn.name}
-                readOnly={!props.data?.fetchUserLoggedIn.name}
-                onChange={props.onChangeName}
-              />
+              <C.UserInputBox>
+                <UserInfoInput
+                  defaultValue={props.data?.fetchUserLoggedIn.name}
+                  readOnly={!props.data?.fetchUserLoggedIn.name}
+                  onChange={props.onChangeName}
+                />
+              </C.UserInputBox>
             </C.UserName>
             <UploadProfile
               picture={props.picture}
@@ -54,11 +46,15 @@ export default function ChargePageUI(props: IPropsCharge) {
             />
             <C.UserName>
               <span>포인트</span>
-              <UserInfoInput
-                defaultValue={props.data?.fetchUserLoggedIn.userPoint?.amount}
-                readOnly={true}
-              />
-              <C.ChargeBtn onClick={props.onClickPayment}>충전하기</C.ChargeBtn>
+              <div>
+                <UserInfoInput
+                  defaultValue={props.data?.fetchUserLoggedIn.userPoint?.amount}
+                  readOnly={true}
+                />
+                <C.ChargeBtn onClick={props.onClickPayment}>
+                  충전하기
+                </C.ChargeBtn>
+              </div>
             </C.UserName>
             <C.UserName>
               <span>충전 금액</span>

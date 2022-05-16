@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../commons/styles/media";
 
 export const Wrapper = styled.div`
   width: 100%;
+  @media (max-width: 1199px) {
+    padding: 30px 60px;
+  }
 `;
 
 export const WrapperTitle = styled.div`
@@ -29,18 +33,27 @@ export const WrapperBody = styled.div`
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid #e0e0e0;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    flex-wrap: wrap;
+  }
 `;
 
 export const CommonContainer = styled.div`
   width: 15%;
   font-size: 1rem;
   font-weight: 700;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    width: 30%;
+  }
 `;
 
 export const TitleContainer = styled.div`
   width: 40%;
   font-size: 1rem;
   font-weight: 700;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    width: 50%;
+  }
 `;
 
 export const TitleRemark = styled.div`

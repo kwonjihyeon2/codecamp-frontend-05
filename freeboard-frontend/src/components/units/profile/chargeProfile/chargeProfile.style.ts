@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../commons/styles/media";
 
 export const ButtonColor = styled.button`
   border: 1px solid #e0e0e0;
@@ -10,6 +11,9 @@ export const ButtonColor = styled.button`
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.02);
+  }
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    margin-top: 10px;
   }
 `;
 
@@ -33,6 +37,9 @@ export const MypageBox = styled.div`
   padding: 50px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 4px 0 rgba(63, 71, 77, 0.06);
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    padding: 50px 30px;
+  }
 `;
 
 export const SettingTxt = styled.div`
@@ -52,6 +59,25 @@ export const UserName = styled.div`
   }
   .btn {
     border: 1px solid #ff385c;
+  }
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    flex-direction: column;
+    span {
+      width: 100%;
+    }
+    input {
+      margin-top: 10px;
+    }
+  }
+`;
+
+export const UserInputBox = styled.div`
+  width: 85%;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    width: 100%;
+    input {
+      width: 100%;
+    }
   }
 `;
 
@@ -83,11 +109,14 @@ export const MoneyTxt = styled.div`
 
 export const SubmitInfo = styled.button`
   width: 30%;
-  margin: 50px 0;
+  margin: 30px 0;
   padding: 10px 0;
   border: 1px solid #000;
   background-color: #000;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    width: 100%;
+  }
 `;

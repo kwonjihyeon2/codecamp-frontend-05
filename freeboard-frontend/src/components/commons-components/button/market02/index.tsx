@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../commons/styles/media";
 
 const MiddleButton = styled.button`
   width: 20%;
@@ -10,6 +11,9 @@ const MiddleButton = styled.button`
   &:hover {
     border: 1px solid #ff385c;
     background-color: #ff385c;
+  }
+  @media ${breakPoints.mobile}, ${breakPoints.xsmobile} {
+    width: 50%;
   }
 `;
 
