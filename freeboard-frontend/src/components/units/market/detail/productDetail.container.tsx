@@ -22,7 +22,6 @@ import { IPropsType } from "./productDetail.types";
 
 export default function ItemDetailContainer(props: IPropsType) {
   const router = useRouter();
-
   const [todayView, setTodayView] = useState([]);
 
   useEffect(() => {
@@ -91,7 +90,7 @@ export default function ItemDetailContainer(props: IPropsType) {
 
   const onClickPicked = (el: string | undefined) => async () => {
     try {
-      const pickResult = await toggleItemPick({
+      await toggleItemPick({
         variables: {
           useditemId: String(el),
         },
@@ -113,7 +112,7 @@ export default function ItemDetailContainer(props: IPropsType) {
     }
   }, [PickedData, props.data]);
 
-  const onClickBasket = async () => {
+  const onClickBasket = () => {
     let el: IUseditem = props.data?.fetchUseditem;
     const todayBasket = JSON.parse(localStorage.getItem("todayBasket") || "[]");
 

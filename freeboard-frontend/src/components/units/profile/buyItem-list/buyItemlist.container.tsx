@@ -15,8 +15,10 @@ export default function BuyListContainer() {
     IQueryFetchUseditemsIBoughtArgs
   >(FETCH_IBOUGHT);
   // console.log(data?.fetchUseditemsIBought);
+
   const MoreLoadData = () => {
     if (!data) return;
+
     fetchMore({
       variables: {
         page: Math.ceil(data?.fetchUseditemsIBought.length / 10) + 1,
@@ -25,6 +27,7 @@ export default function BuyListContainer() {
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult?.fetchUseditemsIBought)
           return { fetchUseditemsIBought: [...prev.fetchUseditemsIBought] };
+
         return {
           fetchUseditemsIBought: [
             ...prev.fetchUseditemsIBought,
@@ -64,12 +67,12 @@ export default function BuyListContainer() {
                     onError={handelError}
                   />
                 </div>
-                <div>
+                <B.ItemInfoContent>
                   <div>구매 상품 | {el.name}</div>
                   <div>
                     구매 가격 | <B.ItemPrice>{el.price}</B.ItemPrice>원
                   </div>
-                </div>
+                </B.ItemInfoContent>
               </B.ItemInfoBox>
             </B.BuyItemBox>
           ))}

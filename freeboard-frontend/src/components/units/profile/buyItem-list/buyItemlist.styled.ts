@@ -11,7 +11,6 @@ export const BuyTitleSpan = styled.span`
   color: gray;
   margin-left: 10px;
 `;
-
 export const BuyItemListBox = styled.div`
   height: 80vh;
   overflow: auto;
@@ -24,7 +23,12 @@ export const BuyItemBox = styled.div`
 
 export const ItemInfoBox = styled.div`
   display: flex;
+  align-items: center;
   margin-top: 10px;
+`;
+
+export const ItemInfoContent = styled.div`
+  margin-left: 10px;
 `;
 
 export const ItemPrice = styled.span`
