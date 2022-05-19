@@ -3,9 +3,10 @@ import { FaUserCircle, FaLink, FaLocationArrow } from "react-icons/fa";
 import { BiLike, BiDislike } from "react-icons/bi";
 import ReactPlayer from "react-player";
 import { getMyDate, handleError } from "../../../../commons/libraries/uitils";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 interface IDetailProps {
-  data?: any;
+  data: Pick<IQuery, "fetchBoard"> | undefined;
   GoList: () => void;
   GoEditPage: () => void;
   deleteBoard: () => void;
@@ -46,19 +47,19 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
             <div>
               <div>
                 <S.showImg
-                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
+                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images?.[0]}`}
                   onError={handleError}
                   alt="첫번째 이미지"
                 />
               </div>
               <S.BodyImg>
                 <S.BottomImg
-                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[1]}`}
+                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images?.[1]}`}
                   onError={handleError}
                   alt="두번째 이미지"
                 />
                 <S.BottomImg
-                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[2]}`}
+                  src={`https://storage.googleapis.com/${props.data?.fetchBoard.images?.[2]}`}
                   onError={handleError}
                   alt="세번째 이미지"
                 />

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardCommentProps {
   isEdit: boolean;
@@ -10,14 +11,14 @@ export interface IActive {
 }
 
 export interface IPropsComment {
-  data: any;
+  data: Pick<IQuery, "fetchBoardComments"> | undefined;
   onChangeInputs: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isActive: boolean;
   CreateComment: () => void;
   length: Number;
-  handelChange: any;
-  StarValue: any;
+  handleChange: (value: number) => void;
+  StarValue: number;
 }
 
 export interface IPropsCommentList {

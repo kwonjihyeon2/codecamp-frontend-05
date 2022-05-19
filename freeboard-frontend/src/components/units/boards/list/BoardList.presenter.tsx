@@ -3,13 +3,14 @@ import { FaPencilAlt } from "react-icons/fa";
 import { ChangeEvent, MouseEvent } from "react";
 import { getMyDate } from "../../../../commons/libraries/uitils";
 import { v4 as uuidv4 } from "uuid";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 interface IPropsListUI {
-  data: any;
+  data: Pick<IQuery, "fetchBoards"> | undefined;
   GoToDetail: (event: MouseEvent<HTMLDivElement>) => void;
   CreateNew: () => void;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-  dataBoardsCount: any;
+  dataBoardsCount: Pick<IQuery, "fetchBoardsCount"> | undefined;
   search: string;
 }
 

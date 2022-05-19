@@ -1,11 +1,12 @@
 import BoardListPageUI from "./BoardList.presenter";
 import { useRouter } from "next/router";
 import { ChangeEvent, MouseEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 interface IPropsList {
-  data: any;
+  data: Pick<IQuery, "fetchBoards"> | undefined;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-  dataBoardsCount: any;
+  dataBoardsCount: Pick<IQuery, "fetchBoardsCount"> | undefined;
   search: string;
 }
 

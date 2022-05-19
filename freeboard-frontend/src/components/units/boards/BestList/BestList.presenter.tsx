@@ -1,13 +1,16 @@
 import { v4 as uuidv4 } from "uuid";
 import { getMyDate } from "../../../../commons/libraries/uitils";
+import { IQuery } from "../../../../commons/types/generated/types";
 import * as L from "./BestList.styled";
 
 type IPage = "/market" | "/boards";
 
 interface IPropsData {
-  data: any;
+  data: Pick<IQuery, "fetchBoardsOfTheBest"> | undefined;
   moveToPage: (page: IPage) => () => void;
-  BestData: any;
+  BestData: Pick<IQuery, "fetchUseditemsOfTheBest"> | undefined;
+  onClickMarket: (id: string) => () => void;
+  onClickBoard: (id: string) => () => void;
 }
 
 export default function BestListPageUI(props: IPropsData) {
@@ -20,7 +23,10 @@ export default function BestListPageUI(props: IPropsData) {
       <L.WrapperList>
         {props.data?.fetchBoardsOfTheBest.map((el: any) => (
           <L.WrapperListBox key={uuidv4()}>
-            <div style={{ height: "35vh" }}>
+            <div
+              style={{ height: "35vh" }}
+              onClick={props.onClickBoard(el._id)}
+            >
               <L.BestImg
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 src={
@@ -52,7 +58,10 @@ export default function BestListPageUI(props: IPropsData) {
       <L.WrapperList>
         {props.BestData?.fetchUseditemsOfTheBest.map((el: any) => (
           <L.WrapperListBox key={uuidv4()}>
-            <div style={{ height: "35vh" }}>
+            <div
+              style={{ height: "35vh" }}
+              onClick={props.onClickMarket(el._id)}
+            >
               <L.BestImg
                 style={{
                   width: "100%",

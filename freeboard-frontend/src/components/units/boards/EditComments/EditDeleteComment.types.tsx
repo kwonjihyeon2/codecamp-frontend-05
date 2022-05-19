@@ -1,7 +1,8 @@
 import { ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IPropsEdit {
-  data: any;
+  data: Pick<IQuery, "fetchBoardComments"> | undefined;
   isModalVisible: boolean;
   DeleteCommentBtn: () => void;
   ToggleSetting: () => void;

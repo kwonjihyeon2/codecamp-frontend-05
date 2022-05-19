@@ -66,7 +66,7 @@ export default function FreeBoardComments() {
   };
 
   const [StarValue, setStarValue] = useState(3);
-  const handelChange = (value: any) => {
+  const handleChange = (value: number) => {
     setStarValue(value);
   };
 
@@ -90,7 +90,7 @@ export default function FreeBoardComments() {
           ],
         });
       }
-      console.log(inputs.password.length);
+      // console.log(inputs.password.length);
     } catch (error) {
       console.log(error.message);
     }
@@ -105,7 +105,7 @@ export default function FreeBoardComments() {
       isActive={isActive}
       CreateComment={CreateCommentBtn}
       length={length}
-      handelChange={handelChange}
+      handleChange={handleChange}
       StarValue={StarValue}
     />
   );

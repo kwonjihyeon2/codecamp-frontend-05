@@ -22,7 +22,7 @@ export default function FreeBoardCommentsUI(props: IPropsComment) {
             />
             <Rate
               value={props.StarValue}
-              onChange={props.handelChange}
+              onChange={props.handleChange}
               style={{ fontSize: 16 }}
             />
           </div>
