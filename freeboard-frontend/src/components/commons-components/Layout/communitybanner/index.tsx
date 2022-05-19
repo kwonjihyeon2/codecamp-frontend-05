@@ -6,7 +6,7 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../../commons/types/generated/types";
-import { handelError } from "../../../../commons/libraries/uitils";
+import { handleError } from "../../../../commons/libraries/uitils";
 
 const FETCH_BOARDS = gql`
   query fetchUseditems($search: String, $page: Int) {
@@ -62,7 +62,7 @@ export default function LayOutDesignSubBanner() {
               <S.SlickimgBox>
                 <S.ColorImg
                   src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                  onError={handelError}
+                  onError={handleError}
                   alt={el.remarks}
                 />
               </S.SlickimgBox>

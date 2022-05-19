@@ -4,7 +4,7 @@ import {
   IQueryFetchUseditemsIBoughtArgs,
 } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
-import { getMyDate, handelError } from "../../../../commons/libraries/uitils";
+import { getMyDate, handleError } from "../../../../commons/libraries/uitils";
 import * as B from "./buyItemlist.styled";
 import InfiniteScroll from "react-infinite-scroller";
 import { FETCH_IBOUGHT } from "./buyItemlist.query";
@@ -64,7 +64,7 @@ export default function BuyListContainer() {
                       borderRadius: "10px",
                     }}
                     src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                    onError={handelError}
+                    onError={handleError}
                   />
                 </div>
                 <B.ItemInfoContent>

@@ -2,7 +2,7 @@ import * as S from "./BoardDetail.styles";
 import { FaUserCircle, FaLink, FaLocationArrow } from "react-icons/fa";
 import { BiLike, BiDislike } from "react-icons/bi";
 import ReactPlayer from "react-player";
-import { getMyDate } from "../../../../commons/libraries/uitils";
+import { getMyDate, handleError } from "../../../../commons/libraries/uitils";
 
 interface IDetailProps {
   data?: any;
@@ -47,16 +47,19 @@ export default function FreeBoardDetailUI(props: IDetailProps) {
               <div>
                 <S.showImg
                   src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
+                  onError={handleError}
                   alt="첫번째 이미지"
                 />
               </div>
               <S.BodyImg>
                 <S.BottomImg
                   src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[1]}`}
+                  onError={handleError}
                   alt="두번째 이미지"
                 />
                 <S.BottomImg
                   src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[2]}`}
+                  onError={handleError}
                   alt="세번째 이미지"
                 />
               </S.BodyImg>

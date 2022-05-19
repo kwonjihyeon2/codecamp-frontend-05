@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { FETCH_BEST_ITEMS } from "./Bestlist.queries";
 import { v4 as uuidv4 } from "uuid";
-import { handelError } from "../../../../commons/libraries/uitils";
+import { handleError } from "../../../../commons/libraries/uitils";
 import styled from "@emotion/styled";
 import { FaChevronRight } from "react-icons/fa";
 import { MoveToPageHook } from "../../../commons-components/hooks/MoveToPageHook";
@@ -83,7 +83,7 @@ export default function BestItemList() {
           <WrapperBox key={uuidv4()} onClick={moveToPage(`/market/${el._id}`)}>
             <ImgBox>
               <ListImg
-                onError={handelError}
+                onError={handleError}
                 src={`https://storage.googleapis.com/${el.images?.[0]}`}
               />
             </ImgBox>

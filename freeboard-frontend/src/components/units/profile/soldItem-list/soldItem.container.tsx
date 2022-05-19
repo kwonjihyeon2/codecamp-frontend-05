@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { v4 as uuidv4 } from "uuid";
-import { getMyDate, handelError } from "../../../../commons/libraries/uitils";
+import { getMyDate, handleError } from "../../../../commons/libraries/uitils";
 import * as S from "./soldItem.styled";
 
 const FETCH_ISOLD = gql`
@@ -35,7 +35,7 @@ export default function SoldItemContainer() {
                 <img
                   style={{ width: "100%" }}
                   src={`https://googlestorage.com/${el.images?.[0]}`}
-                  onError={handelError}
+                  onError={handleError}
                 />
               </div>
               <div>

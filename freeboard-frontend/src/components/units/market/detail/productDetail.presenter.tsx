@@ -4,7 +4,7 @@ import Dompurify from "dompurify";
 import { MoveToPageHook } from "../../../commons-components/hooks/MoveToPageHook";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { handelError } from "../../../../commons/libraries/uitils";
+import { handleError } from "../../../../commons/libraries/uitils";
 import { BsFillSuitHeartFill, BsSuitHeart } from "react-icons/bs";
 import { FiMoreVertical, FiShoppingCart } from "react-icons/fi";
 import { RiArrowGoBackLine } from "react-icons/ri";
@@ -92,7 +92,7 @@ export default function ItemDetailPageUI(props: IPropsDetailType) {
               <img
                 style={{ width: "100%" }}
                 src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images?.[0]}`}
-                onError={handelError}
+                onError={handleError}
                 alt="이미지"
               />
             </div>
@@ -240,7 +240,7 @@ export default function ItemDetailPageUI(props: IPropsDetailType) {
               <img
                 style={{ width: "100%" }}
                 src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                onError={handelError}
+                onError={handleError}
               />
               <L.TextWrap>{el.name}</L.TextWrap>
             </div>

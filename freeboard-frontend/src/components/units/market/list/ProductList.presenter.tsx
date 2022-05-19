@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BestItemList from "../bestList/Bestlist.container";
-import { handelError } from "../../../../commons/libraries/uitils";
+import { handleError } from "../../../../commons/libraries/uitils";
 import InfiniteScroll from "react-infinite-scroller";
 import { IPropsList } from "./ProductList.types";
 
@@ -60,7 +60,7 @@ export default function ItemListUI(props: IPropsList) {
                   <L.ListBox>
                     <L.ListImg
                       src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                      onError={handelError}
+                      onError={handleError}
                     />
                   </L.ListBox>
 
@@ -92,7 +92,7 @@ export default function ItemListUI(props: IPropsList) {
                   <L.ListBox>
                     <L.ListImg
                       src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                      onError={handelError}
+                      onError={handleError}
                     />
                   </L.ListBox>
 

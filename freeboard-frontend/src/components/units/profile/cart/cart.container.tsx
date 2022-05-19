@@ -1,4 +1,4 @@
-import { handelError } from "../../../../commons/libraries/uitils";
+import { handleError } from "../../../../commons/libraries/uitils";
 import ProductMiddleButton from "../../../commons-components/button/market02";
 import * as C from "./cart.styled";
 import { basketType, IPropsCart } from "./cart.types";
@@ -20,7 +20,7 @@ export default function CartPageContainer(props: IPropsCart) {
           <C.CommonContainer>
             <C.ContainerImg
               src={`https://storage.googleapis.com/${el.images[0]}`}
-              onError={handelError}
+              onError={handleError}
               alt={el.name}
             />
           </C.CommonContainer>

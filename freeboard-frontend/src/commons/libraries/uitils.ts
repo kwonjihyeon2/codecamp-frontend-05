@@ -36,6 +36,6 @@ export const checkFileValidation = (clickfile: File | undefined) => {
   return true;
 };
 
-export const handelError = (event: ChangeEvent<HTMLImageElement>) => {
+export const handleError = (event: ChangeEvent<HTMLImageElement>) => {
   event.target.src = "/basic.jpeg";
 };

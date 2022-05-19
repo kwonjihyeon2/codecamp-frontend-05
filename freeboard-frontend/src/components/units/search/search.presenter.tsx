@@ -1,4 +1,4 @@
-import { handelError } from "../../../commons/libraries/uitils";
+import { handleError } from "../../../commons/libraries/uitils";
 import { IPropsSearch } from "./search.types";
 import * as S from "./search.styles";
 import { useState } from "react";
@@ -51,7 +51,7 @@ export default function SearchPageUI(props: IPropsSearch) {
                     <S.BoxImg
                       src={`https://storage.googleapis.com/${el.images?.[0]}`}
                       alt={`${el.title}이미지`}
-                      onError={handelError}
+                      onError={handleError}
                     />
                   </S.ImgContainer>
                   <S.TitleText>{el.title}</S.TitleText>
@@ -88,7 +88,7 @@ export default function SearchPageUI(props: IPropsSearch) {
                     <S.BoxImg
                       src={`https://storage.googleapis.com/${el.images?.[0]}`}
                       alt={`${el.remarks}이미지`}
-                      onError={handelError}
+                      onError={handleError}
                     />
                   </S.ImgContainer>
                   <S.TitleText>{el.name}</S.TitleText>

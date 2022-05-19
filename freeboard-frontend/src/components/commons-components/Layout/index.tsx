@@ -31,9 +31,11 @@ export default function LayOutDesign(props: IPropsDesign) {
     "/boards/",
     "/boards/new/",
     `/boards/${router.query.board_Id}/`,
+    `/boards/${router.query.board_Id}/edit/`,
     "/market/",
     "/market/new",
     `/market/${router.query.ItemId}/`,
+    `/market/${router.query.ItemId}/edit/`,
   ];
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
