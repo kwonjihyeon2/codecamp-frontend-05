@@ -6,7 +6,7 @@ export default function LibraryRatePage() {
   //여기 value는 setValue에 의해 값이 바뀜
   //컴포넌트가 다시 그려짐 -> value(키,속성)={value} (=state) : 5가됨.
 
-  const handleChange = (value) => {
+  const handleChange = (value: number) => {
     //const value = 123 === 괄호안의 value {value}
     setValue(value);
 
