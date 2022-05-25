@@ -50,3 +50,6 @@
 ![debounce검색](https://user-images.githubusercontent.com/90013333/170189136-3b1a6399-63b8-430b-af6a-23ef11976ccd.gif)
 - ### Query Parameter를 이용한 검색 기능
   ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
+  
+- ### 무한스크롤을 이용한 데이터 조회
+![무한스크롤](https://user-images.githubusercontent.com/90013333/170190389-ec7b2d45-c529-477d-ace5-d7d47c25062a.gif)
