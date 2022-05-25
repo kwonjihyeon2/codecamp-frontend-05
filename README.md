@@ -46,6 +46,7 @@
 
   ![장바구니](https://user-images.githubusercontent.com/90013333/169230388-243fb118-739c-4065-af1e-0c741fa51904.gif)
   <img width="1420" alt="장바구니 로컬 스토리지" src="https://user-images.githubusercontent.com/90013333/169230161-443db999-ccdc-4e33-a038-fd5b02d7d3d5.png" />
-
+- ### Debounce를 이용한 검색 기능
+![검색](https://user-images.githubusercontent.com/90013333/170188288-027d5246-e2f0-474c-b9e0-764c016f93fb.gif)
 - ### Query Parameter를 이용한 검색 기능
   ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
