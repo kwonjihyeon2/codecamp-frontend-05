@@ -25,36 +25,26 @@
 
 ![회원가입 및 로그인](https://user-images.githubusercontent.com/90013333/170430140-ad08bce2-387c-42b4-b22a-5f9ae11965dc.gif)
 
-
 - ### 권한 분기
+  - useContext에 담은 accessToken을 기준으로 권한 분기 처리<br/>
   ![권한분기](https://user-images.githubusercontent.com/90013333/169223779-7dd48a36-4959-4f7b-a7fe-c043a74c12e8.gif)
-  - useContext에 담은 accessToken을 기준으로 권한 분기 처리
 
-- ### 회원 정보 수정
-
+- ### 마이페이지
+  - 무한 스크롤 라이브러리를 활용해서 내역 조회
+  - GraphQL을 이용하여 회원 정보 수정
+  - localStorage를 활용해서 장바구니 기능 구현
+  - 아임 포트를 이용한 결제 기능 구현<br/>
   ![정보 수정](https://user-images.githubusercontent.com/90013333/169223476-c863a1a1-1d0c-4bc8-bd18-57275083adb0.gif)
 
-- ### 게시판 CRUD
-
-  ![게시판](https://user-images.githubusercontent.com/90013333/169229301-baa59e69-1a15-4459-9da0-19812dac8903.gif)
-
-- ### 댓글 CRUD
-
-  ![댓글 CRUD](https://user-images.githubusercontent.com/90013333/169233824-43db4cca-7339-4053-a23b-2f2910bf8547.gif)
-  게시물 디테일 조회 중 배포 후 카카오맵 API 오류 확인, 로컬로 구현. 수정 예정입니다.
-
-- ### 결제
-
-  ![결제](https://user-images.githubusercontent.com/90013333/169229186-014877b2-f5d0-49e8-bc46-bb9ce6e1b2d7.gif)
-
-- ### 로컬스토리지를 활용한 장바구니 기능
-
-  ![장바구니](https://user-images.githubusercontent.com/90013333/169230388-243fb118-739c-4065-af1e-0c741fa51904.gif)
-  <img width="1420" alt="장바구니 로컬 스토리지" src="https://user-images.githubusercontent.com/90013333/169230161-443db999-ccdc-4e33-a038-fd5b02d7d3d5.png" />
-- ### Debounce를 이용한 검색 기능
-![debounce검색](https://user-images.githubusercontent.com/90013333/170189136-3b1a6399-63b8-430b-af6a-23ef11976ccd.gif)
-- ### Query Parameter를 이용한 검색 기능
-  ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
+- ### 게시물 조회 및 검색
+  - 페이지네이션을 활용한 데이터 조회
+  - Debounce를 이용해서 키워드 기준으로 검색 결과 자동 표출되게 구현하였으며 결과 조회와 함께 해당 키워드 컬러 변경<br />
+ ![검색과 페이지네이션](https://user-images.githubusercontent.com/90013333/170435883-ad780033-fdff-4856-86d9-40e964f04608.gif)
   
-- ### 무한스크롤을 이용한 데이터 조회
-![무한스크롤](https://user-images.githubusercontent.com/90013333/170190389-ec7b2d45-c529-477d-ace5-d7d47c25062a.gif)
+- ### 댓글 기능 구현
+  - 카카오맵 API를 이용한 위치 조회
+  - 무한스크롤을 이용한 댓글 조회 <br />
+
+- ### Query Parameter를 이용한 검색 기능
+  - Header Layout에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 
+  ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
