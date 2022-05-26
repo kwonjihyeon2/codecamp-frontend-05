@@ -7,7 +7,7 @@
 <img width="60" src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white"> <img width="60" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
 <br />
 
-에어비엔비 사이트 UI를 클론하고 유저들의 자유 커뮤니티를 컨셉으로 개인 프로젝트를 만들어보았습니다.<br />
+웹 에어비앤비 UI를 클론하고 유저들의 자유 커뮤니티를 컨셉으로 개인 프로젝트를 만들어보았습니다.<br />
 유저들끼리 자유롭게 소통할 수 있는 커뮤니티를 제공하고 회원들끼리 중고 거래를 가능하도록 구현했습니다.<br />
 현재는 현재 프로젝트에서 구현된 내용을 보강하거나 다양한 OPEN-API를 구현을 목표로 공부 중입니다.
 
