@@ -46,9 +46,8 @@
   
 - ### Query Parameter를 이용한 검색 기능
   - 레이아웃 헤더에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 <br /><br />
-  ![검색](https://user-images.githubusercontent.com/90013333/170476507-81145a76-7ee8-4680-bca0-7becb1c45d13.gif)
+  ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif))
 
-  
 - ### 문화 데이터 광장 OPEN-API로 데이터 조회
   - axios로 api를 요청 후 컨텐츠 제공
   - 리펙토링 예정 사항 : 다양한 오픈 API를 활용해서 데이터를 처리해 볼 예정이며, 데이터를 받아오는 동안 미리 화면에 보여지는 부분이 필요하다고 판단하여 TOAST UI 등을 활용하는 방향으로 유저 친화적으로 코드 수정 예정<br /><br />
