@@ -97,8 +97,8 @@ export default function OpenApiPage() {
     async function fetchFestival() {
       const result = await axios
         .get(
-          `https://cors-anywhere.herokuapp.com/
-          http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?serviceKey=${process.env.NEXT_PUBLIC_CULTURE_KEY}`
+          //https://cors-anywhere.herokuapp.com/
+          `http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?serviceKey=${process.env.NEXT_PUBLIC_CULTURE_KEY}`
         )
         .then((res) => res.data);
       setList(result.response.body.items);
