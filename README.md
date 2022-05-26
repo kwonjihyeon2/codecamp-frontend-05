@@ -7,7 +7,9 @@
 <img width="60" src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white"> <img width="60" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
 <br />
 
-개인 프로젝트를 보시려면 아래 링크로 접속해주세요.
+에어비엔비 사이트 UI를 클론하고 유저들의 자유 커뮤니티를 컨셉으로 개인 프로젝트를 만들어보았습니다.<br />
+유저들끼리 자유롭게 소통할 수 있는 커뮤니티를 제공하고 회원들끼리 중고 거래를 가능하도록 구현했습니다.<br />
+현재는 현재 프로젝트에서 구현된 내용을 보강하거나 다양한 OPEN-API를 구현을 목표로 공부 중입니다.
 
 > [https://hyunswork.shop](https://hyunswork.shop)
 
@@ -15,15 +17,18 @@
 
 > ID : kjh2747@gmail.com <br />
 > PW : 123qwe!!<br />
-> <br />
+<br />
 
 - ### 회원가입 및 로그인
+  - 회원가입 및 로그인 시 정규표현식을 사용해서 정보 입력 기본 검증 처리
+  - accessToken, refreshToken으로 일정 기간동안 로그인 유지<br/>
 
-  ![회원가입 및 로그인](https://user-images.githubusercontent.com/90013333/169228573-def78bf6-18b1-4567-a3d9-545eaedfe3fd.gif)
+![회원가입 및 로그인](https://user-images.githubusercontent.com/90013333/170430140-ad08bce2-387c-42b4-b22a-5f9ae11965dc.gif)
+
 
 - ### 권한 분기
-
   ![권한분기](https://user-images.githubusercontent.com/90013333/169223779-7dd48a36-4959-4f7b-a7fe-c043a74c12e8.gif)
+  - useContext에 담은 accessToken을 기준으로 권한 분기 처리
 
 - ### 회원 정보 수정
 
