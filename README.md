@@ -28,7 +28,7 @@
   - useContext에 담은 accessToken을 기준으로 권한 분기 처리<br/><br/>
    ![권한분기](https://user-images.githubusercontent.com/90013333/170437100-5f127e68-e692-49ab-980e-67b4a129c30a.gif)
 
-- ### 마이페이지
+- ### 회원 정보 페이지
   - 무한 스크롤 라이브러리를 활용해서 내역 조회
   - GraphQL을 이용하여 회원 정보 수정
   - localStorage를 활용해서 장바구니 기능 구현
@@ -47,9 +47,8 @@
   - localStorage에 저장된 데이터를 불러와 오늘 본 상품 조회
   - 리펙토링 예정 사항 : 배포 시 카카오맵 API를 불러오지 못하는 문제를 확인하여 해당 오류 해결 예정, localStorage에 저장된 데이터의 제한을 두지 않은 상태로 상품을 조회한 만큼 데이터가 들어가는 상황으로, 동일한 데이터 혹은 일정한 갯수만 조회되도록 제한할 예정 <br /><br />
   
-
 - ### Query Parameter를 이용한 검색 기능
-  - Header Layout에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 <br /><br />
+  - 레이아웃 헤더에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 <br /><br />
   ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
   
 - ### 문화데이터광장 OPEN-API로 데이터 조회
