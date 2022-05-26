@@ -47,8 +47,7 @@ export default function MarketUploadfile(props: IPropsUpload) {
       const result = await uploadfile({
         variables: { file },
       });
-      props.onChangefile(result.data?.uploadFile.url, props.index);
-      console.log(result.data?.uploadFile);
+      props.onChangefile(result.data?.uploadFile.url || "", props.index);
     } catch (error) {
       Modal.error({
         title: "업로드 실패",

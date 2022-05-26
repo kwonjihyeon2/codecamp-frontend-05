@@ -76,7 +76,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
       event.target.value
     ) {
       setIsActive(true);
-      console.log(isActive);
+      // console.log(isActive);
     } else {
       setIsActive(false);
     }
@@ -92,7 +92,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
   };
 
   const onCompleteDaumPostcode = (data: any) => {
-    console.log(data);
+    // console.log(data);
     setAddress(data.address);
     setZonecode(data.zonecode);
     setAddressDetail(data.addressDetail);
@@ -193,7 +193,7 @@ export default function FreeBoardWrite(props: IWriteConProps) {
       });
 
       Modal.success({ content: "게시물이 수정되었습니다." });
-      console.log(props.ToPre?.fetchBoard.boardAddress);
+      // console.log(props.ToPre?.fetchBoard.boardAddress);
       router.push(`/boards/${router.query.board_Id}`);
     } catch (error) {
       Modal.error({

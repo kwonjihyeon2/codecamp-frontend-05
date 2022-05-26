@@ -52,7 +52,6 @@ export default function EditCommentAnswerItem(props: IPropsAnswer) {
           },
         ],
       });
-      console.log(props.isOpenComment);
       setIsEdit((prev) => !prev);
     } catch (error) {
       console.log(error.message);

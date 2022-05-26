@@ -28,7 +28,6 @@ export default function CommentAnswerItem(props: ICommentAnswer) {
       useditemQuestionId: String(props.isOpenComment),
     },
   });
-  console.log(data);
 
   const [createCommentAnswer] = useMutation<
     Pick<IMutation, "createUseditemQuestionAnswer">,

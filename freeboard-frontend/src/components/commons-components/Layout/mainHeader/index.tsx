@@ -81,7 +81,7 @@ export default function LayOutDesignMainHead(props: IpropsHeader) {
           </H.SearchBox>
         ) : (
           <H.NavList>
-            <H.NavLi onClick={moveToPage("/openapi")}>OPEN-API</H.NavLi>
+            <H.NavLi onClick={moveToPage("/openapi")}>FESTIVAL</H.NavLi>
             <H.NavLi onClick={moveToPage("/boards")}>COMMUNITY</H.NavLi>
             <H.NavLi onClick={moveToPage("/market")}>MARKET</H.NavLi>
             <H.NavLi onClick={moveToPage("/mypage")}>MY</H.NavLi>

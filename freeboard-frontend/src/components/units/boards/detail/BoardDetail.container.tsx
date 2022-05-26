@@ -45,7 +45,7 @@ export default function FreeBoardDetail() {
       await deleteBoard({
         variables: { boardId: String(router.query.board_Id) },
       });
-      console.log(router.query.board_Id);
+      // console.log(router.query.board_Id);
       Modal.success({ content: "게시물이 삭제되었습니다" });
       router.push("/boards");
     } catch (error) {
@@ -70,7 +70,7 @@ export default function FreeBoardDetail() {
         ],
       });
 
-      console.log(Like, data?.fetchBoard.likeCount);
+      // console.log(Like, data?.fetchBoard.likeCount);
       setLike(Number(data?.fetchBoard.likeCount));
     } catch (error) {
       console.log(error.message);
@@ -93,7 +93,7 @@ export default function FreeBoardDetail() {
           },
         ],
       });
-      console.log(DisLike, data?.fetchBoard.dislikeCount);
+      // console.log(DisLike, data?.fetchBoard.dislikeCount);
       setDisLike(Number(data?.fetchBoard.dislikeCount));
     } catch (error) {
       console.log(error.message);

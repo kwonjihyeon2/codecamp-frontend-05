@@ -43,7 +43,7 @@ export default function JoinPageContainer() {
     } else {
       setUserError("");
     }
-    console.log(PasswordVali.test(inputs.userPassword));
+    // console.log(PasswordVali.test(inputs.userPassword));
     if (!PasswordVali.test(inputs.userPassword)) {
       setPasswordError(
         "8-16자 사이 영문, 숫자, 특수문자를 조합해서 입력해주세요."
@@ -68,7 +68,6 @@ export default function JoinPageContainer() {
       setIsActive(false);
     }
   };
-  console.log(inputs);
 
   const onClickJoin = async () => {
     try {
@@ -81,7 +80,7 @@ export default function JoinPageContainer() {
           },
         },
       });
-      console.log(result.data?.createUser);
+      // console.log(result.data?.createUser);
       Modal.success({
         content: "회원가입에 성공했습니다. 로그인 페이지로 이동합니다.",
       });

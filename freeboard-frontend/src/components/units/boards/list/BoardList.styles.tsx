@@ -12,7 +12,7 @@ export const WrapperTop = styled.div`
   align-items: center;
 `;
 export const BoardCount = styled.span`
-  color: #c51315;
+  color: #ff385c;
   font-weight: 700;
 `;
 
@@ -30,8 +30,8 @@ export const SearchInput = styled.input`
 
 export const SearchButton = styled.button`
   padding: 5px 15px;
-  border: 1px solid #c51315;
-  background-color: #c51315;
+  border: 1px solid #ff385c;
+  background-color: #ff385c;
   color: white;
   cursor: pointer;
 `;
@@ -72,13 +72,27 @@ export const TitleTopBox = styled.div`
 `;
 export const TitleBox = styled.div`
   width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   cursor: pointer;
   &:hover {
-    color: #c51315;
+    color: #ff385c;
   }
 `;
 export const WriterDate = styled.div`
   width: 20%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 export const ListBottom = styled.div`
   display: flex;
@@ -95,7 +109,7 @@ export const CreateBtn = styled.button`
   transition: ease-in 0.3s;
   &:hover {
     color: white;
-    background-color: #c51315;
+    background-color: #ff385c;
   }
 `;
 export const PencilIcon = styled.span`
@@ -107,5 +121,5 @@ interface IPropsWord {
 }
 
 export const Word = styled.span`
-  color: ${(props: IPropsWord) => (props.isMatched ? "#c51315" : "#000")};
+  color: ${(props: IPropsWord) => (props.isMatched ? "#FF385C" : "#000")};
 `;

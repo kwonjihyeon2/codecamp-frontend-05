@@ -27,12 +27,10 @@ export default function ProductCommentItem(props: IPropsEditComment) {
   const [isEdit, setIsEdit] = useState(false);
 
   const onChangeEdit = (useditemQuestionId: string) => () => {
-    console.log(useditemQuestionId);
     setIsEdit((prev) => !prev);
   };
 
   const onClickUpdate = (useditemQuestionId: string) => async (data) => {
-    console.log(data);
     try {
       const result = await updateComment({
         variables: {
@@ -51,7 +49,6 @@ export default function ProductCommentItem(props: IPropsEditComment) {
           });
         },
       });
-      console.log(result);
       setIsEdit((prev) => !prev);
     } catch (error) {
       console.log(error.message);

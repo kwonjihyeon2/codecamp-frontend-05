@@ -26,7 +26,7 @@ export default function BoardsEditPage() {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.board_Id },
   });
-  console.log(data?.fetchBoard);
+  // console.log(data?.fetchBoard);
 
   return <FreeBoardWrite isEdit={true} ToPre={data} />;
 }

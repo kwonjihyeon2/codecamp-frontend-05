@@ -26,7 +26,6 @@ export default function ChargeListContainer() {
     Pick<IQuery, "fetchPointTransactionsOfLoading">,
     IQueryFetchPointTransactionsOfLoadingArgs
   >(FETCH_CHARGE_LIST);
-  console.log(data?.fetchPointTransactionsOfLoading);
 
   return (
     <div>

@@ -17,7 +17,6 @@ export default function ItemListUI(props: IPropsList) {
     slidesToScroll: 1,
     centerPadding: "20px",
   };
-  console.log(props.data);
 
   const MoreLoadData = () => {
     if (!props.data) return;

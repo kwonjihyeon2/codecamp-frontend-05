@@ -78,7 +78,6 @@ export default function UploadProfile(props: IEditProfile) {
       const result = await uploadfile({
         variables: { file },
       });
-      console.log(result);
       props.onChangefile(result.data?.uploadFile.url || "");
     } catch (error) {
       console.log(error.message);

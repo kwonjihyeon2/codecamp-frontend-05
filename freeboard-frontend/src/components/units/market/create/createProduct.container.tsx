@@ -50,7 +50,6 @@ export default function CreateProductContainer(props: IPropsType) {
   };
 
   const onPostcode = (data: any) => {
-    console.log(data);
     setAddress(data.address);
     setZonecode(data.zonecode);
     onToggleModal();
@@ -94,8 +93,6 @@ export default function CreateProductContainer(props: IPropsType) {
           },
         },
       });
-
-      console.log(result.data?.createUseditem);
       Modal.success({
         content: "상품이 등록되었습니다.",
       });
@@ -132,7 +129,6 @@ export default function CreateProductContainer(props: IPropsType) {
   };
 
   const onChangeContents = (value: string) => {
-    console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
   };

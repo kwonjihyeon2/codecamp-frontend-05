@@ -51,7 +51,7 @@ export default function BoardListMainPage() {
     setMatchPage(1);
     BoardsCountRefetch({ search: searchdata });
     setSearch(searchdata);
-    console.log(data?.fetchBoards);
+    // console.log(data?.fetchBoards);
   }, 500);
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {

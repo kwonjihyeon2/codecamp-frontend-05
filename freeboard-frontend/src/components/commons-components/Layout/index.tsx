@@ -24,23 +24,21 @@ const HIDDEN_SEARCH = "/search/";
 export default function LayOutDesign(props: IPropsDesign) {
   const router = useRouter();
 
-  const HIDDEN_BANNERS = [
-    "/Login/",
-    "/Login/join/",
-    "/mypage/",
-    "/boards/",
-    "/boards/new/",
-    `/boards/${router.query.board_Id}/`,
-    `/boards/${router.query.board_Id}/edit/`,
-    "/market/",
-    "/market/new",
-    `/market/${router.query.ItemId}/`,
-    `/market/${router.query.ItemId}/edit/`,
-  ];
-
+  // const HIDDEN_BANNERS = [
+  //   "/Login/",
+  //   "/Login/join/",
+  //   "/mypage/",
+  //   "/boards/",
+  //   "/boards/new/",
+  //   `/boards/${router.query.board_Id}/`,
+  //   `/boards/${router.query.board_Id}/edit/`,
+  //   "/market/",
+  //   "/market/new",
+  //   `/market/${router.query.ItemId}/`,
+  //   `/market/${router.query.ItemId}/edit/`,
+  // ];
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
   const isHiddenmain = HIDDEN_MAIN.includes(router.asPath);
-  const isHiddenBanner = HIDDEN_BANNERS.includes(router.asPath);
   const isSearch = router.pathname.includes(HIDDEN_SEARCH);
   const isHiddenSubBanner = HIDDEN_SUBBANNER.includes(router.asPath);
 
@@ -61,7 +59,7 @@ export default function LayOutDesign(props: IPropsDesign) {
               setOpenNavi={setOpenNavi}
             />
           )}
-          {!isHiddenBanner && !isSearch ? <LayOutDesignBanner /> : <></>}
+          {isHiddenmain && !isSearch ? <LayOutDesignBanner /> : <></>}
 
           {isHiddenSubBanner && <LayOutDesignSubBanner />}
         </div>

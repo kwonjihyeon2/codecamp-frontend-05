@@ -20,8 +20,7 @@ export default function BoardListPage(props: IPropsList) {
 
   const GoToDetailPage = (event: MouseEvent<HTMLDivElement>) => {
     if (event.currentTarget instanceof Element)
-      console.log(event.currentTarget.id);
-    if (event.currentTarget instanceof Element)
+      // console.log(event.currentTarget.id);
       router.push(`boards/${event.currentTarget.id}`);
   };
 

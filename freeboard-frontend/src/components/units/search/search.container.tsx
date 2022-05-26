@@ -12,7 +12,7 @@ import { FETCH_BOARDS, FETCH_USED_ITEMS } from "./search.queries";
 export default function RouterSearchPage() {
   const router = useRouter();
   const keyword = router.query.keyword;
-  console.log(router);
+  // console.log(router);
 
   const { moveToPage } = MoveToPageHook();
   //test

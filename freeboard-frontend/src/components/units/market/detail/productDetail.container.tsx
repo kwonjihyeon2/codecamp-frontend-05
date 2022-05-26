@@ -63,7 +63,6 @@ export default function ItemDetailContainer(props: IPropsType) {
         },
         refetchQueries: [],
       });
-      console.log(result);
       Modal.success({
         content: "구매 성공 !",
       });

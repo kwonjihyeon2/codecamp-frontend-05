@@ -42,7 +42,7 @@ export default function ProductComment() {
   >(DELETE_COMMENT);
 
   const onClickSubmit = async (data: IComment) => {
-    console.log(data);
+    // console.log(data);
     await createComment({
       variables: {
         createUseditemQuestionInput: { contents: data.contents },
@@ -74,7 +74,7 @@ export default function ProductComment() {
               const filteredPrev = prev.filter(
                 (el) => readField("_id", el) !== deletedId
               );
-              console.log(filteredPrev, prev);
+              // console.log(filteredPrev, prev);
               return [...filteredPrev];
             },
           },
@@ -89,7 +89,7 @@ export default function ProductComment() {
     setIsOpenComment(el);
     // console.log(el);
   };
-  console.log(isOpenComment);
+  // console.log(isOpenComment);
 
   return (
     <ProductCommentUI

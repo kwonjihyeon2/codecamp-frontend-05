@@ -59,7 +59,7 @@ export default function EditBoardCommentList() {
           },
         ],
       });
-      console.log(modalpassword);
+      // console.log(modalpassword);
       Modal.success({
         content: "댓글이 삭제되었습니다.",
       });

@@ -3,7 +3,6 @@ import { MakeGlobalContext } from "../pages/_app";
 
 export default function SearchPage() {
   const { search } = useContext(MakeGlobalContext);
-  console.log(search);
 
   return (
     <div>

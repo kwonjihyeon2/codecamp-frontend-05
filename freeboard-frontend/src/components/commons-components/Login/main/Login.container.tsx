@@ -42,7 +42,6 @@ export default function LoginContainer() {
       setPasswordError(
         "8-16자 사이 영문, 숫자, 특수문자를 조합해서 입력해주세요."
       );
-      console.log(isActive);
     } else {
       setPasswordError("");
     }

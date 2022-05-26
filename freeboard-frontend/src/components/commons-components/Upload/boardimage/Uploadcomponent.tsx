@@ -31,8 +31,7 @@ export default function Uploadfile(props: IPropsWriteUI) {
   >(UPLOAD_FILES);
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const clickfile = event.target.files?.[0];
-    console.log(clickfile); // 파일 올라간 시간 등 storage 주소
+    const clickfile = event.target.files?.[0]; // 파일 올라간 시간 등 storage 주소
 
     const isVaild = checkFileValidation(clickfile);
     if (!isVaild) return;

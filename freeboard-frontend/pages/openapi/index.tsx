@@ -1,93 +1,137 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "@emotion/styled/";
+import { v4 as uuidv4 } from "uuid";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const Wrapper = styled.div`
-  max-width: 1240px;
-  margin: 50px auto;
-  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
 `;
 
-const CurrentTable = styled.div`
-  width: 50%;
+const WrapperBody = styled.div`
+  max-width: 1240px;
+  width: 100%;
+`;
+
+const WrapperContainer = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  margin: 10px auto;
-  li {
-    width: 33%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 10px 0;
+`;
+
+const ContainerTitle = styled.h1`
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
+`;
+
+const ContentsBox = styled.div`
+  width: 23%;
+  position: relative;
+  margin: 0 20px 30px 0;
+`;
+
+const PosterBox = styled.div`
+  width: 100%;
+  height: 30vh;
+  overflow: hidden;
+  border-radius: 10px;
+`;
+
+const Poster = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+`;
+const TitleBox = styled.div`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
+const TitleText = styled.h4`
+  font-size: 1rem;
+  margin: 10px 0;
+`;
+
+const ContentsStyle = styled.div`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;
+
+const MoveLink = styled.div`
+  position: absolute;
+  top: 80%;
+  right: 0;
+  transform: translateY(-80%);
+  margin-right: 10px;
+  a {
+    &:hover {
+      color: #ff385c;
+    }
   }
 `;
 
 export default function OpenApiPage() {
-  const [mydate, setDate] = useState("");
-  const [Korea, setKorea] = useState("");
-  const [prevKorea, setPrevKorea] = useState("");
-  const [Usdollar, setUsdollar] = useState("");
-  const [prevUsdollar, setPrevUsdollar] = useState("");
-  const [Jpy, setJpy] = useState("");
-  const [prevJpy, setPrevJpy] = useState("");
-
-  // map 실패
-  useEffect(() => {
-    async function fetchCurrent() {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_OPEN_API_CURRENT}`
-      );
-
-      const myKorea = Number(result.data.eur.krw).toFixed(2);
-      const myusdollar = Number(result.data.eur.usd).toFixed(2);
-      const myjpy = Number(result.data.eur.jpy).toFixed(2);
-      setDate(result.data.date);
-      setKorea(myKorea);
-      setUsdollar(myusdollar);
-      setJpy(myjpy);
-      console.log(myjpy, myKorea);
-    }
-    fetchCurrent();
-  }, []);
+  const [List, setList] = useState<{ item: any[] }>();
 
   useEffect(() => {
-    async function fetchPrev() {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_OPEN_API_DATE}`
-      );
-
-      const Myprevkorea = Number(result.data.eur.krw).toFixed(2);
-      const MyprevUS = Number(result.data.eur.usd).toFixed(2);
-      const MyprevJpy = Number(result.data.eur.jpy).toFixed(2);
-      setPrevKorea(Myprevkorea);
-      setPrevUsdollar(MyprevUS);
-      setPrevJpy(MyprevJpy);
-      console.log(MyprevJpy, Myprevkorea);
+    async function fetchFestival() {
+      const result = await axios
+        .get(
+          // https://cors-anywhere.herokuapp.com/
+          "http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?serviceKey=0a71849d-0b05-4d1f-add8-09d1890d69e5"
+        )
+        .then((res) => res.data);
+      setList(result.response.body.items);
     }
-    fetchPrev();
+    fetchFestival();
   }, []);
 
   return (
     <Wrapper>
-      <div>{mydate}일 EUR 기준 환율을 확인하세요</div>
-      <CurrentTable>
-        <li>통화별</li>
-        <li>환율</li>
-        <li>전일 대비</li>
-      </CurrentTable>
-      <CurrentTable>
-        <li>미국 USD</li>
-        <li>{Usdollar}</li>
-        <li>{(Number(Usdollar) - Number(prevUsdollar)).toFixed(2)}</li>
-      </CurrentTable>
-      <CurrentTable>
-        <li>한국 KRW</li>
-        <li>{Korea}</li>
-        <li>{(Number(Korea) - Number(prevKorea)).toFixed(2)}</li>
-      </CurrentTable>
-      <CurrentTable>
-        <li>일본 JPY</li>
-        <li>{Jpy}</li>
-        <li>{(Number(Jpy) - Number(prevJpy)).toFixed(2)}</li>
-      </CurrentTable>
-
-      <div>firebase DB 이용</div>
+      <WrapperBody>
+        <ContainerTitle>
+          {List?.item[0].collectionDb}를 확인하세요
+        </ContainerTitle>
+        <WrapperContainer>
+          {List?.item.map((el) => (
+            <ContentsBox key={uuidv4()}>
+              <PosterBox>
+                <Poster src={`${el.referenceIdentifier}`} />
+              </PosterBox>
+              <TitleBox>
+                <TitleText>{el.title}</TitleText>
+              </TitleBox>
+              <p style={{ margin: "5px 0" }}>위치 : {el.spatialCoverage}</p>
+              <ContentsStyle>{el.description}</ContentsStyle>
+              <MoveLink>
+                <a href={`${el.url}`}>
+                  <FaExternalLinkAlt />
+                </a>
+              </MoveLink>
+            </ContentsBox>
+          ))}
+        </WrapperContainer>
+      </WrapperBody>
     </Wrapper>
   );
 }

@@ -52,8 +52,7 @@ export default function ChargePageContainer() {
       async (rsp: any) => {
         // callback
         if (rsp.success) {
-          // 결제 성공 시 로직
-          console.log(rsp);
+          // 결제 성공 시 로직 console.log(rsp);
           try {
             await createPoint({
               variables: { impUid: rsp.imp_uid },
@@ -100,7 +99,6 @@ export default function ChargePageContainer() {
   const myvariables: IMyVariables = {};
   if (name) myvariables.name = name;
   if (picture) myvariables.picture = picture;
-  console.log(myvariables);
 
   const onClickEdit = async () => {
     try {
@@ -109,7 +107,6 @@ export default function ChargePageContainer() {
           updateUserInput: myvariables,
         },
       });
-      console.log(result);
       Modal.success({
         content: "회원정보 수정이 완료되었습니다.",
       });

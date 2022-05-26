@@ -21,7 +21,6 @@ export default function SoldItemContainer() {
   const { data } = useQuery<Pick<IQuery, "fetchUseditemsISold">>(FETCH_ISOLD, {
     variables: { search: "", page: 1 },
   });
-  console.log(data);
 
   return (
     <div>

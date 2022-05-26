@@ -11,7 +11,6 @@ export const withAuth =
     const { accessToken } = useContext(MakeGlobalContext);
 
     useEffect(() => {
-      // console.log(222, accessToken);
       async function login() {
         if (!accessToken) {
           const newAccessToken = await getAccessToken();
