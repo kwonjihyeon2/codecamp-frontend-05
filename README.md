@@ -7,9 +7,9 @@
 <img width="60" src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white"> <img width="60" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
 <br />
 
-웹 에어비앤비 UI를 클론하고 유저들의 자유 커뮤니티를 컨셉으로 개인 프로젝트를 만들어보았습니다.<br />
-유저들끼리 자유롭게 소통할 수 있는 커뮤니티를 제공하고 가입된 유저들간 중고 거래가 가능하도록 구현했습니다.<br />
-현재는 개인 프로젝트의 코드를 추가 보강하거나 다양한 OPEN-API를 구현을 목표로 공부 중입니다.
+웹 에어비앤비 UI를 클론하고 유저들의 자유 커뮤니티를 컨셉으로 개인 프로젝트를 구성해보았습니다.<br />
+유저들끼리 자유롭게 소통할 수 있는 커뮤니티를 제공하고 가입 회원들간 거래가 가능하도록 구현했습니다.<br />
+현재는 개인 프로젝트의 코드를 추가 보강하거나 다양한 오픈 API를 구현을 목표로 공부 중입니다.
 
 ## 테스트 계정
 
@@ -46,9 +46,11 @@
   - 리펙토링 예정 사항 : 배포 시 카카오맵 API를 불러오지 못하는 문제를 확인하여 해당 오류 해결 예정, localStorage에 저장된 데이터의 제한을 두지 않은 상태로 상품을 조회한 만큼 데이터가 들어가는 상황으로, 동일한 데이터 혹은 일정한 갯수만 조회되도록 제한할 예정 <br /><br />
     ![게시물 상세](https://user-images.githubusercontent.com/90013333/170453145-bb72cf53-6837-46d4-8882-d68a5b445f82.gif)
 - ### Query Parameter를 이용한 검색 기능
+
   - 레이아웃 헤더에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 <br /><br />
-    ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
+    ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif))
+
 - ### 문화 데이터 광장 OPEN-API로 데이터 조회
   - axios로 api를 요청 후 컨텐츠 제공
-  - 리펙토링 예정 사항 : 최근 업데이트된 공공 API를 사용하거나 요청한 데이터를 받아오는 동안 미리 화면에 보여지는 부분이 필요하다고 판단, 스켈레톤 UI 등을 활용하는 방향으로 유저 친화적으로 코드 수정 예정<br /><br />
+  - 리펙토링 예정 사항 : 다양한 오픈 API를 활용해서 데이터를 처리해 볼 예정이며, 데이터를 받아오는 동안 미리 화면에 보여지는 부분이 필요하다고 판단하여 TOAST UI 등을 활용하는 방향으로 유저 친화적으로 코드 수정 예정<br /><br />
     ![api](https://user-images.githubusercontent.com/90013333/170438276-1a47be63-e4ad-43e8-83cc-6ac300f56639.gif)
