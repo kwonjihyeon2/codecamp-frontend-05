@@ -48,7 +48,7 @@
 - ### Query Parameter를 이용한 검색 기능
 
   - 레이아웃 헤더에서 검색한 키워드를 url로 저장 후 해당 키워드를 기준으로 데이터 조회 <br /><br />
-    ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif))
+    ![검색](https://user-images.githubusercontent.com/90013333/169232811-3e155910-b042-43d9-a8e9-8b21c17dae8c.gif)
 
 - ### 문화 데이터 광장 OPEN-API로 데이터 조회
   - axios로 api를 요청 후 컨텐츠 제공
